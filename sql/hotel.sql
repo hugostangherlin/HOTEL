@@ -10,9 +10,22 @@ Senha VARCHAR (255)
 CPF VARCHAR (14)
 Endereço TEXT  NOT NULL
 Data_nascimento DATE  NOT NULL
-)
+);
 
 CREATE TABLE Funcionários(
     ID_Funcionarios INT PRIMARY KEY auto increment 
-    
-)
+    Nome VARCHAR(100) NOT NULL
+    Email VARCHAR (100) UNIQUE NOT NULL,
+    Telefone VARCHAR (15) NOT NULL,
+    Cargo VARCHAR (50) NOT NULL,
+    Senha VARCHAR(255)
+
+);
+
+CREATE TABLE Categoria (
+    ID_Categoria INT auto_increment PRIMARY KEY
+    Nome VARCHAR (50)
+    Descrisão TEXT
+);
+
+
