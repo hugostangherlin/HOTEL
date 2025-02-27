@@ -28,12 +28,6 @@ CREATE TABLE Categoria (
     Descrisão TEXT
 );
 
-CREATE TABLE Categoria (
-    ID_Categoria INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(50) NOT NULL,
-    Descricao TEXT
-);
-
 CREATE TABLE Quartos (
     ID_Quarto INT AUTO_INCREMENT PRIMARY KEY,
     ID_Categoria INT,
