@@ -12,7 +12,7 @@ Endereço TEXT  NOT NULL
 Data_nascimento DATE  NOT NULL
 );
 
-CREATE TABLE Funcionários(
+CREATE TABLE Funcionarios(
     ID_Funcionarios INT PRIMARY KEY auto increment 
     Nome VARCHAR(100) NOT NULL
     Email VARCHAR (100) UNIQUE NOT NULL,
@@ -28,18 +28,12 @@ CREATE TABLE Categoria (
     Descrisão TEXT
 );
 
-CREATE TABLE Categoria (
-    ID_Categoria INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(50) NOT NULL,
-    Descricao TEXT
-);
-
 CREATE TABLE Quartos (
     ID_Quarto INT AUTO_INCREMENT PRIMARY KEY,
     ID_Categoria INT,
     Status ENUM('Disponível', 'Ocupado', 'Manutenção') NOT NULL,
     Capacidade INT NOT NULL,
-    FOREIGN KEY (ID_Categoria) REFERENCES Categoria(ID_Categoria)
+    FOREIGN KEY (ID_Categoria) REFERENCES Categoria
 );
 
 CREATE TABLE Reservas (
@@ -47,16 +41,22 @@ CREATE TABLE Reservas (
     ID_Cliente INT,
     ID_Quarto INT,
     ID_Funcionario INT,
+<<<<<<< HEAD
     ID_Servico INT, 
+=======
+
+>>>>>>> 4b8d93aa4ce4afda9d75c2ea684b9d08f10e7f99
     Status ENUM('Confirmada', 'Pendente', 'Cancelada', 'Finalizada') NOT NULL,
     Check_in DATE NOT NULL,
     Check_out DATE NOT NULL,
     Data_Reserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-    FOREIGN KEY (ID_Quarto) REFERENCES Quartos(ID_Quarto),
-    FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario)
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes,
+    FOREIGN KEY (ID_Quarto) REFERENCES Quartos,
+    FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios,
+    FOREIGN KEY (ID_Servico) REFERENCES Servico
 );
 
+<<<<<<< HEAD
 CREATE TABLE Servicos (
     ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
@@ -74,5 +74,19 @@ CREATE TABLE Avaliacoes (
     FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
     FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
 );
+=======
+CREATE TABLE Servico (
+ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+Nome VARCHAR(100),
+Preço FLOAT 
+Descrisao VARCHAR (500),
+);
+
+CREATE TABLE Avaliacao
+
+
+
+
+>>>>>>> 4b8d93aa4ce4afda9d75c2ea684b9d08f10e7f99
 
 
