@@ -47,6 +47,7 @@ CREATE TABLE Reservas (
     ID_Cliente INT,
     ID_Quarto INT,
     ID_Funcionario INT,
+    ID_Servico INT, 
     Status ENUM('Confirmada', 'Pendente', 'Cancelada', 'Finalizada') NOT NULL,
     Check_in DATE NOT NULL,
     Check_out DATE NOT NULL,
@@ -55,4 +56,23 @@ CREATE TABLE Reservas (
     FOREIGN KEY (ID_Quarto) REFERENCES Quartos(ID_Quarto),
     FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario)
 );
+
+CREATE TABLE Servicos (
+    ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL,
+    Descricao TEXT
+);
+
+CREATE TABLE Avaliacoes (
+    ID_Avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Cliente INT,
+    ID_Reserva INT,
+    Nota INT CHECK (Nota BETWEEN 1 AND 5),
+    Comentario TEXT,
+    Data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+    FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
+);
+
 
