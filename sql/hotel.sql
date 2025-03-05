@@ -71,24 +71,6 @@ CREATE TABLE Avaliacoes (
     FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
 );
 
-CREATE TABLE Servico (
-    ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100),
-    Preço FLOAT 
-    Descrisao VARCHAR (500),
-);
-
-CREATE TABLE Avaliacoes (
-    ID_Avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Cliente INT,
-    ID_Reserva INT,
-    Nota INT CHECK (Nota BETWEEN 1 AND 5),
-    Comentario TEXT,
-    Data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-    FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
-);
-
 
 
 
