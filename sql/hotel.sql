@@ -41,11 +41,7 @@ CREATE TABLE Reservas (
     ID_Cliente INT,
     ID_Quarto INT,
     ID_Funcionario INT,
-<<<<<<< HEAD
-    ID_Servico INT, 
-=======
-
->>>>>>> 4b8d93aa4ce4afda9d75c2ea684b9d08f10e7f99
+    ID_Servico INT,
     Status ENUM('Confirmada', 'Pendente', 'Cancelada', 'Finalizada') NOT NULL,
     Check_in DATE NOT NULL,
     Check_out DATE NOT NULL,
@@ -56,7 +52,7 @@ CREATE TABLE Reservas (
     FOREIGN KEY (ID_Servico) REFERENCES Servico
 );
 
-<<<<<<< HEAD
+
 CREATE TABLE Servicos (
     ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
@@ -74,19 +70,26 @@ CREATE TABLE Avaliacoes (
     FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
     FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
 );
-=======
+
 CREATE TABLE Servico (
-ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
-Nome VARCHAR(100),
-Preço FLOAT 
-Descrisao VARCHAR (500),
+    ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Preço FLOAT 
+    Descrisao VARCHAR (500),
 );
 
-CREATE TABLE Avaliacao
+CREATE TABLE Avaliacoes (
+    ID_Avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Cliente INT,
+    ID_Reserva INT,
+    Nota INT CHECK (Nota BETWEEN 1 AND 5),
+    Comentario TEXT,
+    Data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+    FOREIGN KEY (ID_Reserva) REFERENCES Reservas(ID_Reserva)
+);
 
 
 
-
->>>>>>> 4b8d93aa4ce4afda9d75c2ea684b9d08f10e7f99
 
 
