@@ -10,7 +10,7 @@ header {
     box-shadow: 0px 3px 10px #464646;
 }
 
-.navbar {
+.nav-bar {
     display: flex;
     justify-content: space-between;
     padding: 1.5rem 6rem;
@@ -24,35 +24,40 @@ header {
 .logo h1 {
     color: #fff;
 }
-.navlist{
+
+.nav-list {
     display: flex;
     align-items: center;
 }
-.navlist ul{
+
+.nav-list ul {
     display: flex;
     justify-content: center;
     list-style: none;
 }
-.navitem{
-    margin: 0% 15px;
+
+.nav-item {
+    margin: 0 15px;
 }
-.navlink{
+
+.nav-link {
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     color: #fff;
     font-weight: 400;
 }
-.loginbutton button {
+
+.login-button button {
     border: none;
-    background-color: #0187a7;
     padding: 10px 15px;
     border-radius: 5px;
-
+    background-color: #0187a7;
 }
-.loginbutton button a{
+
+.login-button button a {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
     font-size: 1.1rem;
-
 }
+
