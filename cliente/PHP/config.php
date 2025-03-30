@@ -4,22 +4,21 @@ $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
 
-$pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
+//$pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
 // $sql = $pdo->query('SELECT * FROM clientes');
 // echo "TOTAL: ".$sql->rowCount();
 // $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
 // echo '<pre>';
 try {
     // Criar conexão PDO
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;", $db_user, $db_pass);
+    $pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   } catch (PDOException $e) {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
   }
   
-  // Verificar se o formulário foi enviado
+  // Verificar se o cadastro foi enviado
   if (isset($_POST['submit'])) {
-    // Capturar e sanitizar os dados
     $nome = htmlspecialchars($_POST['name']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $telefone = htmlspecialchars($_POST['telefone']);

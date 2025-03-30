@@ -1,5 +1,5 @@
 <?php 
-require "conexao.php";
+require "config.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
