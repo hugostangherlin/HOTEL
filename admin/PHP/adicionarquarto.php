@@ -15,22 +15,21 @@ if ($category && $status && $capacity && $price) {
     if ($sql->rowCount() === 0) {
         $sql = $pdo->prepare("INSERT INTO quartos (categoria, status, capacidade, preco) VALUES (:category, :status, :capacity, :price)");
 
-        $sql->bindValue(':category', $category);  // categoria do quarto
-        $sql->bindValue(':status', $status);  // status do quarto
-        $sql->bindValue(':capacity', $capacity);  // capacidade do quarto
-        $sql->bindValue(':price', $price);  // preço do quarto
+        $sql->bindValue(':category', $category); 
+        $sql->bindValue(':status', $status); 
+        $sql->bindValue(':capacity', $capacity);  
+        $sql->bindValue(':price', $price); 
 
         $sql->execute();
 
         header("Location: gerenciarquartos.php");
         exit;
     } else {
-        // Redirecionar para a página de adicionar caso o quarto já exista
+        
         header("Location: gerenciarquartos.php?error=quarto_existente");
         exit;
     }
 } else {
-    // Redirecionar para a página de adicionar caso os campos não sejam preenchidos corretamente
     header("Location: gerenciarquartos.php?error=dados_invalidos");
     exit;
 }
