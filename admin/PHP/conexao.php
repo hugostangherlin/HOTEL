@@ -1,5 +1,5 @@
 <?php
-$db_name = 'rodeo hotel';
+$db_name = 'rodeohotel';
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
