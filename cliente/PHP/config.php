@@ -4,41 +4,53 @@ $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
 
-//$pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
-// $sql = $pdo->query('SELECT * FROM clientes');
-// echo "TOTAL: ".$sql->rowCount();
-// $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
-// echo '<pre>';
+// Conexão com o banco de dados
 try {
-    // Criar conexão PDO
     $pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  } catch (PDOException $e) {
+} catch (PDOException $e) {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
-  }
-  
-  // Verificar se o cadastro foi enviado
-  if (isset($_POST['submit'])) {
-    $nome = htmlspecialchars($_POST['name']);
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $telefone = htmlspecialchars($_POST['telefone']);
-    $senha = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash seguro para a senha
-    $cpf = htmlspecialchars($_POST['cpf']);
-    $endereco = htmlspecialchars($_POST['endereco']);
+}
+
+if (isset($_POST['submit'])) {
+    $nome = filter_input(INPUT_POST, 'name',);
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $telefone = filter_input(INPUT_POST, 'telefone');
+    $senha = $_POST['password'];
+    $cpf = filter_input(INPUT_POST, 'cpf');
+    $endereco = filter_input(INPUT_POST, 'endereco');
     $birthdate = $_POST['birthdate'];
-  
-    // Verificar se os campos obrigatórios foram preenchidos
-    if (!empty($nome) && !empty($email) && !empty($telefone) && !empty($_POST['password'])) {
+
+    if ($nome && $email && $telefone && $senha) {
         try {
-            // Query para inserir os dados no banco
-            $stmt = $pdo->prepare("INSERT INTO clientes (nome, email, telefone, senha, cpf, endereco, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$nome, $email, $telefone, $senha, $cpf, $endereco, $birthdate]);
-            
-            echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='cadastro.php';</script>";
+  
+            $sql = $pdo->prepare("SELECT * FROM clientes WHERE email = :email");
+            $sql->bindValue(':email', $email);
+            $sql->execute();
+
+            if ($sql->rowCount() === 0) {  
+                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+                $sql = $pdo->prepare("INSERT INTO clientes (nome, email, telefone, senha, cpf, endereco, data_nascimento) 
+                                      VALUES (:nome, :email, :telefone, :senha, :cpf, :endereco, :data_nascimento)");
+                $sql->bindValue(':nome', $nome);
+                $sql->bindValue(':email', $email);
+                $sql->bindValue(':telefone', $telefone);
+                $sql->bindValue(':senha', $senhaHash);
+                $sql->bindValue(':cpf', $cpf);
+                $sql->bindValue(':endereco', $endereco);
+                $sql->bindValue(':data_nascimento', $birthdate);
+                $sql->execute();
+
+                header("Location: cadastro.php");
+                exit;
+            } else {
+                echo "<script>alert('Bem vindo!');</script>";
+            }
         } catch (PDOException $e) {
             echo "Erro ao cadastrar: " . $e->getMessage();
         }
     } else {
         echo "<script>alert('Por favor, preencha todos os campos obrigatórios!');</script>";
     }
-  }
+}
+?>

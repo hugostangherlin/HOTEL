@@ -30,25 +30,10 @@ require "conexao.php"
         </label>
         <div class="input-field">
           <select name="category" id="category" class="form-control" require>
-            <?php
-            $conn = new mysqli("localhost", "root", "", "rodeo hotel");
-
-            // Verifica se a conexão foi bem-sucedida
-            if ($conn->connect_error) {
-              die("Connection failed: " . $conn->connect_error);
-            }
-
-            // Consulta as categorias
-            $result = $conn->query("SELECT id_categoria, nome FROM categorias");
-
-            // Exibe as opções no select
-            while ($row = $result->fetch_assoc()) {
-              echo "<option value='" . $row['id_categoria'] . "'>" . $row['nome'] . "</option>";
-            }
-
-            // Fecha a conexão
-            $conn->close();
-            ?>
+          <option value="suite">Suite Master</option>
+            <option value="luxo">Luxo</option>
+            <option value="standard">Standard</option>
+            <option value="economico">Ecônomico</option>
           </select>
           <i class="#"></i>
         </div>
