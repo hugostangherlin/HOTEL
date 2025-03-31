@@ -117,7 +117,6 @@ require "config.php";
         
         <input type="submit" name="submit" class="btn-default">
           <i class="fa-solid fa check"></i>
-          Criar Conta
         </input>
       </div>
     </form>
