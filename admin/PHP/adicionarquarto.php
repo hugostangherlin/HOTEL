@@ -12,7 +12,7 @@ if ( $status && $capacity) {
     $sql->execute();
 
     if ($sql->rowCount() === 0) {
-        $sql = $pdo->prepare("INSERT INTO quartos (categoria, status, capacidade, preco) VALUES (:category, :status, :capacity, :price)");
+        $sql = $pdo->prepare("INSERT INTO quartos (status, capacidade) VALUES (:status, :capacity)");
 
         $sql->bindValue(':status', $status); 
         $sql->bindValue(':capacity', $capacity);  
