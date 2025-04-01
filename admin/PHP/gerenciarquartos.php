@@ -23,7 +23,7 @@ require 'conexao.php';
     </div>
 
     <form action="adicionarquarto.php" method="POST" id="form">
-      <!-- Categoria -->
+      <!-- Categoria
       <div class="input-box">
         <label for="category" class="form-label">
           Categoria
@@ -37,7 +37,7 @@ require 'conexao.php';
           </select>
           <i class="#"></i>
         </div>
-      </div>
+      </div> -->
       <!-- Status -->
       <div class="input-box">
         <label for="status" class="form-label">
@@ -62,7 +62,7 @@ require 'conexao.php';
             name="capacity"
             id="capacity"
             class="form-control">
-          <!-- Preço -->
+          <!-- Preço
           <div class="input-box">
             <label for="number" class="form-label">
               Preço
@@ -76,7 +76,7 @@ require 'conexao.php';
                 class="form-control">
               <br><br>
               <input type="submit" name="submit" class="btn-default">
-              <i class="#"></i>
+              <i class="#"></i> -->
               Criar Quarto
               </input>
             </div>
