@@ -74,9 +74,9 @@ require 'conexao.php';
                 step="0.01"
                 min="0"
                 class="form-control">
-              <br><br>
+              <br><br>-->
               <input type="submit" name="submit" class="btn-default">
-              <i class="#"></i> -->
+              <i class="#"></i> 
               Criar Quarto
               </input>
             </div>
