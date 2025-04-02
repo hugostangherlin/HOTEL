@@ -1,5 +1,9 @@
 <?php
 require 'conexao.php';
+
+$sth  = $pdo->prepare("SELECT * FROM categoria");
+$sth->execute();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,21 +27,23 @@ require 'conexao.php';
     </div>
 
     <form action="adicionarquarto.php" method="POST" id="form">
-      <!-- Categoria
+      <!-- Categoria -->
       <div class="input-box">
         <label for="category" class="form-label">
           Categoria
         </label>
         <div class="input-field">
           <select name="category" id="category" class="form-control" require>
-          <option value="suite">Suite Master</option>
-            <option value="luxo">Luxo</option>
-            <option value="standard">Standard</option>
-            <option value="economico">Ecônomico</option>
+            <option value="">Selecione</option>
+          <?php
+              while($categ = $sth->fetch(PDO::FETCH_ASSOC)){
+                echo "<option value='{$categ["ID_Categoria"]}'>{$categ["Nome"]}</option>";
+              }
+           ?>
           </select>
           <i class="#"></i>
         </div>
-      </div> -->
+      </div>
       <!-- Status -->
       <div class="input-box">
         <label for="status" class="form-label">
@@ -45,6 +51,7 @@ require 'conexao.php';
         </label>
         <div class="input-field">
           <select name="status" id="status" class="form-control" require>
+          <option value="">Selecione</option>
             <option value="disponivel">Disponível</option>
             <option value="ocupado">Ocupado</option>
             <option value="manutencao">Manutenção</option>
@@ -62,21 +69,8 @@ require 'conexao.php';
             name="capacity"
             id="capacity"
             class="form-control">
-          <!-- Preço
-          <div class="input-box">
-            <label for="number" class="form-label">
-              Preço
-            </label>
-            <div class="input-field">
-              <input type="number"
-                name="price"
-                id="price"
-                step="0.01"
-                min="0"
-                class="form-control">
-              <br><br>
               <input type="submit" name="submit" class="btn-default">
-              <i class="#"></i> -->
+              <i class="#"></i> 
               Criar Quarto
               </input>
             </div>
