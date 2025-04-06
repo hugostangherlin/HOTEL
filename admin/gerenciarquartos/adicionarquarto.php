@@ -15,10 +15,10 @@ if ( $status && $capacity) {
         $sql->bindValue(':category', $category);  
         $sql->execute();
 
-        header("Location: gerenciarquartos.php");
+        header("Location: index.php");
         exit;
 } else {
-    header("Location: gerenciarquartos.php?error=dados_invalidos");
+    header("Location: criarquarto.php?error=dados_invalidos");
     exit;
 }
 ?>

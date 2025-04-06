@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +18,7 @@ h2 {
     margin-bottom: 24px;
     color: #333;
 }
-
+/* Botão de "Adicionar quarto */
 .btn-add {
     background-color: #6366f1;
     color: white;
@@ -30,7 +31,7 @@ h2 {
     display: inline-block;
     margin-bottom: 20px;
 }
-
+/* Efeito ao passar o mouse no botão */
 .btn-add:hover {
     background-color: #818cf8;
 }
@@ -43,7 +44,7 @@ table {
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
-
+/* Cedulas da tabela */
 th, td {
     padding: 16px;
     text-align: left;
@@ -57,37 +58,41 @@ th {
     color: #4b5563;
     font-weight: 500;
 }
-
+/* Estilização para última coluna da tabela, "Ações */
 td:last-child {
     white-space: nowrap;
     display: flex;
     gap: 12px;
 }
-
+/* Efeito ao passar o mouse sobre as linhas da tabela */
 tr:hover {
     background-color: #f1f5f9;
 }
-
+/* Estilizar os botões de editar e excluir */
 .btn-action {
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 6px;
     font-size: 13px;
     color: white;
     text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+/* Botão de editar */
 .btn-edit {
-    background-color: #6366f1;
+    background-color: #4f46e5; /* Indigo */
 }
-
+/* Eefeito no botão de editar */
 .btn-edit:hover {
-    background-color: #818cf8;
+    background-color: #6366f1;
+    transform: scale(1.05);
 }
-
+/* Botão de excluir */
 .btn-delete {
-    background-color: #ef4444;
+    background-color: #dc2626; /* Red */
 }
-
+/* Efeito no botão de excluir */
 .btn-delete:hover {
-    background-color: #f87171;
+    background-color: #ef4444;
+    transform: scale(1.05);
 }

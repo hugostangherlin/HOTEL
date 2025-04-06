@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
+/* Reset básico e fonte */
 * {
     margin: 0;
     padding: 0;
@@ -7,19 +8,22 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* Corpo da página com fundo claro e centralização */
 body {
-    background-color: #6366f1;
+    background-color: #f3f4f6;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
+/* Container do formulário com visual limpo e elegante */
 #form_container {
-    background-color: #f6f8ff;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -27,14 +31,17 @@ body {
     gap: 20px;
 }
 
+/* Título do formulário */
 #form_title {
     font-size: 24px;
     font-weight: 500;
     color: #272727;
     text-align: center;
     position: relative;
+    margin-bottom: 16px;
 }
 
+/* Linha decorativa abaixo do título */
 #form_title::after {
     content: '';
     position: absolute;
@@ -47,12 +54,14 @@ body {
     bottom: -8px;
 }
 
+/* Estrutura geral do formulário */
 form {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+/* Estilização dos rótulos */
 label {
     font-size: 14px;
     color: #404044;
@@ -60,6 +69,7 @@ label {
     margin-bottom: 4px;
 }
 
+/* Campos de entrada e seleção */
 select,
 input[type="number"],
 input[type="text"] {
@@ -71,11 +81,13 @@ input[type="text"] {
     font-size: 14px;
 }
 
+/* Destaque no foco dos campos */
 select:focus,
 input:focus {
     outline: 2px solid #6366f1;
 }
 
+/* Botão de envio (Salvar) */
 input[type="submit"] {
     background-color: #6366f1;
     color: white;
@@ -85,10 +97,12 @@ input[type="submit"] {
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+/* Efeito hover no botão */
 input[type="submit"]:hover {
     background-color: #818cf8;
+    transform: scale(1.03);
 }

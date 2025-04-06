@@ -9,6 +9,7 @@ if($sql->rowCount() > 0){
     $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
+<h2>Painel de Quartos</h2>
 <table border="1" width="100%">
     <tr>
         <th>Número da Reserva</th>

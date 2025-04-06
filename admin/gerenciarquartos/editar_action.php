@@ -18,6 +18,6 @@ if ($id && $status && $capacity && $category) {
     header("Location: index.php");
     exit;
 } else {
-    header("Location: adicionarquarto.php");
+    header("Location: index.php");
     exit;
 }
