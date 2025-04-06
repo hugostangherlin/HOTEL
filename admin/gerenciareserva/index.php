@@ -3,7 +3,7 @@ require 'conexao.php';
 
 $lista = [];
 
-$sql = $pdo->query("SELECT * FROM reserva");
+$sql = $pdo->query("SELECT * FROM reservas");
 
 if($sql->rowCount() > 0){
     $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -20,18 +20,18 @@ if($sql->rowCount() > 0){
         <th>Data de Criação da Reserva</th>
     </tr>
     
-    <?php foreach($lista as $reserva): ?>
+    <?php foreach($lista as $reservas): ?>
             <tr>
-                <td><?=$reserva['ID_Reserva'];?></td>
-                <td><?=$reserva['ID_Cliente'];?></td>
-                <td><?=$reserva['ID_Quarto'];?></td>
-                <td><?=$reserva['Status'];?></td>
-                <td><?=$reserva['Check_in'];?></td>
-                <td><?=$reserva['Check_out'];?></td>
-                <td><?php echo reserva['Data_Reserva']; ?></td>
+                <td><?=$reservas['ID_Reserva'];?></td>
+                <td><?=$reservas['ID_Cliente'];?></td>
+                <td><?=$reservass['ID_Quarto'];?></td>
+                <td><?=$reservas['Status'];?></td>
+                <td><?=$reservas['Check_in'];?></td>
+                <td><?=$reservas['Check_out'];?></td>
+                <td><?php echo $reservas['Data_Reserva']; ?></td>
                 <td>
-                    <a href="editar.php?id=<?=$quartos['ID_Quarto'];?>">[ Editar ]</a>
-                    <a href="excluir.php?id=<?=$quartos['ID_Quarto'];?>" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">[ Excluir ]</a>
+                    <a href="editar.php?id=<?=$reservas['ID_Reserva'];?>">[ Editar ]</a>
+                    <a href="excluir.php?id=<?=$reservas['ID_Reserva'];?>" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">[ Excluir ]</a>
                 </td>
             </tr>
     <?php endforeach; ?>

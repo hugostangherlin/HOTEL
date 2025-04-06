@@ -1,6 +1,7 @@
 <?php 
 require 'conexao.php';
 
+
 $lista = [];
 
 $sql = $pdo->query("SELECT * FROM quartos");
@@ -9,8 +10,19 @@ if($sql->rowCount() > 0){
     $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
-
-<a href="gerenciarquartos.php">Adicionar quarto</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Quarto</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+</body>
+</html>
+<a href="criarquarto.php">Adicionar quarto</a>
 
 <table border="1" width="100%">
     <tr>

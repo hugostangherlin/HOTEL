@@ -23,8 +23,19 @@ if($id){
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Quarto</title>
+    <link rel="stylesheet" href="editar.css">
+</head>
+<body>
+    
+</body>
+</html>
 
-<h2>Editar Quarto</h2>
 <form method="POST" action="editar_action.php">
 <input type="hidden" name="id" value="<?php echo $info['ID_Quarto'];?>" />
 <label for="status">
@@ -40,11 +51,11 @@ if($id){
     <br /><br />
     
     <label for="capacidade">Capacidade:</label>
-    <input type="number" name="capacidade" id="capacidade" value="<?php echo $info['Capacidade'] ?? ''; ?>" required />
+    <input type="number" name="capacity" id="capacidade" value="<?php echo $info['Capacidade'] ?? ''; ?>" required />
     <br /><br />
     
     <label for="categoria">Categoria:</label>
-    <input type="text" name="categoria" id="categoria" value="<?php echo $info['ID_Categoria'] ?? ''; ?>" required />
+    <input type="text" name="category" id="categoria" value="<?php echo $info['ID_Categoria'] ?? ''; ?>" required />
     <br /><br />
     
     <input type="submit" value="Salvar" />
