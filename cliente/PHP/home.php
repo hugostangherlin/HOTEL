@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cliente/CSS/menu.css">
+    <link rel="stylesheet" href="../CSS/menu.css">
     <title>Rodeo Hotel</title>
 </head>
 
@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <button><a href="entrar.html">Entrar</a></button>
+                <button><a href="entrar.php">Entrar</a></button>
             </div>
         </div>
     </header>

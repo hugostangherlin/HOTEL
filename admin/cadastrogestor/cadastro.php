@@ -1,13 +1,13 @@
 <?php 
-require "config.php";
+require "conexao.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina de Cadastro de Conta de Hóspede</title>
-  <link rel="stylesheet" href="../CSS/cadastro.css">
+  <title>Pagina de Cadastro de Conta de Gestor</title>
+  <link rel="stylesheet" href="../cadastrogestor/cadastro.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -113,9 +113,7 @@ require "config.php";
           </div>
         </div>
         <br>
-        
-        
-        <input type="submit" name="submit" class="btn-default">
+         <input type="submit" name="submit" class="btn-default">
           <i class="fa-solid fa check"></i>
         </input>
       </div>
@@ -124,5 +122,3 @@ require "config.php";
 </body>
 
 </html>
-
-<!-- Não está estilizando" -->

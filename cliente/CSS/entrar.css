@@ -1,123 +1,120 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body{
-    height: 100vh;
-    width: 100%;
-    font-family:  'Inter', sans-serif;
-    position: relative;
-  }
-  body::before{
-    content: '';
-    background-color: #6366f1;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-
-  .container{
-    padding: 60px;
-    z-index: 90;
-    position: relative;
-    max-width: 450px;
-    height: 550px;
-    margin-left: 50%;
-    background-color: rgb(0,0,0,0.75);
-    transform: translate(-50%, 20%);
-    border-radius: 10px;
-  }
-  .container h2{
-    color: #fff;
-    font-size: 34px;
-    margin-bottom: 25px;
-  }
-  .container .box-input{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-bottom: 25px;
-  }
-  .container .box-input input{
-    height: 50px;
-    width: 100%;
-    color: #fff;
-    background-color: #ffff;
-    border: none;
-    outline: none;
-    padding: 0 15px 0 15px;
-    border-radius: 5px;
-  }
-  .container .box-input input:hover{
-    background-color: #6366f1;
-  }
-  .container .box-input .btn{
-    background-color: #6366f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #ffffff;
-    cursor: pointer;
-    gap: 8px;
-    height: fit-content;
-    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-  .container .box-input .btn:hover{
-    background-color: #818cf8;
-    text-decoration: none;
-  }
-  .support{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    font-size: 15px;
-    margin: 30px 0 30px 0;
-  }
-  .support .remember{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    color: #fff;
-  }
-  .help a{
-    color: #b3b3b3;
-    text-decoration: none;
-  }
-  .footer{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #b3b3b3;
-    font-size: 15px;
-    margin-bottom: 25px;
-  }
-  .footer a{
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-  }
-  .description_footer{
-    color: #b3b3b3;
-    font-size: 13px;
-    line-height: 18px;
-  }
-  .description_footer span{
-    color: #0071eb;
-    cursor: pointer;
-  }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #6366f1;
+}
+
+.container {
+  background-color: #f6f8ff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #272727;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.login h2::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: #6366f1;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 30px;
+}
+
+.box-input {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.box-input input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.box-input input:focus {
+  outline: 2px solid #6366f1;
+}
+
+.btn {
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  background-color: #818cf8;
+}
+
+.support {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #404044;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 14px;
+  color: #404044;
+}
+
+.footer a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+input[type="checkbox"] {
+  accent-color: #6366f1;
+}
