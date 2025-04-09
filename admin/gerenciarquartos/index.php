@@ -25,21 +25,29 @@ if ($sql->rowCount() > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Gereciamento de Quartos</title>
     <link rel="stylesheet" href="index.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!-- DataTable JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
 </head>
 
 <body>
     <h2>Painel de Gereciamento de Quartos</h2>
     <a href="criarquarto.php" class="btn-add">Adicionar quarto</a>
 
-    <table border="1" width="100%">
-        <tr>
-            <th><strong>Número do Quarto</strong></th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th>Capacidade</th>
-            <th>Ações</th>
-        </tr>
+    <table border="1" id="myTable" class="cell-border stripe hover" width="100%">
+        <thead>
+            <tr>
+                <th><strong>Número do Quarto</strong></th>
+                <th>Categoria</th>
+                <th>Status</th>
+                <th>Capacidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
         <!-- Exibe os dados amarzenados no array -->
+        <tbody>
         <?php foreach ($lista as $quartos): ?>
             <tr>
                 <td><?= $quartos['ID_Quarto']; ?></td>
@@ -52,10 +60,18 @@ if ($sql->rowCount() > 0) {
                 </td>
 
             </tr>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </tbody>
 
     </table>
 
+    <script type="text/javascript">
+        var table = new DataTable('#myTable', {
+            language: {
+                url: './DataTable/pt-BR.json',
+            },
+        });
+    </script>
 
 </body>
 
