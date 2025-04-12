@@ -65,9 +65,9 @@ if ($id) {
         <label for="status">Status:</label>
         <select name="status" id="status" required>
             <option value="">Selecione</option>
-            <option value="disponivel" <?php echo ($info['Status'] == 'disponivel') ? 'selected' : ''; ?>>Disponível</option>
-            <option value="ocupado" <?php echo ($info['Status'] == 'ocupado') ? 'selected' : ''; ?>>Ocupado</option>
-            <option value="manutencao" <?php echo ($info['Status'] == 'manutencao') ? 'selected' : ''; ?>>Manutenção</option>
+            <option value="disponivel" <?php echo ($info['Status'] == 'Disponível') ? 'selected' : ''; ?>>Disponível</option>
+            <option value="ocupado" <?php echo ($info['Status'] == 'Ocupado') ? 'selected' : ''; ?>>Ocupado</option>
+            <option value="manutencao" <?php echo ($info['Status'] == 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
         </select>
 
 
