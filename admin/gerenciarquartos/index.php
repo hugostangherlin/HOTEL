@@ -6,9 +6,9 @@ $lista = [];
 
 //Consulta SQL com JOIN para buscar dados da tabela quartos e consultar tabela categoria
 $sql = $pdo->query("
-    SELECT q.ID_Quarto, q.Status, q.Capacidade, c.Nome AS Categoria_Nome
-    FROM quartos q
-    JOIN categoria c ON q.ID_Categoria = c.ID_Categoria
+SELECT q.*, c.Nome as CategoriaNome
+          FROM Quarto q
+          INNER JOIN Categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
 ");
 // Retorno da consulta
 if ($sql->rowCount() > 0) {
@@ -48,15 +48,15 @@ if ($sql->rowCount() > 0) {
         </thead>
         <!-- Exibe os dados amarzenados no array -->
         <tbody>
-        <?php foreach ($lista as $quartos): ?>
+        <?php foreach ($lista as $quarto): ?>
             <tr>
-                <td><?= $quartos['ID_Quarto']; ?></td>
-                <td><?= $quartos['Categoria_Nome']; ?></td>
-                <td><?= $quartos['Status']; ?></td>
-                <td><?php echo $quartos['Capacidade']; ?></td>
+                <td><?= $quarto['ID_Quarto']; ?></td>
+                <td><?= $quarto['CategoriaNome']; ?></td>
+                <td><?= $quarto['Status']; ?></td>
+                <td><?php echo $quarto['Capacidade']; ?></td>
                 <td>
-                    <a href="editar.php?id=<?= $quartos['ID_Quarto']; ?>" class="btn-action btn-edit">Editar</a>
-                    <a href="excluir.php?id=<?= $quartos['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir</a>
+                    <a href="editar.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-edit">Editar</a>
+                    <a href="excluir.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir</a>
                 </td>
 
             </tr>

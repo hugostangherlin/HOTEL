@@ -1,4 +1,4 @@
-<?php
+<?php 
 require 'conexao.php';
 
 // Array para armazenar as informações do quarto a ser editado
@@ -21,7 +21,7 @@ if ($sql->rowCount() > 0) {
 // Se o ID do quarto foi enviado pela URL
 if ($id) {
     // Prepara a consulta para buscar os dados do quarto com base no ID
-    $sql = $pdo->prepare("SELECT * FROM quartos WHERE ID_Quarto = :id");
+    $sql = $pdo->prepare("SELECT * FROM quarto WHERE ID_Quarto = :id");
     $sql->bindValue(':id', $id, PDO::PARAM_INT);
     $sql->execute();
 
@@ -39,6 +39,7 @@ if ($id) {
     exit;
 }
 ?>
+
 <!-- HTML -->
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -53,15 +54,12 @@ if ($id) {
 <body>
 
     <!-- Formulário -->
-    <form
-        method="POST"
-        action="editar_action.php"
-        id="form_container">
+    <form method="POST" action="editar_action.php" id="form_container">
         <h2 id="form_title">Editar Quarto</h2>
         <!-- Campo oculto com o ID do quarto -->
         <input type="hidden" name="id" value="<?php echo $info['ID_Quarto']; ?>" />
 
-        <!--Status -->
+        <!-- Status -->
         <label for="status">Status:</label>
         <select name="status" id="status" required>
             <option value="">Selecione</option>
@@ -70,7 +68,6 @@ if ($id) {
             <option value="manutencao" <?php echo ($info['Status'] == 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
         </select>
 
-
         <!-- Capacidade -->
         <label for="capacidade">Capacidade:</label>
         <input type="number" name="capacity" id="capacidade" value="<?php echo $info['Capacidade'] ?? ''; ?>" required />
@@ -78,13 +75,12 @@ if ($id) {
         <!-- Categoria -->
         <label for="categoria">Categoria:</label>
         <select name="category" id="categoria" required>
-            <option value="">Selecione uma categoria</option>
-
+            <option value="">Selecione</option>
             <!-- Loop para listar as categorias disponíveis -->
             <?php foreach ($categorias as $categoria): ?>
                 <option value="<?= $categoria['ID_Categoria']; ?>"
-                    <?= ($info['ID_Categoria'] == $categoria['ID_Categoria']) ? 'selected' : ''; ?>>
-                    <?= $categoria['Nome']; ?>
+                <?= ($info['Categoria_ID_Categoria'] == $categoria['ID_Categoria']) ? 'selected' : ''; ?>>
+                <?= $categoria['Nome']; ?>
                 </option>
             <?php endforeach; ?>
         </select>

@@ -7,7 +7,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 
 if ($id) {
-    $sql = $pdo->prepare("DELETE FROM quartos WHERE ID_Quarto = :id");
+    $sql = $pdo->prepare("DELETE FROM quarto WHERE ID_Quarto = :id");
     // Associar o valor do ID ao parâmetro da query
     $sql->bindValue(':id', $id, PDO::PARAM_INT);
     $sql->execute();

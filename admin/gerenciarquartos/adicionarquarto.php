@@ -8,7 +8,7 @@ $category = filter_input(INPUT_POST, 'category');
 
 if ( $status && $capacity) {
 
-        $sql = $pdo->prepare("INSERT INTO quartos (status, capacidade, ID_Categoria) VALUES (:status, :capacity, :category)");
+        $sql = $pdo->prepare("INSERT INTO quarto (status, capacidade, Categoria_ID_Categoria) VALUES (:status, :capacity, :category)");
 
         $sql->bindValue(':status', $status); 
         $sql->bindValue(':capacity', $capacity);  

@@ -49,6 +49,18 @@ require "config.php";
           </div>
         </div>
 
+        <!-- Senha -->
+<div class="input-box">
+  <label for="password" class="form-label">
+    Senha
+  </label>
+  <div class="input-field">
+    <input type="password" name="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+    <i class="fa-solid fa-key"></i>
+  </div>
+</div>
+
+
         <!-- Telefone -->
         <div class="input-box">
           <label for="last_name" class="form-label">
