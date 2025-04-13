@@ -1,17 +1,5 @@
 <?php
-$db_name = 'rodeo_hotel';
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-
-// Conexão com o banco de dados
-try {
-    $pdo = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erro na conexão com o banco de dados: " . $e->getMessage());
-    
-}
+require '../config/config.php';
 
 if (isset($_POST['submit'])) {
     $nome = filter_input(INPUT_POST, 'name');

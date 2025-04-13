@@ -1,14 +1,14 @@
 <?php 
-require "config.php";
+require './config/config.php';
 ?>
-<!-- HTML -->
+<!-- PARA HÓSPEDES-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina de Cadastro de Conta de Hóspede</title>
-  <link rel="stylesheet" href="../CSS/cadastro.css">
+  <link rel="stylesheet" href="#">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -25,7 +25,7 @@ require "config.php";
       </button>
     </div>
 
-    <form action="cadastro.php" method="post"id="form">
+    <form action="../actions/adicionar_action.php" method="post" id="form">
       <div id="input_container">
       <!-- Nome -->
         <div class="input-box">
@@ -116,4 +116,3 @@ require "config.php";
 
 </html>
 
-<!-- Não está estilizando" -->
