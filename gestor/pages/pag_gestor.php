@@ -15,7 +15,7 @@
 
     <div class="cards">
         <a href="cadastrar_gestor.php">Cadastrar Gestor</a>
-        <a href="gerenciar_quartos.php">Gerenciar Quartos</a>
+        <a href="gerenciarquartos/index.css">Gerenciar Quartos</a>
         <a href="gerenciar_reservas.php">Gerenciar Reservas</a>
         <a href="gerar_relatorios.php">Gerar Relatórios</a>
     </div>

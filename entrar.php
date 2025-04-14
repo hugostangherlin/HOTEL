@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config/config.php';
+require 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: pages/pag_gestor.php");
                 break;
             case 2:
-                header("Location: pages/pag_hospede.php");
+                header("Location: hospede/pages/pag_hospede.php");
                 break;
             default:
                 $_SESSION['erro_login'] = "Perfil não identificado!";
