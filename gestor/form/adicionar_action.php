@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config/config.php';
+require '../config/config.php';
 // Cadastro de Gestor
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome      = $_POST['name'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $executou = $stmt->execute([$nome, $email, $senha, $telefone, $cpf, $endereco, $nascimento, $perfil]);
     if ($executou) {
-        echo "<script>alert('Gestor cadastrado com sucesso!'); window.location.href='entrar.php';</script>";
+        echo "<script>alert('Gestor cadastrado com sucesso!'); window.location.href='/HOTEL/entrar.php';</script>";
     } else {
         echo "<script>alert('Erro ao cadastrar!');</script>";
     }

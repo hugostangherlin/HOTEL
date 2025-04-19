@@ -11,14 +11,17 @@
 
 <div class="conteudo">
     <h3><?php echo "$saudacao, $nome!"; ?></h3>
-    <a class="sair" href="logout.php">Sair</a>
 
     <div class="cards">
-        <a href="cadastrar_gestor.php">Cadastrar Gestor</a>
-        <a href="gerenciarquartos/index.css">Gerenciar Quartos</a>
+        <a href="../form/cadastroform.php">Cadastrar Gestor</a>
+        <a href="gerenciarquartos/index.php">Gerenciar Quartos</a>
         <a href="gerenciar_reservas.php">Gerenciar Reservas</a>
         <a href="gerar_relatorios.php">Gerar Relatórios</a>
     </div>
+</div>
+<div class="btn_logout">
+<form action="/HOTEL/logout.php" method="post" class="btn_logout">
+<button type="submit">Sair</button>
 </div>
 
 </body>

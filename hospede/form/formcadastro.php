@@ -1,9 +1,10 @@
-<?php 
-require './config/config.php';
+<?php
+require '../config/config.php';
 ?>
 <!-- PARA HÓSPEDES-->
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@ require './config/config.php';
 
     <form action="../actions/adicionar_action.php" method="post" id="form">
       <div id="input_container">
-      <!-- Nome -->
+        <!-- Nome -->
         <div class="input-box">
           <label for="name" class="form-label">
             Nome
@@ -50,15 +51,15 @@ require './config/config.php';
         </div>
 
         <!-- Senha -->
-<div class="input-box">
-  <label for="password" class="form-label">
-    Senha
-  </label>
-  <div class="input-field">
-    <input type="password" name="password" id="password" class="form-control" placeholder="Digite sua senha" required>
-    <i class="fa-solid fa-key"></i>
-  </div>
-</div>
+        <div class="input-box">
+          <label for="password" class="form-label">
+            Senha
+          </label>
+          <div class="input-field">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+            <i class="fa-solid fa-key"></i>
+          </div>
+        </div>
 
 
         <!-- Telefone -->
@@ -82,7 +83,7 @@ require './config/config.php';
           </div>
         </div>
 
-<!-- Endereço -->
+        <!-- Endereço -->
         <div class="input-box">
           <label for="endereco" class="form-label">
             Endereço
@@ -104,15 +105,13 @@ require './config/config.php';
           </div>
         </div>
         <br>
-        
-        
-        <input type="submit" name="submit" class="btn-default">
-          <i class="fa-solid fa check"></i>
-        </input>
+        <button type="submit" name="submit" class="btn-default">
+          <i class="fa-solid fa-check"></i> Cadastrar
+        </button>
+<!-- Problema quando o formulário é enviado e permanece na URL "HOTEL/hospede/actions/adicionar_action.php" e não existe, deve arrumar para "HOTEL/hospede/pages/pag_hospede.php" -->
       </div>
     </form>
   </main>
 </body>
 
 </html>
-

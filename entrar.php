@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Redireciona conforme o perfil
         switch ($usuario['Perfil_ID_Perfil']) {
             case 1:
-                header("Location: pages/pag_gestor.php");
+                header("Location: gestor/pages/pag_gestor.php");
                 break;
             case 2:
                 header("Location: hospede/pages/pag_hospede.php");
@@ -77,6 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit">Entrar</button>
     </form>
 
-    <a href="formcadastro.php">Cadastrar</a>
+    <a href="hospede/form/formcadastro.php">Cadastrar</a>
 </body>
 </html>

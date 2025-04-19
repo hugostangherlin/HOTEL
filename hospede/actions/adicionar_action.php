@@ -32,11 +32,12 @@ if (isset($_POST['submit'])) {
                 $sql->bindValue(':data_nascimento', $birthdate);
                 $sql->bindValue(':perfil', $perfil);
                 $sql->execute();
+                header("Location: ../pages/pag_hospede.php");
+exit;
+;
 
-                header("Location: cadastro.php");
-                exit;
             } else {
-                echo "<script>alert('Este e-mail já está cadastrado!');</script>";
+                echo "<script>alert('Bem vindo!');</script>";
             }
         } catch (PDOException $e) {
             echo "Erro ao cadastrar: " . $e->getMessage();
