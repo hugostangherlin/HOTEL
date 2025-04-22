@@ -14,7 +14,45 @@ require '../config/config.php';
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+    let nome = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let senha = document.getElementById("password").value.trim();
+    let telefone = document.getElementById("telefone").value.trim();
+    let cpf = document.getElementById("cpf").value.trim();
+    let endereco = document.getElementById("endereco").value.trim();
+    let birthdate = document.getElementById("birthdate").value;
 
+    if (nome === "" || email === "" || senha === "" || telefone === "" || cpf === "" || endereco === "" || birthdate === "") {
+        alert("Por favor, preencha todos os campos!");
+        e.preventDefault(); // cancela o envio
+        return;
+    }
+
+    if (senha.length < 6) {
+        alert("A senha precisa ter pelo menos 6 caracteres!");
+        e.preventDefault();
+        return;
+    }
+
+    // validação básica de CPF (apenas formato)
+    let cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+    if (!cpfRegex.test(cpf)) {
+        alert("Digite o CPF no formato 000.000.000-00");
+        e.preventDefault();
+        return;
+    }
+
+    // validação de telefone (formato simples)
+    let telefoneRegex = /^\+?\d{2}\s?\(\d{2}\)\d{4,5}\-?\d{4}$/;
+    if (!telefoneRegex.test(telefone)) {
+        alert("Digite o telefone no formato +00 (00)0000-0000 ou +00 (00)00000-0000");
+        e.preventDefault();
+        return;
+    }
+});
+</script>
 <body>
   <main id="form_container">
     <div id="form_header">

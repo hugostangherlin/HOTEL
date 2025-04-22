@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../config/config.php';
 
 if (isset($_POST['submit'])) {
@@ -10,8 +11,7 @@ if (isset($_POST['submit'])) {
     $endereco = filter_input(INPUT_POST, 'endereco');
     $birthdate = $_POST['birthdate'];
 
-    // Definindo automaticamente o perfil para "Hóspede" (ou outro perfil padrão)
-    $perfil = 2; // Supondo que o ID de "Hóspede" seja 2 no banco de dados
+    $perfil = 2; // ID de Hóspede
 
     if ($nome && $email && $telefone && $senha && $perfil) {
         try {
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
             if ($sql->rowCount() === 0) {
                 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-                $sql = $pdo->prepare("INSERT INTO usuarios (Nome, Email, Telefone, Senha, CPF, Endereco, Data_Nascimento, Perfil_ID_Perfil) 
+                $sql = $pdo->prepare("INSERT INTO usuarios (Nome, Email, Telefone, Senha, CPF, Endereco, Data_Nascimento, Perfil_ID_Perfil)
                                       VALUES (:nome, :email, :telefone, :senha, :cpf, :endereco, :data_nascimento, :perfil)");
                 $sql->bindValue(':nome', $nome);
                 $sql->bindValue(':email', $email);
@@ -32,12 +32,20 @@ if (isset($_POST['submit'])) {
                 $sql->bindValue(':data_nascimento', $birthdate);
                 $sql->bindValue(':perfil', $perfil);
                 $sql->execute();
-                header("Location: ../pages/pag_hospede.php");
-exit;
-;
+
+                // Inicia sessão com os dados do novo usuário
+                $_SESSION['usuario'] = [
+                    'id' => $pdo->lastInsertId(),
+                    'nome' => $nome,
+                    'perfil' => $perfil
+                ];
+
+                // Redireciona para a página de hóspede
+                header("Location: /HOTEL/hospede/pages/pag_hospede.php");
+                exit;
 
             } else {
-                echo "<script>alert('Bem vindo!');</script>";
+                echo "<script>alert('E-mail já cadastrado!');</script>";
             }
         } catch (PDOException $e) {
             echo "Erro ao cadastrar: " . $e->getMessage();
@@ -45,4 +53,6 @@ exit;
     } else {
         echo "<script>alert('Por favor, preencha todos os campos obrigatórios!');</script>";
     }
-};
+}
+?>
+

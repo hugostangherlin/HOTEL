@@ -5,6 +5,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
     header("Location: entrar.php"); // Redireciona para o login caso não tenha permissão
     exit();
 }
+$nome = $_SESSION['usuario']['nome'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
