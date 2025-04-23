@@ -12,12 +12,15 @@
 <div class="conteudo">
     <h3><?php echo "$saudacao, $nome!"; ?></h3>
 
-    <div class="cards">
+    <div class="dashboard">
         <a href="../form/cadastroform.php">Cadastrar Gestor</a>
         <a href="gerenciarquartos/index.php">Gerenciar Quartos</a>
         <a href="gerenciar_reservas.php">Gerenciar Reservas</a>
         <a href="gerar_relatorios.php">Gerar Relatórios</a>
     </div>
+</div>
+<div class="exibirperfil">
+    <a href="exibir_gestor.php">Meu Perfil</a>
 </div>
 <div class="btn_logout">
 <form action="/HOTEL/logout.php" method="post" class="btn_logout">
