@@ -23,7 +23,7 @@ require '../config/config.php';
         <i class="fa-solid fa-right-to-bracket"></i>
       </button>
     </div>
-    <form action="" method="post" id="form">
+    <form action="adicionar_action.php" method="post" id="form">
   <div id="input_container">
     <!-- Nome -->
     <div class="input-box">

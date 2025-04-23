@@ -39,11 +39,8 @@ if (isset($_POST['submit'])) {
                     'nome' => $nome,
                     'perfil' => $perfil
                 ];
-
-                // Redireciona para a página de hóspede
-                header("Location: /HOTEL/hospede/pages/pag_hospede.php");
+                header("Location: /HOTEL/gestor/pages/pag_gestor.php");
                 exit;
-
             } else {
                 echo "<script>alert('E-mail já cadastrado!');</script>";
             }
@@ -54,5 +51,6 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Por favor, preencha todos os campos obrigatórios!');</script>";
     }
 }
+// Pagina direcionando para "adicionar_action.php"
 ?>
 
