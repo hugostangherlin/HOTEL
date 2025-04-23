@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $endereco = filter_input(INPUT_POST, 'endereco');
     $birthdate = $_POST['birthdate'];
 
-    $perfil = 1; // ID de Hóspede
+    $perfil = 1; 
 
     if ($nome && $email && $telefone && $senha && $perfil) {
         try {
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
                 ];
 
                 // Redireciona para a página de hóspede
-                header("Location: /HOTEL/gestor/pages/pag_gestor.php");
+                header("Location: /HOTEL/hospede/pages/pag_hospede.php");
                 exit;
 
             } else {
