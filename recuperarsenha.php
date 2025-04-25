@@ -1,62 +1,79 @@
 <?php
+require 'config.php';
 
-require "config.php";
+$mensagem = "";
+$etapa = 1;
 
+if (isset($_POST['validar-email'])) {
+    $email = $_POST['email'];
 
-    if(isset($_POST['validar-email'])){
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mensagem = "E-mail inválido.";
+    } else {
+        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
+        $stmt->bindValue(":email", $email);
+        $stmt->execute();
 
-        $email = $_POST['email'];
-
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $erro[] = "E-mail inválido";
+        if ($stmt->rowCount() > 0) {
+            $etapa = 2;
+        } else {
+            $mensagem = "E-mail não encontrado.";
         }
-
-        $novasenha = substr(md5(time()), 0, 6);
-        
-
-        if(mail($email, "Sua nova senha", "Sua nova senha: ".$novasenha)){
-
-        $sql = "UPDATE usuario SET senha = '$novasenha' WHERE email ='$email'";
-        $consulta = $db->prepare($sql);
-        $consulta->execute();
-        }
-        
     }
+}
 
+if (isset($_POST['definir-senha'])) {
+    $email = $_POST['email'];
+    $novaSenha = $_POST['nova_senha'];
+
+    if (strlen($novaSenha) < 6) {
+        $mensagem = "A senha deve ter pelo menos 6 caracteres.";
+        $etapa = 2;
+    } else {
+        $senhaCriptografada = password_hash($novaSenha, PASSWORD_DEFAULT);
+        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute([
+            ":senha" => $senhaCriptografada,
+            ":email" => $email
+        ]);
+
+        $mensagem = "Senha atualizada com sucesso! <a href='entrar.php'>Clique aqui para fazer login</a>.";
+        $etapa = 1;
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Senha</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 offset-md-4 form">
-                <form action="recuperar_senha.php" method="post">
-                    <h1 class="text-center">Recuperação de Senha</h1>
-                    <p class="text-center">Nos informe seu e-mail Cadastrado</p>
+    <div class="form-container">
+        <h2>Recuperação de Senha</h2>
 
-                    <div class="form-group mb-2">
-                        <input class="form-control" type="email" name="email" placeholder="Digite seu endereço de e-mail" required >
-                    </div>
-                    <div class="form-group mb-2">
-                        <input class="form-control button" type="submit" name="validar-email" value="Redefinir Senha">
-                    </div>
+        <?php if ($etapa == 1): ?>
+            <p>Digite seu e-mail cadastrado:</p>
+            <form method="post">
+                <input type="email" name="email" required placeholder="Seu e-mail"><br><br>
+                <input type="submit" name="validar-email" value="Continuar">
+            </form>
+        <?php elseif ($etapa == 2): ?>
+            <p>Digite a nova senha para o e-mail <strong><?php echo htmlspecialchars($email); ?></strong>:</p>
+            <form method="post">
+                <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
+                <input type="password" name="nova_senha" required placeholder="Nova senha"><br><br>
+                <input type="submit" name="definir-senha" value="Salvar Nova Senha">
+            </form>
+        <?php endif; ?>
 
-                    <div class="link login-link text-center"><a href="../index.php">Voltar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <?php if (!empty($mensagem)): ?>
+            <div class="mensagem"><?php echo $mensagem; ?></div>
+        <?php endif; ?>
+
+        <p><a href="entrar.php">Voltar ao login</a></p>
     </div>
-
 </body>
-
 </html>

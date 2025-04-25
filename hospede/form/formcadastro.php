@@ -9,50 +9,11 @@ require '../config/config.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina de Cadastro de Conta de Hóspede</title>
-  <link rel="stylesheet" href="#">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<script>
-document.getElementById("form").addEventListener("submit", function(e) {
-    let nome = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let senha = document.getElementById("password").value.trim();
-    let telefone = document.getElementById("telefone").value.trim();
-    let cpf = document.getElementById("cpf").value.trim();
-    let endereco = document.getElementById("endereco").value.trim();
-    let birthdate = document.getElementById("birthdate").value;
-
-    if (nome === "" || email === "" || senha === "" || telefone === "" || cpf === "" || endereco === "" || birthdate === "") {
-        alert("Por favor, preencha todos os campos!");
-        e.preventDefault(); // cancela o envio
-        return;
-    }
-
-    if (senha.length < 6) {
-        alert("A senha precisa ter pelo menos 6 caracteres!");
-        e.preventDefault();
-        return;
-    }
-
-    // validação básica de CPF (apenas formato)
-    let cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-    if (!cpfRegex.test(cpf)) {
-        alert("Digite o CPF no formato 000.000.000-00");
-        e.preventDefault();
-        return;
-    }
-
-    // validação de telefone (formato simples)
-    let telefoneRegex = /^\+?\d{2}\s?\(\d{2}\)\d{4,5}\-?\d{4}$/;
-    if (!telefoneRegex.test(telefone)) {
-        alert("Digite o telefone no formato +00 (00)0000-0000 ou +00 (00)00000-0000");
-        e.preventDefault();
-        return;
-    }
-});
-</script>
 <body>
   <main id="form_container">
     <div id="form_header">
@@ -139,17 +100,17 @@ document.getElementById("form").addEventListener("submit", function(e) {
             Data de Nascimento
           </label>
           <div class="input-field">
-            <input type="date" name="birthdate" id="name" class="form-control">
+          <input type="date" name="birthdate" id="birthdate" class="form-control">
           </div>
         </div>
         <br>
         <button type="submit" name="submit" class="btn-default">
           <i class="fa-solid fa-check"></i> Cadastrar
         </button>
-<!-- Problema quando o formulário é enviado e permanece na URL "HOTEL/hospede/actions/adicionar_action.php" e não existe, deve arrumar para "HOTEL/hospede/pages/pag_hospede.php" -->
+        <br>
+        <a href="#">Voltar</a>
       </div>
     </form>
   </main>
 </body>
-
 </html>

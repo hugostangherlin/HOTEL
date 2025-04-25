@@ -76,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="password" name="senha" placeholder="Senha" required>
         <button type="submit">Entrar</button>
     </form>
-
+    <a href="recuperarsenha.php">Recuperar Senha</a>
+    <br>
     <a href="hospede/form/formcadastro.php">Cadastrar</a>
 </body>
 </html>
