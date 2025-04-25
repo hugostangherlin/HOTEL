@@ -6,7 +6,11 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
     exit();
 }
 $nome = $_SESSION['usuario']['nome'];
+
+// Conexão com o banco de dados
+require 'config.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,84 +20,103 @@ $nome = $_SESSION['usuario']['nome'];
     <link rel="stylesheet" href="../CSS/menu.css">
     <link rel="icon" href="../assets/favicon.ico?v=1" type="image/x-icon">
 </head>
+
+<body>
 <?php include '../includes/header.php'; ?>
 
 <div class="conteudo">
-    <h3><?php echo "$saudacao, $nome!"; ?></h3>
-<div class="exibirperfil">
-    <a href="exibir_hospede.php">Meu Perfil</a>
-</div>
+    <h3><?php echo "Bem-vindo, $nome!"; ?></h3>
 
-<div class="btn_logout">
-<form action="/HOTEL/logout.php" method="post" class="btn_logout">
-<button type="submit">Sair</button>
-</div>
-<div>
-<form method="GET" action="">
-    <label>Check-in:</label>
-    <input type="date" name="checkin" required>
+    <div class="exibirperfil">
+        <a href="exibir_hospede.php">Meu Perfil</a>
+    </div>
 
-    <label>Check-out:</label>
-    <input type="date" name="checkout" required>
+    <div class="btn_logout">
+        <form action="/HOTEL/logout.php" method="post" class="btn_logout">
+            <button type="submit">Sair</button>
+        </form>
+    </div>
 
-    <label>Categoria:</label>
-    <select name="categoria" required>
-      <option value="">--Selecione--</option>
-      <?php
-      // Buscar categorias do banco
-      $sql = $pdo->query("SELECT * FROM categoria");
-      $categorias = $sql->fetchAll();
-      foreach ($categorias as $cat) {
-        echo "<option value='{$cat['ID_Categoria']}'>{$cat['Nome']}</option>";
-      }
-      ?>
-    </select>
+    <!-- Formulário de filtro de quartos -->
+    <form method="GET" action="">
+        <label>Check-in:</label>
+        <input type="date" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>">
 
-    <button type="submit">Buscar</button>
-  </form>
+        <label>Check-out:</label>
+        <input type="date" name="checkout" value="<?= isset($_GET['checkout']) ? $_GET['checkout'] : '' ?>">
 
-  <!-- RESULTADOS -->
-  <?php
-  if (!empty($_GET['checkin']) && !empty($_GET['checkout']) && !empty($_GET['categoria'])) {
-    $checkin = $_GET['checkin'];
-    $checkout = $_GET['checkout'];
-    $categoria = $_GET['categoria'];
+        <label>Categoria:</label>
+        <select name="categoria">
+            <option value="">--Selecione--</option>
+            <?php
+            $sql = $pdo->query("SELECT * FROM categoria");
+            $categorias = $sql->fetchAll();
+            foreach ($categorias as $cat) {
+                $selected = (isset($_GET['categoria']) && $_GET['categoria'] == $cat['ID_Categoria']) ? 'selected' : '';
+                echo "<option value='{$cat['ID_Categoria']}' $selected>{$cat['Nome']}</option>";
+            }
+            ?>
+        </select>
 
-    $stmt = $pdo->prepare("
-      SELECT q.*, c.Nome AS categoria_nome
-      FROM quarto q
-      JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-      WHERE q.Status = 'Disponível'
-        AND q.Categoria_ID_Categoria = :categoria
-        AND q.ID_Quarto NOT IN (
+        <button type="submit">Buscar</button>
+    </form>
+
+    <hr>
+
+    <?php
+    // Filtros opcionais
+    $checkin = !empty($_GET['checkin']) ? $_GET['checkin'] : null;
+    $checkout = !empty($_GET['checkout']) ? $_GET['checkout'] : null;
+    $categoria = !empty($_GET['categoria']) ? $_GET['categoria'] : null;
+
+    // Monta a consulta base
+    $sql = "SELECT q.*, c.Nome AS categoria_nome
+            FROM quarto q
+            JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
+            WHERE q.Status = 'Disponível'";
+
+    // Condições dinâmicas
+    if ($categoria) {
+        $sql .= " AND q.Categoria_ID_Categoria = :categoria";
+    }
+    if ($checkin && $checkout) {
+        $sql .= " AND q.ID_Quarto NOT IN (
             SELECT Quarto_ID_Quarto
             FROM reserva
             WHERE (:checkin < Checkout AND :checkout > Checkin)
-        )
-    ");
-    $stmt->execute([
-      ':checkin' => $checkin,
-      ':checkout' => $checkout,
-      ':categoria' => $categoria
-    ]);
+        )";
+    }
 
+    $stmt = $pdo->prepare($sql);
+
+    // Bind params
+    if ($categoria) {
+        $stmt->bindParam(':categoria', $categoria);
+    }
+    if ($checkin && $checkout) {
+        $stmt->bindParam(':checkin', $checkin);
+        $stmt->bindParam(':checkout', $checkout);
+    }
+
+    $stmt->execute();
     $quartos = $stmt->fetchAll();
 
+    // Exibição
     if (count($quartos) > 0) {
-      echo "<h2>Quartos disponíveis:</h2>";
-      foreach ($quartos as $q) {
-        echo "<div style='border:1px solid #ccc; margin:10px; padding:10px;'>";
-        echo "<strong>Categoria:</strong> {$q['categoria_nome']}<br>";
-        echo "<strong>Capacidade:</strong> {$q['Capacidade']} pessoas<br>";
-        echo "<img src='uploads/{$q['Foto']}' width='150'><br>"; // ajuste o caminho da foto se necessário
-        echo "<button>Reservar</button>"; // futuramente, pode linkar para a página de reserva
-        echo "</div>";
-      }
+        echo "<h2>Quartos Disponíveis:</h2>";
+        foreach ($quartos as $q) {
+            echo "<div style='border:1px solid #ccc; margin:10px; padding:10px;'>";
+            echo "<strong>Categoria:</strong> {$q['categoria_nome']}<br>";
+            echo "<strong>Capacidade:</strong> {$q['Capacidade']} pessoas<br>";
+            echo "<img src='../uploads/{$q['Foto']}' width='150'><br>";
+            echo "<a href='reservar.php?id={$q['ID_Quarto']}&checkin=$checkin&checkout=$checkout'>Reservar</a>";
+            echo "</div>";
+        }
     } else {
-      echo "<p>Nenhum quarto disponível nessas condições.</p>";
+        echo "<p>Nenhum quarto disponível nessas condições.</p>";
     }
-  }
-  ?>
-
+    ?>
 </div>
 
+</body>
+</html>
