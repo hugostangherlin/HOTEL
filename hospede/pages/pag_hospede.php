@@ -31,6 +31,10 @@ require 'config.php';
         <a href="exibir_hospede.php">Meu Perfil</a>
     </div>
 
+    <div class="minhasreservas">
+<a href="minhasreservas.php">Minhas Reservas</a>
+    </div>
+
     <div class="btn_logout">
         <form action="/HOTEL/logout.php" method="post" class="btn_logout">
             <button type="submit">Sair</button>
@@ -64,59 +68,62 @@ require 'config.php';
     <hr>
 
     <?php
-    // Filtros opcionais
-    $checkin = !empty($_GET['checkin']) ? $_GET['checkin'] : null;
-    $checkout = !empty($_GET['checkout']) ? $_GET['checkout'] : null;
-    $categoria = !empty($_GET['categoria']) ? $_GET['categoria'] : null;
+// Filtros opcionais
+$checkin = !empty($_GET['checkin']) ? $_GET['checkin'] : null;
+$checkout = !empty($_GET['checkout']) ? $_GET['checkout'] : null;
+$categoria = !empty($_GET['categoria']) ? $_GET['categoria'] : null;
 
-    // Monta a consulta base
-    $sql = "SELECT q.*, c.Nome AS categoria_nome
-            FROM quarto q
-            JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-            WHERE q.Status = 'Disponível'";
+// Monta a consulta com status de ocupação
+$sql = "SELECT q.*, c.Nome AS categoria_nome,
+        CASE 
+            WHEN EXISTS (
+                SELECT 1 FROM reserva r
+                WHERE r.Quarto_ID_Quarto = q.ID_Quarto
+                AND (:checkin IS NOT NULL AND :checkout IS NOT NULL)
+                AND (:checkin < r.Checkout AND :checkout > r.Checkin)
+            )
+            THEN 'Ocupado'
+            ELSE 'Disponível'
+        END AS status_reserva
+        FROM quarto q
+        JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
+        WHERE 1 = 1";
 
-    // Condições dinâmicas
-    if ($categoria) {
-        $sql .= " AND q.Categoria_ID_Categoria = :categoria";
-    }
-    if ($checkin && $checkout) {
-        $sql .= " AND q.ID_Quarto NOT IN (
-            SELECT Quarto_ID_Quarto
-            FROM reserva
-            WHERE (:checkin < Checkout AND :checkout > Checkin)
-        )";
-    }
+if ($categoria) {
+    $sql .= " AND q.Categoria_ID_Categoria = :categoria";
+}
 
-    $stmt = $pdo->prepare($sql);
+$stmt = $pdo->prepare($sql);
 
-    // Bind params
-    if ($categoria) {
-        $stmt->bindParam(':categoria', $categoria);
-    }
-    if ($checkin && $checkout) {
-        $stmt->bindParam(':checkin', $checkin);
-        $stmt->bindParam(':checkout', $checkout);
-    }
+// Bind dos parâmetros
+$stmt->bindParam(':checkin', $checkin);
+$stmt->bindParam(':checkout', $checkout);
+if ($categoria) {
+    $stmt->bindParam(':categoria', $categoria);
+}
 
-    $stmt->execute();
-    $quartos = $stmt->fetchAll();
+$stmt->execute();
+$quartos = $stmt->fetchAll();
 
-    // Exibição
-    if (count($quartos) > 0) {
-        echo "<h2>Quartos Disponíveis:</h2>";
-        foreach ($quartos as $q) {
-            echo "<div style='border:1px solid #ccc; margin:10px; padding:10px;'>";
-            echo "<strong>Categoria:</strong> {$q['categoria_nome']}<br>";
-            echo "<strong>Capacidade:</strong> {$q['Capacidade']} pessoas<br>";
-            echo "<img src='../uploads/{$q['Foto']}' width='150'><br>";
-            echo "<a href='reservar.php?id={$q['ID_Quarto']}&checkin=$checkin&checkout=$checkout'>Reservar</a>";
-            echo "</div>";
+// Exibição
+if (count($quartos) > 0) {
+    echo "<h2>Lista de Quartos:</h2>";
+    foreach ($quartos as $q) {
+        echo "<div style='border:1px solid #ccc; margin:10px; padding:10px;'>";
+        echo "<strong>Categoria:</strong> {$q['categoria_nome']}<br>";
+        echo "<strong>Capacidade:</strong> {$q['Capacidade']} pessoas<br>";
+        echo "<strong>Status:</strong> {$q['status_reserva']}<br>";
+        echo "<img src='../uploads/{$q['Foto']}' width='150'><br>";
+
+        if ($q['status_reserva'] === 'Disponível') {
+            echo "<a href='pagamento.php?id={$q['ID_Quarto']}&checkin=$checkin&checkout=$checkout'>Reservar</a>";
+        } else {
+            echo "<em>Indisponível no período selecionado</em>";
         }
-    } else {
-        echo "<p>Nenhum quarto disponível nessas condições.</p>";
-    }
-    ?>
-</div>
 
-</body>
-</html>
+        echo "</div>";
+    }
+} else {
+    echo "<p>Nenhum quarto encontrado.</p>";
+}
+?>
