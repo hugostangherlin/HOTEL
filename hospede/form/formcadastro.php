@@ -1,116 +1,67 @@
 <?php
 require '../config/config.php';
 ?>
-<!-- PARA HÓSPEDES-->
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina de Cadastro de Conta de Hóspede</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-  <main id="form_container">
-    <div id="form_header">
-      <h1 id="form_title">
-        Criar conta
-      </h1>
-      <button class="btn-default">
-        <i class="fa-solid fa-right-to-bracket"></i>
-      </button>
+<!-- Modal (pop-up) do Formulário de Cadastro -->
+<div id="register-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal" class="close">&times;</span>
+      <h2>Criar conta</h2>
+      <form action="hospede/actions/adicionar_action.php" method="post" id="form">
+        <div id="input_container">
+          <div class="input-box">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" placeholder="Digite seu nome" required>
+          </div>
+          <div class="input-box">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" placeholder="exemplo@gmail.com" required>
+          </div>
+          <div class="input-box">
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+          </div>
+          <div class="input-box">
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" id="telefone" placeholder="+00 (00)0000-0000" required>
+          </div>
+          <div class="input-box">
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+          </div>
+          <div class="input-box">
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco" id="endereco" placeholder="Digite seu endereço" required>
+          </div>
+          <div class="input-box">
+            <label for="birthdate">Data de Nascimento</label>
+            <input type="date" name="birthdate" id="birthdate" required>
+          </div>
+          <button type="submit" name="submit" class="btn-default">Cadastrar</button>
+        </div>
+      </form>
     </div>
+</div>
 
-    <form action="../actions/adicionar_action.php" method="post" id="form">
-      <div id="input_container">
-        <!-- Nome -->
-        <div class="input-box">
-          <label for="name" class="form-label">
-            Nome
-          </label>
-          <div class="input-field">
-            <input type="text" name="name" id="name" class="form-control" placeholder="Digite seu nome">
-            <i class="fa-regular fa-user"></i>
-          </div>
-        </div>
+<script>
+  // Abrir o modal de cadastro
+  const openModalButton = document.getElementById("open-register-form");
+  const modal = document.getElementById("register-modal");
+  const closeModalButton = document.getElementById("close-modal");
 
-        <!-- Email -->
-        <div class="input-box">
-          <label for="birthdate" class="form-label">
-            E-mail
-          </label>
-          <div class="input-field">
-            <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@gmail.com">
-            <i class="fa-regular fa-envelope"></i>
-          </div>
-        </div>
+  openModalButton.onclick = function() {
+    modal.style.display = "block";
+  }
 
-        <!-- Senha -->
-        <div class="input-box">
-          <label for="password" class="form-label">
-            Senha
-          </label>
-          <div class="input-field">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Digite sua senha" required>
-            <i class="fa-solid fa-key"></i>
-          </div>
-        </div>
+  // Fechar o modal de cadastro
+  closeModalButton.onclick = function() {
+    modal.style.display = "none";
+  }
 
-
-        <!-- Telefone -->
-        <div class="input-box">
-          <label for="last_name" class="form-label">
-            Telefone
-          </label>
-          <div class="input-field">
-            <input type="text" name="telefone" id="telefone" class="form-control" placeholder="+00 (00)0000-0000">
-            <i class="fa-regular fa-phone"></i>
-          </div>
-        </div>
-
-        <div class="input-box">
-          <label for="cpf" class="form-label">
-            CPF
-          </label>
-          <div class="input-field">
-            <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" maxlength="14">
-            <i class="fa-regular fa-id-card"></i>
-          </div>
-        </div>
-
-        <!-- Endereço -->
-        <div class="input-box">
-          <label for="endereco" class="form-label">
-            Endereço
-          </label>
-          <div class="input-field">
-            <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Digite seu endereço">
-            <i class="fa-solid fa-location-dot"></i>
-          </div>
-        </div>
-
-
-        <!-- Data de Nascimento -->
-        <div class="input-box">
-          <label for="birthdate" class="form-label">
-            Data de Nascimento
-          </label>
-          <div class="input-field">
-          <input type="date" name="birthdate" id="birthdate" class="form-control">
-          </div>
-        </div>
-        <br>
-        <button type="submit" name="submit" class="btn-default">
-          <i class="fa-solid fa-check"></i> Cadastrar
-        </button>
-        <br>
-        <a href="#">Voltar</a>
-      </div>
-    </form>
-  </main>
-</body>
-</html>
+  // Fechar o modal quando clicar fora dele
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>

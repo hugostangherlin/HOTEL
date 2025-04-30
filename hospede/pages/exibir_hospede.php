@@ -45,8 +45,9 @@ if (!$usuario) {
     <div class="btn-group">
         <a href="editar_perfil.php">Editar Perfil</a>
         <br><br>
-        <a href="deletar_perfil.php">Excluir Conta</a>
-        <br><br>
+        <form action="deletar_perfil.php" method="post" onsubmit="return confirm('Deseja realmente solicitar a exclusão da sua conta?');">
+    <button type="submit" style="color: red;">Solicitar exclusão da conta</button>
+</form>
         <a href="pag_hospede.php">Voltar</a>
         <br><br>
         <form action="/HOTEL/logout.php" method="post">

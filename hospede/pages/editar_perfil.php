@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Atualiza os dados do usuário no banco
-        $sql = "UPDATE usuarios SET Nome = ?, Email = ?, Telefone = ?, Endereco = ?, DataNascimento = ? WHERE ID = ?";
+        $sql = "UPDATE usuarios SET Nome = ?, Email = ?, Telefone = ?, Endereco = ?, Data_Nascimento = ? WHERE ID = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$nome, $email, $telefone, $endereco, $dataNascimento, $id_usuario]);
 
