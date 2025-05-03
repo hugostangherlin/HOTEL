@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require __DIR__ . '/Config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Redireciona conforme o perfil
         switch ($usuario['Perfil_ID_Perfil']) {
             case 1:
-                header("Location: gestor/pages/pag_gestor.php");
+                header("Location: gestor/dashboard.php");
                 break;
             case 2:
                 header("Location: hospede/pages/pag_hospede.php");

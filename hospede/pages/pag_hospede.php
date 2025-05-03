@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 $nome = $_SESSION['usuario']['nome'];
 
 // Conexão com o banco de dados
-require 'config.php';
+require_once '../../config/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +22,6 @@ require 'config.php';
 </head>
 
 <body>
-<?php include '../includes/header.php'; ?>
-
 <div class="conteudo">
     <h3><?php echo "Bem-vindo, $nome!"; ?></h3>
 

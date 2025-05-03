@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/config.php';
+require_once '../../config/config.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
@@ -26,12 +26,12 @@ if (!$usuario) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Meu Perfil</title>
+    <title>Sua Conta</title>
 
 </head>
 <body>
 
-    <h1">Meu Perfil</h1>
+    <h1">Sua Conta</h1>
 
     <div class="perfil">
         <p><strong>Nome:</strong> <?= $usuario['Nome'] ?></p>
@@ -43,17 +43,16 @@ if (!$usuario) {
     </div>
 
     <div class="btn-group">
-        <a href="editar_perfil.php">Editar Perfil</a>
-        <br><br>
+    <form action="editar_perfil.php">
+    <button >Editar Conta</button>
+</form>
+<br><br>
         <form action="deletar_perfil.php" method="post" onsubmit="return confirm('Deseja realmente solicitar a exclusão da sua conta?');">
     <button type="submit" style="color: red;">Solicitar exclusão da conta</button>
 </form>
-        <a href="pag_hospede.php">Voltar</a>
-        <br><br>
-        <form action="/HOTEL/logout.php" method="post">
-            <button type="submit">Sair</button>
-        </form>
-    </div>
-
+<br><br>
+<form action="pag_hospede.php">
+    <button >Voltar</button>
+</form>
 </body>
 </html>

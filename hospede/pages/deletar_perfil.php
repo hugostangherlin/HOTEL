@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/config.php';
+require_once '../../config/config.php';
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
     header("Location: entrar.php");

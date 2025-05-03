@@ -1,5 +1,5 @@
 <?php
-require 'conexao.php';
+require_once '../../config/config.php';
 
 // Array vazio para armazenar os dados
 $lista = [];
@@ -28,14 +28,14 @@ if ($sql->rowCount() > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Gerenciamento de Quartos</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="quartos.css?v=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
 </head>
 <body>
     <h2>Painel de Gerenciamento de Quartos</h2>
-    <a href="criarquarto.php" class="btn-add">Adicionar quarto</a>
+    <a href="adicionar_quarto.php" class="btn-add">Adicionar quarto</a>
 
     <table border="1" id="myTable" class="cell-border stripe hover" width="100%">
         <thead>
@@ -66,8 +66,9 @@ if ($sql->rowCount() > 0) {
 
                     <td><?= $quarto['Capacidade']; ?></td>
                     <td>
-                        <a href="editar.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-edit">Editar</a>
-                        <a href="excluir.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir</a>
+                        <a href="editar_quarto.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-edit">Editar Quarto</a>
+                        <a href="../../actions/excluir.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir Quarto</a>
+                        <a href="maisdetalhes.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-more">Mais informações</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

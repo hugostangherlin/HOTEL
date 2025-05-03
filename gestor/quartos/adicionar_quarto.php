@@ -1,5 +1,5 @@
 <?php
-require 'conexao.php';
+require_once '../../config/config.php';
 
 $sth  = $pdo->prepare("SELECT * FROM categoria");
 $sth->execute();
@@ -19,14 +19,14 @@ $sth->execute();
   <main id="form_container">
     <div id="form_header">
       <h1 id="form_title">
-        Criar Quartos
+        Adicionar Novo Quarto
       </h1>
       <button class="btn_default">
         <i></i>
       </button>
     </div>
 
-    <form action="adicionarquarto.php" method="POST" id="form">
+    <form action="../../actions/adicionar_quarto.php" method="POST" id="form">
       <!-- Categoria -->
       <div class="input-box">
         <label for="category" class="form-label">

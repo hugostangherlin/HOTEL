@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/config.php';
+require_once '../../config/config.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {

@@ -54,7 +54,7 @@ if ($id) {
 <body>
 
     <!-- Formulário -->
-    <form method="POST" action="editar_action.php" id="form_container">
+    <form method="POST" action="../../assests/editar_quarto.php" id="form_container">
         <h2 id="form_title">Editar Quarto</h2>
         <!-- Campo oculto com o ID do quarto -->
         <input type="hidden" name="id" value="<?php echo $info['ID_Quarto']; ?>" />

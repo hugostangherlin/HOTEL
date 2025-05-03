@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Abr-2025 às 21:16
+-- Tempo de geração: 03-Maio-2025 às 16:08
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -48,6 +48,41 @@ CREATE TABLE `categoria` (
   `Descricao` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`ID_Categoria`, `Nome`, `Descricao`) VALUES
+(1, 'Suite Master', ''),
+(2, 'Luxo ', ''),
+(3, 'Standard', ''),
+(4, 'Econômico', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pagamentos`
+--
+
+CREATE TABLE `pagamentos` (
+  `ID_Pagamento` int(11) NOT NULL,
+  `ID_Reserva` int(11) DEFAULT NULL,
+  `ID_Usuarios` int(11) DEFAULT NULL,
+  `Valor` decimal(10,2) DEFAULT NULL,
+  `Forma_Pagamento` enum('Cartão','Boleto','Pix','Dinheiro') NOT NULL,
+  `Status` enum('Pendente','Pago','Cancelado') NOT NULL,
+  `Data_Pagamento` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `pagamentos`
+--
+
+INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
+(13, 22, 13, 600.00, 'Cartão', 'Pago', '2025-04-30 12:33:33'),
+(14, 23, 13, 150.00, 'Cartão', 'Pago', '2025-04-30 13:10:51'),
+(15, 24, 13, 150.00, 'Cartão', 'Pago', '2025-04-30 13:17:14');
+
 -- --------------------------------------------------------
 
 --
@@ -78,8 +113,31 @@ CREATE TABLE `quarto` (
   `Status` enum('Disponível','Ocupado','Manutenção') NOT NULL,
   `Capacidade` int(11) NOT NULL,
   `Categoria_ID_Categoria` int(11) NOT NULL COMMENT 'Cada quarto corresponde a uma categoria.',
-  `Foto` varchar(45) NOT NULL
+  `Foto` varchar(45) NOT NULL,
+  `Preco_diaria` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `quarto`
+--
+
+INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
+(1, 'Disponível', 1, 1, '', 150.00),
+(2, 'Disponível', 2, 1, '', 150.00),
+(3, 'Disponível', 4, 1, '', 150.00),
+(4, 'Disponível', 6, 1, '', 150.00),
+(5, 'Disponível', 1, 2, '', 200.00),
+(6, 'Disponível', 2, 2, '', 200.00),
+(7, 'Disponível', 4, 2, '', 200.00),
+(8, 'Disponível', 6, 2, '', 200.00),
+(9, 'Disponível', 1, 3, '', 300.00),
+(10, 'Disponível', 2, 3, '', 300.00),
+(11, 'Disponível', 4, 3, '', 300.00),
+(12, 'Disponível', 6, 3, '', 300.00),
+(13, 'Disponível', 1, 4, '', 400.00),
+(14, 'Disponível', 2, 4, '', 400.00),
+(15, 'Disponível', 4, 4, '', 400.00),
+(16, 'Disponível', 6, 4, '', 400.00);
 
 -- --------------------------------------------------------
 
@@ -110,6 +168,15 @@ CREATE TABLE `reserva` (
   `usuarios_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Extraindo dados da tabela `reserva`
+--
+
+INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`) VALUES
+(22, '2025-05-01', '2025-05-05', 1, 13),
+(23, '2025-04-30', '2025-05-01', 1, 13),
+(24, '2025-04-30', '2025-05-01', 2, 13);
+
 -- --------------------------------------------------------
 
 --
@@ -125,17 +192,18 @@ CREATE TABLE `usuarios` (
   `Endereco` varchar(45) NOT NULL,
   `CPF` varchar(45) NOT NULL,
   `Perfil_ID_Perfil` int(11) NOT NULL COMMENT 'Cada usuário será designado um tipo de perfil',
-  `Senha` varchar(255) DEFAULT NULL
+  `Senha` varchar(255) DEFAULT NULL,
+  `solicitou_exclusao` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `Senha`) VALUES
-(13, 'Hóspede', 'hospede@gmail.com', '2004-05-01', '+55(61) 98317-9384', 'Qnr 1 Conjunto B Casa 34', '111.111.111-11', 2, '$2y$10$Icht.DWS1nBcjpZZsEqsd.D.PYxwdVlWhfVJ9onvKOq9UGXNNxp6S'),
-(15, 'Gestor', 'gestor@gmail.com', '2001-01-01', '+55(61) 98311-3397', 'CNR 1', '478.258.96-46', 1, '$2y$10$P49Ed5x7bHSjNZwQdEa8kutDbyAkljQ/nfqiG9lrkC9sTvHdDRHc.'),
-(16, 'HUGO STANGHERLIN FEITOSA DE CARVALHO', 'hugo@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1', '852.741.963-02', 1, '$2y$10$nzKr89bIL5HMUX96bbGb7.sm4MhGGz9MJVlR2ZWzibGYgTh.G5RIS');
+INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `Senha`, `solicitou_exclusao`) VALUES
+(13, 'Hóspede', 'hospede@gmail.com', '', '+55(61) 98317-9384', 'Qnr 1 Conjunto B Casa 34', '111.111.111-11', 2, '$2y$10$z3Ij/79X.oErHvqsrU.xsO2v4TQjWJazcaCQrNiS/3ZCRAyjlApNi', 1),
+(15, 'Gestor', 'gestor@gmail.com', '2001-01-01', '+55(61) 98311-3397', 'CNR 1', '478.258.96-46', 1, '$2y$10$P49Ed5x7bHSjNZwQdEa8kutDbyAkljQ/nfqiG9lrkC9sTvHdDRHc.', 0),
+(18, 'hospedes1', 'hospede1@gmail.com', '2004-05-01', '+5561983113397', 'QNR 1', '478.258.96-46', 2, '$2y$10$dPN5DMF/lwkqVpLzXZMmDuET1FJw0FiofFP16KTh9Nt.tHnxIb6Pa', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -154,6 +222,14 @@ ALTER TABLE `avaliacao`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`ID_Categoria`);
+
+--
+-- Índices para tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  ADD PRIMARY KEY (`ID_Pagamento`),
+  ADD KEY `idx_reserva_id` (`ID_Reserva`),
+  ADD KEY `idx_usuario_id` (`ID_Usuarios`);
 
 --
 -- Índices para tabela `perfil`
@@ -206,7 +282,13 @@ ALTER TABLE `avaliacao`
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -215,16 +297,28 @@ ALTER TABLE `perfil`
   MODIFY `ID_Perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Gestor ou Hóspede', AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de tabela `quarto`
+--
+ALTER TABLE `quarto`
+  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT de tabela `relatorios`
 --
 ALTER TABLE `relatorios`
   MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restrições para despejos de tabelas
@@ -236,6 +330,13 @@ ALTER TABLE `usuarios`
 ALTER TABLE `avaliacao`
   ADD CONSTRAINT `fk_Avaliacao_Reserva1` FOREIGN KEY (`Reserva_ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Avaliacao_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  ADD CONSTRAINT `pagamentos_ibfk_1` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pagamentos_ibfk_2` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `quarto`
