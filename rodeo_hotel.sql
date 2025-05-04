@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03-Maio-2025 às 16:08
+-- Tempo de geração: 04-Maio-2025 às 05:35
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -79,9 +79,7 @@ CREATE TABLE `pagamentos` (
 --
 
 INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
-(13, 22, 13, 600.00, 'Cartão', 'Pago', '2025-04-30 12:33:33'),
-(14, 23, 13, 150.00, 'Cartão', 'Pago', '2025-04-30 13:10:51'),
-(15, 24, 13, 150.00, 'Cartão', 'Pago', '2025-04-30 13:17:14');
+(0, 0, 0, 900.00, 'Cartão', 'Pago', '2025-05-04 00:34:33');
 
 -- --------------------------------------------------------
 
@@ -173,9 +171,7 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`) VALUES
-(22, '2025-05-01', '2025-05-05', 1, 13),
-(23, '2025-04-30', '2025-05-01', 1, 13),
-(24, '2025-04-30', '2025-05-01', 2, 13);
+(0, '2025-05-04', '2025-05-10', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -201,169 +197,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `Senha`, `solicitou_exclusao`) VALUES
-(13, 'Hóspede', 'hospede@gmail.com', '', '+55(61) 98317-9384', 'Qnr 1 Conjunto B Casa 34', '111.111.111-11', 2, '$2y$10$z3Ij/79X.oErHvqsrU.xsO2v4TQjWJazcaCQrNiS/3ZCRAyjlApNi', 1),
-(15, 'Gestor', 'gestor@gmail.com', '2001-01-01', '+55(61) 98311-3397', 'CNR 1', '478.258.96-46', 1, '$2y$10$P49Ed5x7bHSjNZwQdEa8kutDbyAkljQ/nfqiG9lrkC9sTvHdDRHc.', 0),
-(18, 'hospedes1', 'hospede1@gmail.com', '2004-05-01', '+5561983113397', 'QNR 1', '478.258.96-46', 2, '$2y$10$dPN5DMF/lwkqVpLzXZMmDuET1FJw0FiofFP16KTh9Nt.tHnxIb6Pa', 0);
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `avaliacao`
---
-ALTER TABLE `avaliacao`
-  ADD PRIMARY KEY (`ID_Avaliacao`),
-  ADD KEY `fk_Avaliacao_usuarios1_idx` (`usuarios_ID`),
-  ADD KEY `fk_Avaliacao_Reserva1_idx` (`Reserva_ID_Reserva`);
-
---
--- Índices para tabela `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`ID_Categoria`);
-
---
--- Índices para tabela `pagamentos`
---
-ALTER TABLE `pagamentos`
-  ADD PRIMARY KEY (`ID_Pagamento`),
-  ADD KEY `idx_reserva_id` (`ID_Reserva`),
-  ADD KEY `idx_usuario_id` (`ID_Usuarios`);
-
---
--- Índices para tabela `perfil`
---
-ALTER TABLE `perfil`
-  ADD PRIMARY KEY (`ID_Perfil`);
-
---
--- Índices para tabela `quarto`
---
-ALTER TABLE `quarto`
-  ADD PRIMARY KEY (`ID_Quarto`),
-  ADD KEY `fk_Quarto_Categoria1_idx` (`Categoria_ID_Categoria`);
-
---
--- Índices para tabela `relatorios`
---
-ALTER TABLE `relatorios`
-  ADD PRIMARY KEY (`ID_Relatorio`),
-  ADD KEY `fk_Relatorios_Reserva1_idx` (`Reserva_ID_Reserva`),
-  ADD KEY `fk_Relatorios_usuarios1_idx` (`usuarios_ID`),
-  ADD KEY `fk_Relatorios_Avaliacao1_idx` (`Avaliacao_ID_Avaliacao`);
-
---
--- Índices para tabela `reserva`
---
-ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`ID_Reserva`),
-  ADD KEY `fk_Reserva_Quarto1_idx` (`Quarto_ID_Quarto`),
-  ADD KEY `fk_Reserva_usuarios1_idx` (`usuarios_ID`);
-
---
--- Índices para tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_usuarios_Perfil_idx` (`Perfil_ID_Perfil`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `avaliacao`
---
-ALTER TABLE `avaliacao`
-  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `pagamentos`
---
-ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de tabela `perfil`
---
-ALTER TABLE `perfil`
-  MODIFY `ID_Perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Gestor ou Hóspede', AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `quarto`
---
-ALTER TABLE `quarto`
-  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT de tabela `relatorios`
---
-ALTER TABLE `relatorios`
-  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `reserva`
---
-ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- Restrições para despejos de tabelas
---
-
---
--- Limitadores para a tabela `avaliacao`
---
-ALTER TABLE `avaliacao`
-  ADD CONSTRAINT `fk_Avaliacao_Reserva1` FOREIGN KEY (`Reserva_ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Avaliacao_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `pagamentos`
---
-ALTER TABLE `pagamentos`
-  ADD CONSTRAINT `pagamentos_ibfk_1` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE,
-  ADD CONSTRAINT `pagamentos_ibfk_2` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE;
-
---
--- Limitadores para a tabela `quarto`
---
-ALTER TABLE `quarto`
-  ADD CONSTRAINT `fk_Quarto_Categoria1` FOREIGN KEY (`Categoria_ID_Categoria`) REFERENCES `categoria` (`ID_Categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `relatorios`
---
-ALTER TABLE `relatorios`
-  ADD CONSTRAINT `fk_Relatorios_Avaliacao1` FOREIGN KEY (`Avaliacao_ID_Avaliacao`) REFERENCES `avaliacao` (`ID_Avaliacao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Relatorios_Reserva1` FOREIGN KEY (`Reserva_ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Relatorios_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `reserva`
---
-ALTER TABLE `reserva`
-  ADD CONSTRAINT `fk_Reserva_Quarto1` FOREIGN KEY (`Quarto_ID_Quarto`) REFERENCES `quarto` (`ID_Quarto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Reserva_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_Perfil` FOREIGN KEY (`Perfil_ID_Perfil`) REFERENCES `perfil` (`ID_Perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+(0, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1 Conjunto B Casa 34', '064.875.921-02', 2, '$2y$10$XQdjRL29SzaBvGuJyhu54uXznvWB4bg.HRfUVGeR4gocZoxRHBxFK', 0),
+(0, 'gestor', 'gestor@gmail.com', '1980-10-09', '+5561983113397', 'QNR 1 Conjunto B Casa 34', '704.012.331-20', 1, '$2y$10$C1VbRDsi88lhlK59n1QWxOa2x9eqiRthWoCb/1lF05hCm5BkoWhre', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
