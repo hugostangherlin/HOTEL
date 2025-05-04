@@ -3,6 +3,11 @@ require_once '../Config/config.php';
 require_once '../includes/header_gestor.php';
 ?>
 <link rel="stylesheet" href="../assests/css/dashboard.css">
+<head>
+    <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+</head>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 

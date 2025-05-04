@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require '../config/config.php';
 
 if (isset($_POST['submit'])) {
     $nome = filter_input(INPUT_POST, 'name');

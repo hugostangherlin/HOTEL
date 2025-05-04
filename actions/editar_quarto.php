@@ -1,5 +1,5 @@
 <?php
-require 'conexao.php';
+require '../config/config.php';
 
 // Recupera os dados do formulário
 $id = filter_input(INPUT_POST, 'id');
@@ -20,7 +20,7 @@ if ($id && $status && $capacidade && $categoria) {
 
     // Executa a consulta
     if ($sql->execute()) {
-        header("Location: index.php"); // Redireciona para o painel após sucesso
+        header("Location:/HOTEL/gestor/quartos/index.php"); // Redireciona para o painel após sucesso
         exit;
     } else {
         echo "Erro ao salvar os dados.";

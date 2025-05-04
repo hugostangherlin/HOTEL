@@ -23,7 +23,7 @@ require '../Config/config.php';
         <i class="fa-solid fa-right-to-bracket"></i>
       </button>
     </div>
-    <form action="adicionar_action.php" method="post" id="form">
+    <form method="POST" action="/HOTEL/actions/adicionar_gestor.php"id="form">
   <div id="input_container">
     <!-- Nome -->
     <div class="input-box">
@@ -94,7 +94,7 @@ require '../Config/config.php';
 
     <input type="submit" name="submit" class="btn-default" value="Cadastrar">
   </div>
-</form>
+</fo>
 
 </body>
 </html>

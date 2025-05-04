@@ -1,25 +1,17 @@
 <?php
 // Conexão com o banco de dados
-require_once '../../config/config.php';
+require '../config/config.php';
+// Obtém o ID do quarto a ser excluído, passado pela URL (método GET), e valida se é um número inteiro
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-// Verificar se o ID foi passado via GET
-if (isset($_GET['id'])) {
-    $id_quarto = $_GET['id'];
 
-    // Preparar a consulta para excluir o quarto
-    $query = "DELETE FROM quarto WHERE ID_Quarto = :id_quarto";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':id_quarto', $id_quarto);
-
-    if ($stmt->execute()) {
-        echo "Quarto excluído com sucesso!";
-        // Redirecionar de volta para a lista de quartos ou para outra página
-        header('Location: ../quartos/listar.php');
-        exit;
-    } else {
-        echo "Erro ao excluir o quarto.";
-    }
-} else {
-    echo "ID do quarto não especificado.";
+if ($id) {
+    $sql = $pdo->prepare("DELETE FROM quarto WHERE ID_Quarto = :id");
+    // Associar o valor do ID ao parâmetro da query
+    $sql->bindValue(':id', $id, PDO::PARAM_INT);
+    $sql->execute();
 }
-?>
+
+// Voltar para o painel de gerenciar quartos
+header("Location: /HOTEL/gestor/quartos/index.php");
+exit;

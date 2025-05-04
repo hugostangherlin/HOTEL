@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
                     'nome' => $nome,
                     'perfil' => $perfil
                 ];
-                header("Location: /HOTEL/gestor/pages/pag_gestor.php");
+                header("Location: /HOTEL/gestor/dashboard.php");
                 exit;
             } else {
                 echo "<script>alert('E-mail já cadastrado!');</script>";

@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Login - Hotel</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="modal-content">
       <span id="close-modal" class="close">&times;</span>
       <h2>Criar conta</h2>
-      <form action="adicionar_action.php" method="post" id="form">
+      <form action="actions/adicionar_hospede.php" method="post" id="form">
         <div id="input_container">
           <div class="input-box">
             <label for="name">Nome</label>

@@ -67,7 +67,7 @@ if ($sql->rowCount() > 0) {
                     <td><?= $quarto['Capacidade']; ?></td>
                     <td>
                         <a href="editar_quarto.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-edit">Editar Quarto</a>
-                        <a href="../../actions/excluir.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir Quarto</a>
+                        <a href="../../actions/excluir_quarto.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir Quarto</a>
                         <a href="maisdetalhes.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-more">Mais informações</a>
                     </td>
                 </tr>

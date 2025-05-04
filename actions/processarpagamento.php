@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require '../config/config.php';
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: entrar.php");
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     echo "<h3>Pagamento confirmado com sucesso!</h3>";
-    echo "<p>Reserva registrada com ID: $reserva_id</p>";
-    echo "<a href='pag_hospede.php'>Voltar à página inicial</a>";
+    echo "<p>Reserva Concluída</p>";
+    echo "<a href='/HOTEL/hospede/pag_hospede'>Voltar à página inicial</a>";
 }
 ?>

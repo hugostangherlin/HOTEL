@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require_once '../../config/config.php';
 
 // Verifica login
 if (!isset($_SESSION['usuario'])) {
@@ -57,7 +57,7 @@ $chave_pix = gerarChavePix(); // Gerar chave Pix aleatória
     <h3>Simulação de Pagamento</h3>
     <p><strong>Valor da Reserva:</strong> R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></p>
 
-    <form method="POST" action="processarpagamento.php">
+    <form method="POST" action="../../actions/processarpagamento.php">
         <input type="hidden" name="quarto_id" value="<?php echo $quarto_id; ?>">
         <input type="hidden" name="checkin" value="<?php echo $checkin; ?>">
         <input type="hidden" name="checkout" value="<?php echo $checkout; ?>">

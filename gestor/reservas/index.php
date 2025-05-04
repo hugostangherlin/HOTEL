@@ -35,6 +35,8 @@ if ($sql->rowCount() > 0) {
 <body>
     <h2>Painel de Gerenciamento de Reservas</h2>
 
+    <a href="adicionar_reserva.php" class="btn-add">Nova Reserva</a>
+
     <table border="1" id="myTable" class="cell-border stripe hover" width="100%">
         <thead>
             <tr>
@@ -57,8 +59,8 @@ if ($sql->rowCount() > 0) {
                     <td><?= $reserva['ID_Reserva']; ?></td>
                     <td><?= date('d/m/Y', strtotime($reserva['checkin'])); ?></td>
                     <td><?= date('d/m/Y', strtotime($reserva['checkout'])); ?></td>
-                    <td><?= $reserva['ID_Quarto']; ?></td>
                     <td><?= $reserva['Hospede_Nome']; ?></td>
+                    <td><?= $reserva['ID_Quarto']; ?></td>
                     <td>
                         <?php
                         if ($reserva['Quarto_Status'] === 'Manutencao') {
@@ -72,8 +74,9 @@ if ($sql->rowCount() > 0) {
                     <td><?= $reserva['Categoria']; ?></td>
                     <td>R$ <?= number_format($reserva['Preco_diaria'], 2, ',', '.'); ?></td>
                     <td>
-                        <a href="detalhes_reserva.php?id=<?= $reserva['ID_Reserva']; ?>" class="btn-action btn-more">Mais informações</a>
+                        <a href="editar_quarto.php?id=<?= $reserva['ID_Quarto']; ?>" class="btn-action btn-edit">Editar Reserva</a>
                         <a href="../../actions/excluir_reserva.php?id=<?= $reserva['ID_Reserva']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir essa reserva?')">Excluir Reserva</a>
+                        <a href="detalhes_reserva.php?id=<?= $reserva['ID_Reserva']; ?>" class="btn-action btn-more">Pagamento</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -83,9 +86,10 @@ if ($sql->rowCount() > 0) {
     <script type="text/javascript">
         var table = new DataTable('#myTable', {
             language: {
-                url: './DataTable/pt-BR.json',
+                url: 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese.json',
             },
         });
     </script>
 </body>
 </html>
+

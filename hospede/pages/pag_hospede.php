@@ -40,7 +40,7 @@ require_once '../../config/config.php';
     </div>
 
     <!-- Formulário de filtro de quartos -->
-    <form method="GET" action="">
+    <form method="GET" action="pag_hospede.php">
         <label>Check-in:</label>
         <input type="date" name="checkin" value="<?= isset($_GET['checkin']) ? $_GET['checkin'] : '' ?>">
 

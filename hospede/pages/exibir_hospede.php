@@ -47,7 +47,7 @@ if (!$usuario) {
     <button >Editar Conta</button>
 </form>
 <br><br>
-        <form action="deletar_perfil.php" method="post" onsubmit="return confirm('Deseja realmente solicitar a exclusão da sua conta?');">
+        <form action="deletar_perfil.php" method="post">
     <button type="submit" style="color: red;">Solicitar exclusão da conta</button>
 </form>
 <br><br>
