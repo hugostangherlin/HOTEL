@@ -30,13 +30,13 @@
                         </a>
                         <ul class="nav nav-treeview pl-3">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" target="_blank">
+                                <a href="/HOTEL/gestor/telas/solicitacao.php" class="nav-link" target="_blank">
                                     <i class="fas fa-user text-warning nav-icon"></i>
                                     <p>Usuários</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" target="_blank">
+                                <a href="/HOTEL/gestor/telas/solicitacao_reserva.php" class="nav-link" target="_blank">
                                     <i class="fa-solid fa-bed"></i>
                                     <p>Reservas</p>
                                 </a>

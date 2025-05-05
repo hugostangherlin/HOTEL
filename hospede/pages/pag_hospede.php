@@ -29,8 +29,8 @@ require_once '../../config/config.php';
         <a href="exibir_hospede.php">Meu Perfil</a>
     </div>
 
-    <div class="minhasreservas">
-<a href="minhasreservas.php">Minhas Reservas</a>
+    <div class="minhas_reservas">
+<a href="minhas_reservas.php">Minhas Reservas</a>
     </div>
 
     <div class="btn_logout">

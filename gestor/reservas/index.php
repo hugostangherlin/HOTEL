@@ -63,8 +63,14 @@ if ($sql->rowCount() > 0) {
                     <td><?= $reserva['ID_Quarto']; ?></td>
                     <td>
                         <?php
+                        $hoje = date('Y-m-d');
+                        $checkin = $reserva['checkin'];
+                        $checkout = $reserva['checkout'];
+
                         if ($reserva['Quarto_Status'] === 'Manutencao') {
                             echo 'Manutenção';
+                        } elseif ($checkin <= $hoje && $checkout >= $hoje) {
+                            echo 'Ocupado';
                         } else {
                             echo 'Disponível';
                         }
@@ -74,7 +80,7 @@ if ($sql->rowCount() > 0) {
                     <td><?= $reserva['Categoria']; ?></td>
                     <td>R$ <?= number_format($reserva['Preco_diaria'], 2, ',', '.'); ?></td>
                     <td>
-                        <a href="editar_quarto.php?id=<?= $reserva['ID_Quarto']; ?>" class="btn-action btn-edit">Editar Reserva</a>
+                        <a href="#" class="btn-action btn-edit">Editar Reserva</a>
                         <a href="../../actions/excluir_reserva.php?id=<?= $reserva['ID_Reserva']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir essa reserva?')">Excluir Reserva</a>
                         <a href="detalhes_reserva.php?id=<?= $reserva['ID_Reserva']; ?>" class="btn-action btn-more">Pagamento</a>
                     </td>
@@ -92,4 +98,3 @@ if ($sql->rowCount() > 0) {
     </script>
 </body>
 </html>
-

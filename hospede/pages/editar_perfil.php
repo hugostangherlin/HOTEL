@@ -44,6 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['usuario']['endereco'] = $endereco;
         $_SESSION['usuario']['data_nascimento'] = $dataNascimento;
 
+        // Atualiza a senha, se fornecida
+        if (!empty($_POST['nova_senha']) && !empty($_POST['confirmar_senha'])) {
+            $novaSenha = $_POST['nova_senha'];
+            $confirmarSenha = $_POST['confirmar_senha'];
+
+            if ($novaSenha === $confirmarSenha) {
+                $senhaHash = password_hash($novaSenha, PASSWORD_DEFAULT);
+                $sqlSenha = "UPDATE usuarios SET Senha = ? WHERE ID = ?";
+                $stmtSenha = $pdo->prepare($sqlSenha);
+                $stmtSenha->execute([$senhaHash, $id_usuario]);
+            } else {
+                die("As senhas não coincidem.");
+            }
+        }
+
         // Redireciona de volta para o perfil
         header("Location: exibir_hospede.php");
         exit();
@@ -51,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Erro ao atualizar: " . $e->getMessage());
     }
 }
-
 ?>
 
 <!-- Conteúdo Principal -->
@@ -92,7 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label>Data de Nascimento</label>
-                                    <input type="date" class="form-control" name="data_nascimento" value="<?= htmlspecialchars($usuario['DataNascimento'] ?? '') ?>">
+                                    <input type="date" class="form-control" name="data_nascimento" value="<?= htmlspecialchars($usuario['Data_Nascimento'] ?? '') ?>">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Nova Senha</label>
+                                    <input type="password" class="form-control" name="nova_senha" placeholder="Deixe em branco se não for alterar">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirmar Nova Senha</label>
+                                    <input type="password" class="form-control" name="confirmar_senha" placeholder="Repita a nova senha">
                                 </div>
                             </div>
                             <div class="card-footer">

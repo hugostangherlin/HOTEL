@@ -37,9 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':valor_total' => $valor_total,
         ':forma_pagamento' => $forma_pagamento
     ]);
+// Atualizar status do quarto para "Ocupado"
+$stmt = $pdo->prepare("UPDATE quarto SET Status = 'Ocupado' WHERE ID_Quarto = :id");
+$stmt->execute([':id' => $quarto_id]);
 
     echo "<h3>Pagamento confirmado com sucesso!</h3>";
     echo "<p>Reserva Concluída</p>";
-    echo "<a href='/HOTEL/hospede/pag_hospede'>Voltar à página inicial</a>";
+    echo "<a href='../hospede/pages/minhas_reservas.php'>Voltar à página de Minhas Reservas</a>";
 }
-?>

@@ -133,4 +133,4 @@ $chave_pix = gerarChavePix(); // Gerar chave Pix aleatória
         }
     </script>
 </body>
-</html>
+</html>  

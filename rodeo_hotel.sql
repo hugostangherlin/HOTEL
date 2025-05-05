@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Maio-2025 às 05:35
+-- Tempo de geração: 05-Maio-2025 às 02:23
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -29,12 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `avaliacao` (
   `ID_Avaliacao` int(11) NOT NULL,
-  `Nota` varchar(45) NOT NULL,
-  `Comentario` varchar(45) DEFAULT NULL,
-  `Data_Avaliacao` varchar(45) DEFAULT NULL,
-  `usuarios_ID` int(11) NOT NULL COMMENT 'Somente o usuário pode avaliar uma reserva',
-  `Reserva_ID_Reserva` int(11) NOT NULL COMMENT 'A avaliação corresponde a uma reserva'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ID_Quarto` int(11) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL,
+  `Nota` int(11) NOT NULL,
+  `Comentario` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -44,19 +43,18 @@ CREATE TABLE `avaliacao` (
 
 CREATE TABLE `categoria` (
   `ID_Categoria` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Descricao` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `categoria`
 --
 
-INSERT INTO `categoria` (`ID_Categoria`, `Nome`, `Descricao`) VALUES
-(1, 'Suite Master', ''),
-(2, 'Luxo ', ''),
-(3, 'Standard', ''),
-(4, 'Econômico', '');
+INSERT INTO `categoria` (`ID_Categoria`, `Nome`) VALUES
+(1, 'Suite Master'),
+(2, 'Luxo '),
+(3, 'Standard'),
+(4, 'Econômico');
 
 -- --------------------------------------------------------
 
@@ -66,20 +64,13 @@ INSERT INTO `categoria` (`ID_Categoria`, `Nome`, `Descricao`) VALUES
 
 CREATE TABLE `pagamentos` (
   `ID_Pagamento` int(11) NOT NULL,
-  `ID_Reserva` int(11) DEFAULT NULL,
-  `ID_Usuarios` int(11) DEFAULT NULL,
-  `Valor` decimal(10,2) DEFAULT NULL,
-  `Forma_Pagamento` enum('Cartão','Boleto','Pix','Dinheiro') NOT NULL,
-  `Status` enum('Pendente','Pago','Cancelado') NOT NULL,
-  `Data_Pagamento` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `pagamentos`
---
-
-INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
-(0, 0, 0, 900.00, 'Cartão', 'Pago', '2025-05-04 00:34:33');
+  `ID_Reserva` int(11) NOT NULL,
+  `ID_Usuarios` int(11) NOT NULL,
+  `Valor` decimal(10,2) NOT NULL,
+  `Forma_Pagamento` varchar(45) NOT NULL,
+  `Status` varchar(45) NOT NULL,
+  `Data_Pagamento` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -88,15 +79,15 @@ INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, 
 --
 
 CREATE TABLE `perfil` (
-  `ID_Perfil` int(11) NOT NULL COMMENT 'Gestor ou Hóspede',
-  `Categoria` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ID_Perfil` int(11) NOT NULL,
+  `Nome_Perfil` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `perfil`
 --
 
-INSERT INTO `perfil` (`ID_Perfil`, `Categoria`) VALUES
+INSERT INTO `perfil` (`ID_Perfil`, `Nome_Perfil`) VALUES
 (1, 'Gestor'),
 (2, 'Hóspede');
 
@@ -108,23 +99,23 @@ INSERT INTO `perfil` (`ID_Perfil`, `Categoria`) VALUES
 
 CREATE TABLE `quarto` (
   `ID_Quarto` int(11) NOT NULL,
-  `Status` enum('Disponível','Ocupado','Manutenção') NOT NULL,
-  `Capacidade` int(11) NOT NULL,
-  `Categoria_ID_Categoria` int(11) NOT NULL COMMENT 'Cada quarto corresponde a uma categoria.',
-  `Foto` varchar(45) NOT NULL,
-  `Preco_diaria` decimal(10,2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Status` varchar(45) DEFAULT NULL,
+  `Capacidade` int(11) DEFAULT NULL,
+  `Categoria_ID_Categoria` int(11) NOT NULL,
+  `Foto` varchar(255) DEFAULT NULL,
+  `Preco_diaria` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `quarto`
 --
 
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
-(1, 'Disponível', 1, 1, '', 150.00),
+(1, 'Ocupado', 1, 1, '', 150.00),
 (2, 'Disponível', 2, 1, '', 150.00),
 (3, 'Disponível', 4, 1, '', 150.00),
 (4, 'Disponível', 6, 1, '', 150.00),
-(5, 'Disponível', 1, 2, '', 200.00),
+(5, 'Ocupado', 1, 2, '', 200.00),
 (6, 'Disponível', 2, 2, '', 200.00),
 (7, 'Disponível', 4, 2, '', 200.00),
 (8, 'Disponível', 6, 2, '', 200.00),
@@ -140,17 +131,15 @@ INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categor
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `relatorios`
+-- Estrutura da tabela `relatorio`
 --
 
-CREATE TABLE `relatorios` (
+CREATE TABLE `relatorio` (
   `ID_Relatorio` int(11) NOT NULL,
-  `Data_relatorio` varchar(45) NOT NULL,
-  `Descricao` varchar(45) DEFAULT NULL,
-  `Reserva_ID_Reserva` int(11) NOT NULL COMMENT 'Um relatório pode constar várias reservas.',
-  `usuarios_ID` int(11) NOT NULL COMMENT 'Um relatório pode constar vários usuários',
-  `Avaliacao_ID_Avaliacao` int(11) NOT NULL COMMENT 'Um relatório pode constar várias avaliações'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Data_Relatorio` datetime NOT NULL,
+  `Tipo_Relatorio` varchar(45) NOT NULL,
+  `Descricao` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -162,16 +151,9 @@ CREATE TABLE `reserva` (
   `ID_Reserva` int(11) NOT NULL,
   `Checkin` date NOT NULL,
   `Checkout` date NOT NULL,
-  `Quarto_ID_Quarto` int(11) NOT NULL COMMENT 'Cada reserva corresponde a um quarto.',
+  `Quarto_ID_Quarto` int(11) NOT NULL,
   `usuarios_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `reserva`
---
-
-INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`) VALUES
-(0, '2025-05-04', '2025-05-10', 1, 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -186,19 +168,169 @@ CREATE TABLE `usuarios` (
   `Data_Nascimento` varchar(45) NOT NULL,
   `Telefone` varchar(45) NOT NULL,
   `Endereco` varchar(45) NOT NULL,
-  `CPF` varchar(45) NOT NULL,
-  `Perfil_ID_Perfil` int(11) NOT NULL COMMENT 'Cada usuário será designado um tipo de perfil',
-  `Senha` varchar(255) DEFAULT NULL,
-  `solicitou_exclusao` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `CPF` char(14) NOT NULL,
+  `Perfil_ID_Perfil` int(11) NOT NULL,
+  `solicitou_exclusao` varchar(45) DEFAULT NULL,
+  `Senha` varchar(255) NOT NULL,
+  `Data_Solicitacao_Exclusao` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `Senha`, `solicitou_exclusao`) VALUES
-(0, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1 Conjunto B Casa 34', '064.875.921-02', 2, '$2y$10$XQdjRL29SzaBvGuJyhu54uXznvWB4bg.HRfUVGeR4gocZoxRHBxFK', 0),
-(0, 'gestor', 'gestor@gmail.com', '1980-10-09', '+5561983113397', 'QNR 1 Conjunto B Casa 34', '704.012.331-20', 1, '$2y$10$C1VbRDsi88lhlK59n1QWxOa2x9eqiRthWoCb/1lF05hCm5BkoWhre', 0);
+INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `solicitou_exclusao`, `Senha`, `Data_Solicitacao_Exclusao`) VALUES
+(3, 'gestor', 'gestor@gmail.com', '1980-10-09', '+5561983113397', 'QNR 1 Conjunto B Casa 34', '704.012.331-20', 1, NULL, '$2y$10$HhKxenprFERP3hEKXO9l/eixvksWomx91Xm1xiBEziGuEyPZMYPCu', '2025-05-04 14:57:17'),
+(4, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1', '064.875.921-02', 2, '1', '$2y$10$.qn9xLx.QY9qIQim7/FrPe9P5pQWrZ5wAxUnccYAITC/mYISxDUMS', '2025-05-04 15:01:10');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  ADD PRIMARY KEY (`ID_Avaliacao`),
+  ADD KEY `fk_Avaliacao_Quarto` (`ID_Quarto`),
+  ADD KEY `fk_Avaliacao_Usuario` (`ID_Usuario`);
+
+--
+-- Índices para tabela `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`ID_Categoria`);
+
+--
+-- Índices para tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  ADD PRIMARY KEY (`ID_Pagamento`),
+  ADD KEY `fk_Pagamentos_Reserva` (`ID_Reserva`),
+  ADD KEY `fk_Pagamentos_Usuarios` (`ID_Usuarios`);
+
+--
+-- Índices para tabela `perfil`
+--
+ALTER TABLE `perfil`
+  ADD PRIMARY KEY (`ID_Perfil`);
+
+--
+-- Índices para tabela `quarto`
+--
+ALTER TABLE `quarto`
+  ADD PRIMARY KEY (`ID_Quarto`),
+  ADD KEY `fk_Quarto_Categoria` (`Categoria_ID_Categoria`);
+
+--
+-- Índices para tabela `relatorio`
+--
+ALTER TABLE `relatorio`
+  ADD PRIMARY KEY (`ID_Relatorio`);
+
+--
+-- Índices para tabela `reserva`
+--
+ALTER TABLE `reserva`
+  ADD PRIMARY KEY (`ID_Reserva`),
+  ADD KEY `fk_Reserva_Quarto1` (`Quarto_ID_Quarto`),
+  ADD KEY `fk_Reserva_usuarios1` (`usuarios_ID`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_usuarios_Perfil` (`Perfil_ID_Perfil`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `perfil`
+--
+ALTER TABLE `perfil`
+  MODIFY `ID_Perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `quarto`
+--
+ALTER TABLE `quarto`
+  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de tabela `relatorio`
+--
+ALTER TABLE `relatorio`
+  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  ADD CONSTRAINT `fk_Avaliacao_Quarto` FOREIGN KEY (`ID_Quarto`) REFERENCES `quarto` (`ID_Quarto`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Avaliacao_Usuario` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `pagamentos`
+--
+ALTER TABLE `pagamentos`
+  ADD CONSTRAINT `fk_Pagamentos_Reserva` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Pagamentos_Usuarios` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `quarto`
+--
+ALTER TABLE `quarto`
+  ADD CONSTRAINT `fk_Quarto_Categoria` FOREIGN KEY (`Categoria_ID_Categoria`) REFERENCES `categoria` (`ID_Categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `reserva`
+--
+ALTER TABLE `reserva`
+  ADD CONSTRAINT `fk_Reserva_Quarto1` FOREIGN KEY (`Quarto_ID_Quarto`) REFERENCES `quarto` (`ID_Quarto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Reserva_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_Perfil` FOREIGN KEY (`Perfil_ID_Perfil`) REFERENCES `perfil` (`ID_Perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
