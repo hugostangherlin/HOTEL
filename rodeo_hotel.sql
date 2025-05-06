@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Maio-2025 às 02:23
+-- Tempo de geração: 06-Maio-2025 às 22:25
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -111,11 +111,10 @@ CREATE TABLE `quarto` (
 --
 
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
-(1, 'Ocupado', 1, 1, '', 150.00),
+(1, 'ocupado', 1, 1, '', 150.00),
 (2, 'Disponível', 2, 1, '', 150.00),
 (3, 'Disponível', 4, 1, '', 150.00),
 (4, 'Disponível', 6, 1, '', 150.00),
-(5, 'Ocupado', 1, 2, '', 200.00),
 (6, 'Disponível', 2, 2, '', 200.00),
 (7, 'Disponível', 4, 2, '', 200.00),
 (8, 'Disponível', 6, 2, '', 200.00),
@@ -126,7 +125,8 @@ INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categor
 (13, 'Disponível', 1, 4, '', 400.00),
 (14, 'Disponível', 2, 4, '', 400.00),
 (15, 'Disponível', 4, 4, '', 400.00),
-(16, 'Disponível', 6, 4, '', 400.00);
+(16, 'Disponível', 6, 4, '', 400.00),
+(18, 'disponivel', 10, 1, 'quarto_681a6e6345860.jpeg', 150.00);
 
 -- --------------------------------------------------------
 
@@ -275,7 +275,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `relatorio`
