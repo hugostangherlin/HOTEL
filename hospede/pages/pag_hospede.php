@@ -108,7 +108,7 @@ include '../../includes/navbar_hospede.php';
         if (count($quartos) > 0) {
             foreach ($quartos as $q) {
                 echo "<div class='quarto-card'>";
-                echo "<img src='../uploads/{$q['Foto']}' alt='Foto do quarto' class='room-image'>";
+                echo "<img src='../../uploads/{$q['Foto']}' alt='Foto do quarto' class='room-image'>";
                 echo "<div class='room-info'>";
                 echo "<h3 class='room-category'>{$q['categoria_nome']}</h3>";
                 echo "<p class='room-capacity'>Capacidade: {$q['Capacidade']} pessoas</p>";

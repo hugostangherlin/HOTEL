@@ -150,7 +150,7 @@ if ($id) {
 
         <!-- Status -->
         <label for="status">Status:</label>
-        <select name="status" id="status" required>
+        <select name="status" id="status">
             <option value="">Selecione</option>
             <option value="disponivel" <?php echo ($info['Status'] == 'Disponível') ? 'selected' : ''; ?>>Disponível</option>
             <option value="ocupado" <?php echo ($info['Status'] == 'Ocupado') ? 'selected' : ''; ?>>Ocupado</option>
@@ -159,11 +159,11 @@ if ($id) {
 
         <!-- Capacidade -->
         <label for="capacidade">Capacidade:</label>
-        <input type="number" name="capacity" id="capacidade" value="<?php echo $info['Capacidade'] ?? ''; ?>" required />
+        <input type="number" name="capacity" id="capacidade" value="<?php echo $info['Capacidade'] ?? ''; ?>" />
 
         <!-- Categoria -->
         <label for="categoria">Categoria:</label>
-        <select name="category" id="categoria" required>
+        <select name="category" id="categoria" >
             <option value="">Selecione</option>
             <!-- Loop para listar as categorias disponíveis -->
             <?php foreach ($categorias as $categoria): ?>

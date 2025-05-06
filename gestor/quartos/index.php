@@ -44,6 +44,7 @@ if ($sql->rowCount() > 0) {
                 <th>Categoria</th>
                 <th>Status</th>
                 <th>Capacidade</th>
+                <th>Diária</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -65,6 +66,7 @@ if ($sql->rowCount() > 0) {
 </td>
 
                     <td><?= $quarto['Capacidade']; ?></td>
+                    <td><?= $quarto['Preco_diaria']; ?></td>
                     <td>
                         <a href="editar_quarto.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-edit">Editar Quarto</a>
                         <a href="../../actions/excluir_quarto.php?id=<?= $quarto['ID_Quarto']; ?>" class="btn-action btn-delete" onclick="return confirm('Você tem certeza que deseja excluir esse quarto?')">Excluir Quarto</a>
