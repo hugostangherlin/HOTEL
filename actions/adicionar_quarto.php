@@ -12,16 +12,24 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $foto_tmp = $_FILES['foto']['tmp_name'];
     $foto_nome = basename($_FILES['foto']['name']);
 
+    // Caminho da pasta uploads (diretamente, sem subpasta img)
+    $pasta_upload = '../uploads'; 
+    if (!is_dir($pasta_upload)) {
+        mkdir($pasta_upload, 0755, true); // Cria a pasta uploads se não existir
+    }
+
     $extensao = strtolower(pathinfo($foto_nome, PATHINFO_EXTENSION));
     $permitidas = ['jpg', 'jpeg', 'png', 'gif'];
 
     if (in_array($extensao, $permitidas)) {
         $novo_nome = uniqid('quarto_') . '.' . $extensao;
-        $destino = '../uploads/' . $novo_nome;
+        $destino = $pasta_upload . '/' . $novo_nome; // Caminho correto para a pasta uploads
+
+        // Tentativa de mover a imagem para a pasta uploads
         if (move_uploaded_file($foto_tmp, $destino)) {
             $foto_nome = $novo_nome;
         } else {
-            die('Erro ao mover a imagem.');
+            die('Erro ao mover a imagem para a pasta uploads. Verifique as permissões.');
         }
     } else {
         die('Formato de imagem não permitido.');

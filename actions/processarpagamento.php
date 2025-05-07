@@ -1,6 +1,19 @@
 <?php
 session_start();
-require '../config/config.php';
+$host = "localhost";
+$usuario = "root";
+$senha = "";
+$nome_banco = "rodeo_hotel";
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$nome_banco;charset=utf8", $usuario, $senha, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+} catch (PDOException $e) {
+    die("Erro de conexão: " . $e->getMessage());
+}
+
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: entrar.php");
@@ -43,5 +56,5 @@ $stmt->execute([':id' => $quarto_id]);
 
     echo "<h3>Pagamento confirmado com sucesso!</h3>";
     echo "<p>Reserva Concluída</p>";
-    echo "<a href='../hospede/pages/minhas_reservas.php'>Voltar à página de Minhas Reservas</a>";
+    echo "<a href='../hospede/pages/exibir_hospede'>Voltar à página de Minhas Reservas</a>";
 }

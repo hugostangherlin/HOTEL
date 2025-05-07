@@ -60,7 +60,7 @@ if ($sql->rowCount() > 0) {
     } elseif ($quarto['Ocupado'] > 0) {
         echo 'Ocupado';
     } else {
-        echo 'Disponível';
+        echo $quarto['Status'];  // Exibe o valor exato do status, seja "Disponível", "Ocupado" ou outro
     }
     ?>
 </td>

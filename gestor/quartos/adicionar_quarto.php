@@ -25,7 +25,7 @@ $sth->execute();
       <div class="input-box">
         <label for="category" class="form-label">Categoria</label>
         <div class="input-field">
-          <select name="category" id="category" class="form-control" >
+          <select name="category" id="category" class="form-control" required>
             <option value="">Selecione</option>
             <?php while ($categ = $sth->fetch(PDO::FETCH_ASSOC)) : ?>
               <option value="<?= $categ["ID_Categoria"]; ?>"><?= $categ["Nome"]; ?></option>
@@ -38,7 +38,7 @@ $sth->execute();
       <div class="input-box">
         <label for="status" class="form-label">Status</label>
         <div class="input-field">
-          <select name="status" id="status" class="form-control">
+          <select name="status" id="status" class="form-control" required>
             <option value="">Selecione</option>
             <option value="disponivel">Disponível</option>
             <option value="ocupado">Ocupado</option>
@@ -51,7 +51,7 @@ $sth->execute();
       <div class="input-box">
         <label for="capacity" class="form-label">Capacidade</label>
         <div class="input-field">
-          <input type="number" name="capacity" id="capacity" class="form-control">
+          <input type="number" name="capacity" id="capacity" class="form-control" required>
         </div>
       </div>
 
@@ -59,7 +59,7 @@ $sth->execute();
       <div class="input-box">
         <label for="preco_diaria" class="form-label">Preço da Diária</label>
         <div class="input-field">
-          <input type="number" name="preco_diaria" id="preco_diaria" class="form-control" step="0.01">
+          <input type="number" name="preco_diaria" id="preco_diaria" class="form-control" step="0.01" required>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ $sth->execute();
       <div class="input-box">
         <label for="foto" class="form-label">Foto do Quarto</label>
         <div class="input-field">
-          <input type="file" name="foto" id="foto" class="form-control" accept="image/*">
+          <input type="file" name="foto" id="foto" class="form-control" accept="image/*" required>
         </div>
       </div>
 
@@ -77,6 +77,7 @@ $sth->execute();
       </div>
     </form>
   </main>
+
 </body>
 
 </html>

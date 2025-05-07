@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>Login - Hotel</title>
   <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="entrar.css">
 </head>
 <body>
   <div class="login-container">

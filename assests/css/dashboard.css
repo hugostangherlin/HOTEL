@@ -17,7 +17,7 @@
 /*      Cor de fundo do conteúdo   */
 /* =============================== */
 body, .content-wrapper {
-    background-color: #f3f4f6 !important;
+    background-color: #F1F8FF !important; /* light */
 }
 
 /* =============================== */
@@ -26,8 +26,8 @@ body, .content-wrapper {
 .btn-primary,
 .btn-danger,
 .btn-block {
-    background-color: #FB4D46 !important;
-    border-color: #FB4D46 !important;
+    background-color: #FEA116 !important; /* primary */
+    border-color: #FEA116 !important;
     color: white;
     font-weight: 500;
     font-size: 14px;
@@ -38,8 +38,8 @@ body, .content-wrapper {
 
 .btn-primary:hover,
 .btn-danger:hover {
-    background-color: #e03a35 !important;
-    border-color: #e03a35 !important;
+    background-color: #d88e0f !important;
+    border-color: #d88e0f !important;
 }
 
 /* =============================== */
@@ -47,7 +47,7 @@ body, .content-wrapper {
 /* =============================== */
 .content-header h3 {
     font-weight: 500;
-    color: #333;
+    color: #0F172B; /* dark */
 }
 
 /* =============================== */
@@ -56,7 +56,7 @@ body, .content-wrapper {
 .main-sidebar,
 .main-header,
 .main-footer {
-    background-color:rgb(32, 31, 32)!important;
+    background-color: #0F172B !important; /* dark */
 }
 
 .navbar a,
@@ -69,8 +69,8 @@ body, .content-wrapper {
 
 .nav-link.active,
 .nav-link:hover {
-    background-color: #e03a35 !important;
-    color: white !important;
+    background-color: #FEA116 !important; /* primary */
+    color: #0F172B !important; /* dark text */
 }
 
 /* =============================== */

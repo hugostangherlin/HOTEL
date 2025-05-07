@@ -148,13 +148,14 @@ if ($id) {
         <!-- Campo oculto com o ID do quarto -->
         <input type="hidden" name="id" value="<?php echo $info['ID_Quarto']; ?>" />
 
+
         <!-- Status -->
         <label for="status">Status:</label>
         <select name="status" id="status">
             <option value="">Selecione</option>
-            <option value="disponivel" <?php echo ($info['Status'] == 'Disponível') ? 'selected' : ''; ?>>Disponível</option>
-            <option value="ocupado" <?php echo ($info['Status'] == 'Ocupado') ? 'selected' : ''; ?>>Ocupado</option>
-            <option value="manutencao" <?php echo ($info['Status'] == 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
+            <option value="Disponivel" <?php echo ($info['Status'] == 'Disponível') ? 'selected' : ''; ?>>Disponível</option>
+            <option value="Ocupado" <?php echo ($info['Status'] == 'Ocupado') ? 'selected' : ''; ?>>Ocupado</option>
+            <option value="Manutencao" <?php echo ($info['Status'] == 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
         </select>
 
         <!-- Capacidade -->
@@ -176,7 +177,7 @@ if ($id) {
 
         <!-- Preço Diário -->
         <label for="preco_diaria">Preço da Diária:</label>
-        <input type="number" name="preco_diaria" id="preco_diaria" value="<?php echo $info['Preco_Diaria'] ?? ''; ?>" required />
+        <input type="number" name="preco_diaria" id="preco_diaria" value="<?php echo $info['Preco_Diaria'] ?? ''; ?>" />
 
         <!-- Foto -->
         <label for="foto">Foto do Quarto:</label>
