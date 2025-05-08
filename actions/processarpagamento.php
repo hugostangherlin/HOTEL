@@ -56,5 +56,5 @@ $stmt->execute([':id' => $quarto_id]);
 
     echo "<h3>Pagamento confirmado com sucesso!</h3>";
     echo "<p>Reserva Concluída</p>";
-    echo "<a href='../hospede/pages/minhas_reservas'>Voltar à página de Minhas Reservas</a>";
+    echo "<a href='../hospede/pages/minhas_reservas.php'>Voltar à página de Minhas Reservas</a>";
 }

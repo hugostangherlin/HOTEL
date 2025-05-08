@@ -11,6 +11,8 @@ if ($id) {
     $sql->bindValue(':id', $id, PDO::PARAM_INT);
     $sql->execute();
 }
+        $stmt = $pdo->prepare("UPDATE quarto SET Status = 'Disponível' WHERE ID_Quarto = :id");
+        $stmt->execute([':id' => $quarto_id]);
 
 // Voltar para o painel de gerenciar quartos
 header("Location: /HOTEL/gestor/reservas/index.php");
