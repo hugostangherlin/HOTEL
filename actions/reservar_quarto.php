@@ -15,9 +15,6 @@ if (empty($_GET['id']) || empty($_GET['checkin']) || empty($_GET['checkout'])) {
     exit();
 }
 
-// Depuração para verificar se os dados estão chegando
-var_dump($_GET); // Verifica os valores de id, checkin e checkout
-
 $usuario_id = $_SESSION['usuario']['id'];
 $quarto_id = $_GET['id'];  // Corrigido para pegar 'id' da URL
 $checkin = $_GET['checkin'];

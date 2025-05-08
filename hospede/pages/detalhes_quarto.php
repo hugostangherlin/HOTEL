@@ -57,7 +57,6 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="quarto-conteudo">
         <h2><?= htmlspecialchars($quarto['nome_categoria']) ?></h2>
-        <p><strong>Status:</strong> <?= htmlspecialchars($quarto['Status']) ?></p>
         <p><strong>Capacidade:</strong> <?= htmlspecialchars($quarto['Capacidade']) ?> pessoa(s)</p>
         <p><strong>Preço da Diária:</strong> R$ <?= number_format($quarto['Preco_diaria'], 2, ',', '.') ?></p>
 

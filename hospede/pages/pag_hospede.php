@@ -118,7 +118,6 @@ $categoriaSelecionada = $_GET['categoria'] ?? null;
                             <div class="p-4 mt-2">
                                 <h5 class="mb-1"><?= htmlspecialchars($q['nome_categoria']) ?></h5>
                                 <p>Capacidade: <?= $q['Capacidade'] ?> pessoas</p>
-                                <p>Status: <?= $q['status_reserva'] ?></p>
                                 <?php if ($q['status_reserva'] === 'Disponível'): ?>
                                     <a class="btn btn-sm btn-primary mt-2" href="detalhes_quarto.php?id=<?= $q['ID_Quarto'] ?>">Ver Quarto</a>
                                 <?php else: ?>

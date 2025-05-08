@@ -96,25 +96,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div id="register-modal" class="modal">
     <div class="modal-content">
       <span id="close-modal" class="close">&times;</span>
-      <h2>Criar conta</h2>
+      <h2>Crie sua conta</h2>
       <form action="actions/adicionar_hospede.php" method="post" id="form">
         <div id="input_container">
           <div class="input-box">
+            <br>
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" placeholder="Digite seu nome" required>
           </div>
+          <br>
           <div class="input-box">
             <label for="email">E-mail</label>
             <input type="email" name="email" id="email" placeholder="exemplo@gmail.com" required>
           </div>
+          <br>
           <div class="input-box">
             <label for="password">Senha</label>
             <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
           </div>
+          <br>
           <div class="input-box">
             <label for="telefone">Telefone</label>
             <input type="text" name="telefone" id="telefone" placeholder="+00 (00)0000-0000" required>
           </div>
+          <br>
           <div class="input-box">
             <label for="cpf">CPF</label>
             <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
@@ -123,9 +128,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="endereco">Endereço</label>
             <input type="text" name="endereco" id="endereco" placeholder="Digite seu endereço" required>
           </div>
+          <br>
           <div class="input-box">
             <label for="birthdate">Data de Nascimento</label>
             <input type="date" name="birthdate" id="birthdate" required>
+            <div class="input-box">
+            <div class="form-group form-check mt-3">
+                <input type="checkbox" class="form-check-input" id="lgpd" name="aceite_lgpd" required>
+                <label class="form-check-label" for="lgpd">
+                    Aceito os <a href="termos_e_condicoes.php" target="_blank">termos de uso e a política de privacidade (LGPD)</a>.
+                </label>
+            </div>
+            <br>
           </div>
           <button type="submit" name="submit" class="btn-default">Cadastrar</button>
         </div>
