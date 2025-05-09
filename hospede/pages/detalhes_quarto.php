@@ -50,7 +50,7 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<?php include '../../includes/header_hospede.php';; ?>
+<?php include '../../includes/naaverbar.php';; ?>
 
 <div class="container">
     <div class="quarto-img" style="background-image: url('../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>');"></div>

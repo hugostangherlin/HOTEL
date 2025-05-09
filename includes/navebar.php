@@ -14,11 +14,14 @@ try {
 }
 ?>
 <!DOCTYPE html>
+<!-- PAGINA HOME -->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Rodeo Hotel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 

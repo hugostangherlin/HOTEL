@@ -31,7 +31,7 @@ $hospedes = isset($_GET['hospedes']) ? (int) $_GET['hospedes'] : 1;
 
 
 if (!$checkin || !$checkout || !$categoria || !$hospedes) {
-    die("Todos os campos são obrigatórios!");
+    die();
 }
 
 // Consulta para encontrar quartos disponíveis com base nos critérios
@@ -84,15 +84,17 @@ $checkout_formatado = DateTime::createFromFormat('Y-m-d', $checkout)->format('d/
 <?php if ($quartos): ?>
     <?php foreach ($quartos as $quarto): ?>
         <div style="border:1px solid #ccc; margin:10px 0; padding:10px;">
-                        <?php if (!empty($quarto['Foto'])): ?>
-               <img src="/HOTEL/uploads/<?= $q['Foto'] ?>" alt="Foto do Quarto" style="width: 200px; height: 100px; object-fit: cover;">
-            <?php endif; ?>
+<?php if (!empty($quarto['Foto'])): ?>
+    <img src="/HOTEL/uploads/<?= $quarto['Foto'] ?>" alt="Foto do Quarto" style="width: 200px; height: 100px; object-fit: cover;">
+<?php endif; ?>
+
             <h3><?= htmlspecialchars($quarto['NomeCategoria']) ?></h3>
             <p><strong>Diária:</strong> R$ <?= number_format($quarto['Preco_diaria'], 2, ',', '.') ?></p>
             <p><strong>Hóspedes:</strong> <?= $quarto['Capacidade'] ?> pessoa(s)</p>
         
 
-            <a href="detalhes_quarto.php?id=<?= $quarto['ID_Quarto'] ?>">Ver Quarto</a>
+            <a href="detalhes_quarto.php?id=<?= $quarto['ID_Quarto'] ?>&checkin=<?= $_GET['checkin'] ?>&checkout=<?= $_GET['checkout'] ?>">Ver detalhes</a>
+
         </div>
     <?php endforeach; ?>
 <?php else: ?>

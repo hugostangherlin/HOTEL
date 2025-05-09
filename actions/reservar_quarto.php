@@ -2,23 +2,22 @@
 require '../config/config.php';
 session_start();
 
-
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
     header("Location: entrar.php");
     exit();
 }
 
-// Verifica se os dados necessários foram passados via GET
-if (empty($_GET['id']) || empty($_GET['checkin']) || empty($_GET['checkout'])) {
+// Verifica se os dados necessários estão na sessão
+if (empty($_SESSION['reserva_temporaria']['id_quarto']) || empty($_SESSION['reserva_temporaria']['checkin']) || empty($_SESSION['reserva_temporaria']['checkout'])) {
     echo "Dados incompletos para pagamento.";
     exit();
 }
 
 $usuario_id = $_SESSION['usuario']['id'];
-$quarto_id = $_GET['id'];  // Corrigido para pegar 'id' da URL
-$checkin = $_GET['checkin'];
-$checkout = $_GET['checkout'];
+$quarto_id = $_SESSION['reserva_temporaria']['id_quarto'];  // Pegando da sessão
+$checkin = $_SESSION['reserva_temporaria']['checkin'];  // Pegando da sessão
+$checkout = $_SESSION['reserva_temporaria']['checkout'];  // Pegando da sessão
 
 // Buscar preço da diária do quarto
 $stmt = $pdo->prepare("SELECT Preco_diaria FROM quarto WHERE ID_Quarto = :quarto_id");
@@ -39,7 +38,6 @@ $valor_total = $quarto['Preco_diaria'] * $dias;
 
 // Função para gerar chave Pix aleatória
 function gerarChavePix() {
-    // Gerar um número aleatório de 32 caracteres (simulando uma chave Pix aleatória)
     return strtoupper(bin2hex(random_bytes(16))); // Cria uma chave aleatória de 32 caracteres
 }
 
@@ -94,7 +92,6 @@ $chave_pix = gerarChavePix(); // Gerar chave Pix aleatória
             <h4>Simulação do Boleto:</h4>
             <p>Utilize o código de barras gerado abaixo para simulação de pagamento:</p>
             <div>
-                <!-- Simulação do código de barras (pode ser um número ou imagem fictícia) -->
                 <img src="https://via.placeholder.com/500x100.png?text=Código+de+Barras+Fictício+%7C+%7C1234567890" alt="Código de Barras">
                 <p><strong>Nosso número do boleto:</strong> 1234567890</p>
             </div>
