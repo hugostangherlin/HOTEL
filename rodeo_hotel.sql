@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Maio-2025 às 21:23
+-- Tempo de geração: 08-Maio-2025 às 21:01
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -72,15 +72,6 @@ CREATE TABLE `pagamentos` (
   `Data_Pagamento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `pagamentos`
---
-
-INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
-(9, 9, 4, 150.00, 'Cartão', 'Pago', '2025-05-07 09:04:08'),
-(10, 10, 4, 150.00, 'Pix', 'Pago', '2025-05-07 15:41:14'),
-(11, 11, 4, 150.00, 'Pix', 'Pago', '2025-05-07 15:48:28');
-
 -- --------------------------------------------------------
 
 --
@@ -121,11 +112,11 @@ CREATE TABLE `quarto` (
 
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
 (1, 'Ocupado', 1, 1, 'quarto_681b72b8ae70f.jpeg', 150.00),
-(2, 'Ocupado', 2, 1, 'quarto_681b849dafee7.jpg', 150.00),
-(3, 'Ocupado', 4, 1, '', 150.00),
+(2, 'Disponivel', 2, 1, 'quarto_681b849dafee7.jpg', 150.00),
+(3, 'Disponivel', 4, 1, '', 150.00),
 (4, 'Disponível', 6, 1, '', 150.00),
 (6, 'Disponível', 2, 2, '', 200.00),
-(7, 'Ocupado', 4, 2, 'quarto_681b80f95ea8f.jpg', 200.00),
+(7, 'Disponivel', 4, 2, 'quarto_681b80f95ea8f.jpg', 200.00),
 (8, 'Disponível', 6, 2, '', 200.00),
 (9, 'Disponível', 1, 3, '', 300.00),
 (10, 'Disponível', 2, 3, '', 300.00),
@@ -134,7 +125,7 @@ INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categor
 (13, 'Disponivel', 1, 4, '', 400.00),
 (14, 'Disponivel', 2, 4, 'quarto_681b82ee6681c.jpg', 400.00),
 (15, 'Disponível', 4, 4, '', 400.00),
-(16, 'Disponível', 6, 4, '', 400.00);
+(16, 'Ocupado', 6, 4, '', 400.00);
 
 -- --------------------------------------------------------
 
@@ -163,15 +154,6 @@ CREATE TABLE `reserva` (
   `usuarios_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `reserva`
---
-
-INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`) VALUES
-(9, '2025-05-07', '2025-05-08', 1, 4),
-(10, '2025-05-07', '2025-05-08', 2, 4),
-(11, '2025-05-01', '2025-05-02', 3, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -198,7 +180,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `solicitou_exclusao`, `Senha`, `Data_Solicitacao_Exclusao`) VALUES
 (3, 'gestor', 'gestor@gmail.com', '1980-10-09', '+5561983113397', 'QNR 1 Conjunto B Casa 34', '704.012.331-20', 1, NULL, '$2y$10$HhKxenprFERP3hEKXO9l/eixvksWomx91Xm1xiBEziGuEyPZMYPCu', '2025-05-04 14:57:17'),
-(4, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1', '064.875.921-02', 2, '1', '$2y$10$.qn9xLx.QY9qIQim7/FrPe9P5pQWrZ5wAxUnccYAITC/mYISxDUMS', '2025-05-04 15:01:10');
+(4, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1', '064.875.921-02', 2, '1', '$2y$10$3waVDycvuWEEne8skwNASO/Wqj2.EFAY3kuW6NTpi21nFBorOxIMe', '2025-05-04 15:01:10');
 
 --
 -- Índices para tabelas despejadas
@@ -280,7 +262,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -304,7 +286,7 @@ ALTER TABLE `relatorio`
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
