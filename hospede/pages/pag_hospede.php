@@ -11,7 +11,7 @@ $nomeUsuario = $_SESSION['usuario']['nome'];
 
 require_once '../../config/config.php';
 
-include '../../includes/naaverbar.php';
+include '../../includes/seachbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@ include '../../includes/naaverbar.php';
   <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <br>
   <main class="main-content">
     <div class="container">
       <h3 class="mb-0">Olá, <?= $nomeUsuario ?></h3>
@@ -33,6 +34,6 @@ include '../../includes/naaverbar.php';
     </div>
   </main>
 
-  <?php include '../../includes/foter.php'; ?>
+  <?php include '../../includes/rodape.php'; ?>
 </body>
 </html>
