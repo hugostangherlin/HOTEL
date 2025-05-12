@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/Config/config.php';
+require __DIR__ . '/config/config.php';
 
 $mensagem = "";
 $etapa = 1;

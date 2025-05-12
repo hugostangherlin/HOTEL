@@ -128,21 +128,21 @@ try {
                 }
                 ?>
             </select>
-             <input type="number" name="hospedes" placeholder="Quantos hóspedes?" min="1" value="1" style="padding: 5px; border-radius: 4px; border: none;">
+             <!-- <input type="number" name="hospedes" placeholder="Quantos hóspedes?" min="1" value="1" style="padding: 5px; border-radius: 4px; border: none;"> -->
             <button type="submit" style="padding: 5px 10px; background: white; color: #FB4D46; border: none; border-radius: 4px; cursor: pointer;">
                 <i class="fas fa-search"></i>
             </button>
         </form>
 
         <!-- Ícone de Usuário (Link para Entrar) -->
-        <div class="user-menu">
+        <!-- <div class="user-menu">
             <div class="user-dropdown" id="userDropdown">
                 <a href="entrar.php" class="username d-flex align-items-center">
                     <i class="fas fa-user-circle mr-1"></i>
                     <span>Entrar</span>
                 </a>
             </div>
-        </div>
+        </div> -->
     </nav>
 
     <!-- Script do Dropdown -->

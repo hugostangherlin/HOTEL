@@ -100,4 +100,3 @@ $checkout_formatado = DateTime::createFromFormat('Y-m-d', $checkout)->format('d/
 <?php else: ?>
     <p>Nenhum quarto disponível para os critérios informados.</p>
 <?php endif; ?>
-

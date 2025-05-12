@@ -1,20 +1,11 @@
 <?php
 require_once '../Config/config.php';
+require_once '../includes/header.php';
 ?>
 <link rel="stylesheet" href="../assests/css/dashboard.css">
 <head>
     <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
-     <!-- CDN bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- AdminLTE CDN-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <!-- jQuery e Bootstrap (necessários para AdminLTE) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -30,6 +21,14 @@ require_once '../Config/config.php';
     <div class="content-wrapper">
 
         <!-- Cabeçalho da página -->
+        <section class="content-header">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <h3 class="mb-0"><?= "$saudacao, $nome!" ?></h3>
+                <form action="/HOTEL/logout.php" method="post">
+                    <button type="submit" class="btn btn-danger">Sair</button>
+                </form>
+            </div>
+        </section>
 
         <!-- Conteúdo da página -->
         <section class="content">

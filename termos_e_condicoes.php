@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Termos e Condições de Uso - LGPD</title>
+  <title>Termos e Condições de Uso</title>
   <style>
     body {
       font-family: Arial, sans-serif;

@@ -11,7 +11,7 @@ $nomeUsuario = $_SESSION['usuario']['nome'];
 
 require_once '../../config/config.php';
 
-include '../../includes/seachbar.php';
+include '../../includes/searchbar.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/config/config.php';
+require __DIR__ . '/Config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -17,37 +17,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Verifica se o usuário existe e se a senha bate
+    // Valida senha
     if ($usuario && password_verify($senha, $usuario['Senha'])) {
-        // Armazena os dados na sessão
+        // Armazena dados na sessão
         $_SESSION['usuario'] = [
-            'id' => $usuario['ID'],
-            'nome' => $usuario['Nome'],
-            'email' => $usuario['Email'],
+            'id'     => $usuario['ID'],
+            'nome'   => $usuario['Nome'],
+            'email'  => $usuario['Email'],
             'perfil' => $usuario['Perfil_ID_Perfil']
         ];
 
-        // Redireciona conforme o perfil do usuário
+        // Redireciona conforme o perfil
         switch ($usuario['Perfil_ID_Perfil']) {
-            case 1: // Gestor
-                header("Location: /HOTEL/gestor/dashboard.php");
+            case 1:
+                header("Location: gestor/dashboard.php");
                 break;
-            case 2: // Hóspede
-                // Verifica se há uma URL salva e redireciona para ela
-                if (isset($_SESSION['retorno'])) {
-                    $retornoUrl = $_SESSION['retorno'];
-                    unset($_SESSION['retorno']); // Limpa a variável após o redirecionamento
-                    header("Location: $retornoUrl");
-                    exit();
-                } else {
-                    // Caso não tenha URL salva, redireciona para o painel do hóspede
-                    header("Location: /HOTEL/hospede/pages/pag_hospede.php");
-                }
+            case 2:
+                header("Location: hospede/pages/pag_hospede.php");
                 break;
-            default: // Caso o perfil não esteja identificado
+            default:
                 $_SESSION['erro_login'] = "Perfil não identificado!";
                 header("Location: entrar.php");
-                exit();
+                break;
         }
         exit();
     } else {
@@ -56,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
-
 
 ?>
 <!DOCTYPE html>

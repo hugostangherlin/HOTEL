@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
-* {
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -37,10 +37,10 @@ body {
     padding: 8px 12px;
     border-radius: 6px;
 }
-
 a.username {
-    text-decoration: none;
+text-decoration: none;
 }
+
 
 .dropdown-menu {
     position: absolute;
@@ -55,8 +55,12 @@ a.username {
     z-index: 999;
 }
 
-.dropdown-menu.show {
-    display: flex;
+.dropdown-menu a {
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
 }
 
 .dropdown-menu a:hover {
@@ -67,26 +71,6 @@ a.username {
     border-bottom: none;
 }
 
-/* Mostrar o dropdown quando a classe "show" for adicionada */
 .dropdown-menu.show {
-    display: block;
-}
-
-/* Garantir que os links e ícones não tenham sublinhado */
-.navbar a {
-    text-decoration: none !important; /* Remove qualquer sublinhado */
-    color: inherit !important; /* Herda a cor do elemento pai */
-}
-
-.navbar a i {
-    color: inherit !important; /* Garante que o ícone herde a cor do texto */
-}
-
-/* Ao passar o mouse, o link não deve mudar de cor */
-.navbar a:hover, .navbar a:focus {
-    color: inherit !important; /* A cor continua a mesma */
-    text-decoration: none !important; /* Remove o sublinhado no hover */
-}
-.navbar .username, .navbar .fas {
-    color: white !important; /* Garante que o texto e ícones sejam brancos */
+    display: flex;
 }
