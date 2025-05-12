@@ -40,6 +40,7 @@ if ($sql->rowCount() > 0) {
     <table border="1" id="myTable" class="cell-border stripe hover" width="100%">
         <thead>
             <tr>
+                <th>Foto</th>
                 <th><strong>Número do Quarto</strong></th>
                 <th>Categoria</th>
                 <th>Status</th>
@@ -51,6 +52,10 @@ if ($sql->rowCount() > 0) {
         <tbody>
             <?php foreach ($lista as $quarto): ?>
                 <tr>
+                    <td>
+    <img src="../../uploads/<?= htmlspecialchars($quarto['Foto']); ?>" alt="Foto do Quarto" style="width: 100px; height: auto; border-radius: 8px;">
+</td>
+
                     <td><?= $quarto['ID_Quarto']; ?></td>
                     <td><?= $quarto['CategoriaNome']; ?></td>
                     <td>

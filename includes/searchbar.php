@@ -135,14 +135,14 @@ try {
         </form>
 
         <!-- Ícone de Usuário (Link para Entrar) -->
-        <!-- <div class="user-menu">
+         <div class="user-menu">
             <div class="user-dropdown" id="userDropdown">
                 <a href="entrar.php" class="username d-flex align-items-center">
                     <i class="fas fa-user-circle mr-1"></i>
                     <span>Entrar</span>
                 </a>
             </div>
-        </div> -->
+        </div> 
     </nav>
 
     <!-- Script do Dropdown -->

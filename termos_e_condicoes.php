@@ -2,96 +2,261 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Termos e Condições de Uso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos de Uso e Política de Privacidade</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
+
+    :root {
+      --primary-color: #c62828;
+      --secondary-color: #e53935;
+      --light-color: #f5f5f5;
+      --dark-color: #333;
+      --gray-color: #757575;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px auto;
-      max-width: 800px;
-      line-height: 1.8;
-      color: #333;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: #f9f9f9;
+      padding: 0;
+      margin: 0;
     }
-
-    h1, h2 {
-      color: #c62828;
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: white;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
-
+    
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-color);
+    }
+    
+    h3 {
+      color: var(--gray-color);
+      font-size: 1.2rem;
+      margin: 1.5rem 0 0.8rem;
+    }
+    
     p {
-      margin-bottom: 20px;
+      margin-bottom: 1.2rem;
+      color: #444;
     }
-
-    ul {
-      margin-left: 20px;
+    
+    ul, ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
     }
-
+    
+    li {
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+    
+    ul li::before {
+      content: "•";
+      color: var(--secondary-color);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    
     a {
-      color: #c62828;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    a:hover {
+      color: var(--secondary-color);
       text-decoration: underline;
+    }
+    
+    .highlight {
+      background-color: #fff8e1;
+      padding: 1.5rem;
+      border-left: 4px solid #ffc107;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+    
+    .contact-info {
+      background-color: #e3f2fd;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+    
+    .back-link:hover {
+      background-color: var(--secondary-color);
+      text-decoration: none;
+    }
+    
+    .last-update {
+      font-style: italic;
+      color: var(--gray-color);
+      text-align: right;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Termos e Condições de Uso</h1>
+  <div class="container">
+    <header>
+      <h1>Termos de Uso e Política de Privacidade</h1>
+      <p>Este documento descreve os termos e condições de uso da nossa plataforma de reservas de hotel, bem como a forma como coletamos, utilizamos, armazenamos e protegemos seus dados pessoais, conforme a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018)</strong>.</p>
+    </header>
 
-  <p>Estes termos têm por objetivo esclarecer como tratamos seus dados pessoais, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018)</strong>, especialmente com base nos conceitos descritos no <strong>Art. 5º</strong> da referida lei.</p>
+    <section>
+      <h2>1. Definições Legais (Art. 5º da LGPD)</h2>
+      <p>Para fins deste documento, adotamos as definições da LGPD:</p>
+      <ul>
+        <li><strong>Dado pessoal:</strong> Informação relacionada a pessoa natural identificada ou identificável;</li>
+        <li><strong>Dado pessoal sensível:</strong> Dados sobre origem racial, religião, opinião política, saúde, vida sexual, genéticos ou biométricos;</li>
+        <li><strong>Titular:</strong> Pessoa natural a quem se referem os dados pessoais;</li>
+        <li><strong>Tratamento:</strong> Toda operação realizada com dados pessoais (coleta, uso, acesso, armazenamento, etc.);</li>
+        <li><strong>Controlador:</strong> Responsável pelas decisões sobre o tratamento de dados pessoais;</li>
+        <li><strong>Operador:</strong> Quem trata dados em nome do controlador;</li>
+        <li><strong>Encarregado:</strong> Pessoa indicada para atuar como canal de comunicação entre você e a Autoridade Nacional de Proteção de Dados (ANPD).</li>
+      </ul>
+    </section>
 
-  <h2>1. Definições Legais (Art. 5º da LGPD)</h2>
+    <section>
+      <h2>2. Coleta e Uso de Dados</h2>
+      <div class="highlight">
+        <h3>Dados que coletamos:</h3>
+        <ul>
+          <li>Nome completo</li>
+          <li>CPF</li>
+          <li>Data de nascimento</li>
+          <li>Telefone</li>
+          <li>E-mail</li>
+          <li>Endereço</li>
+        </ul>
+      </div>
+      
+      <div class="highlight">
+        <h3>Finalidades do uso:</h3>
+        <ul>
+          <li>Identificar o usuário no sistema</li>
+          <li>Processar e gerenciar reservas de quartos</li>
+          <li>Realizar cobranças e registrar pagamentos</li>
+          <li>Enviar confirmações, lembretes e informações importantes sobre a reserva</li>
+        </ul>
+      </div>
+    </section>
 
-  <p>Para fins destes termos, consideramos os seguintes conceitos conforme definidos na LGPD:</p>
+    <section>
+      <h2>3. Fundamento Legal para o Tratamento</h2>
+      <p>O tratamento dos seus dados é realizado com base no <strong>consentimento</strong> fornecido no momento do cadastro (Art. 7º, I da LGPD), bem como para a <strong>execução de contrato</strong> (Art. 7º, V), como a efetivação de uma reserva.</p>
+    </section>
 
-  <ul>
-    <li><strong>Dado pessoal:</strong> informação relacionada a pessoa natural identificada ou identificável;</li>
-    <li><strong>Dado pessoal sensível:</strong> dado sobre origem racial ou étnica, convicção religiosa, opinião política, dado referente à saúde ou à vida sexual, dado genético ou biométrico;</li>
-    <li><strong>Titular:</strong> pessoa natural a quem se referem os dados pessoais;</li>
-    <li><strong>Tratamento:</strong> toda operação realizada com dados pessoais, como coleta, produção, recepção, classificação, utilização, acesso, reprodução, armazenamento, eliminação, etc.;</li>
-    <li><strong>Controlador:</strong> pessoa natural ou jurídica a quem competem as decisões referentes ao tratamento de dados pessoais;</li>
-    <li><strong>Operador:</strong> pessoa natural ou jurídica que realiza o tratamento de dados pessoais em nome do controlador;</li>
-    <li><strong>Encarregado:</strong> pessoa indicada pelo controlador para atuar como canal de comunicação entre o controlador, os titulares dos dados e a Autoridade Nacional de Proteção de Dados (ANPD).</li>
-  </ul>
+    <section>
+      <h2>4. Armazenamento e Segurança</h2>
+      <p>Os dados são armazenados em banco de dados seguro, protegido por práticas adequadas de segurança da informação. Implementamos medidas técnicas para proteger contra acessos não autorizados, vazamentos ou destruição de dados.</p>
+    </section>
 
-  <h2>2. Coleta e Uso de Dados</h2>
+    <section>
+      <h2>5. Compartilhamento de Dados</h2>
+      <p>Não compartilhamos seus dados com terceiros, exceto em situações necessárias para:</p>
+      <ul>
+        <li>Cumprir obrigações legais</li>
+        <li>Processos judiciais</li>
+        <li>Requisição expressa do titular</li>
+      </ul>
+    </section>
 
-  <p>Ao se cadastrar em nossa plataforma, coletamos seus dados pessoais, como nome completo, CPF, data de nascimento, telefone, e-mail e endereço. Esses dados são utilizados para:</p>
-  <ul>
-    <li>Identificação do usuário no sistema;</li>
-    <li>Gestão de reservas e pagamentos;</li>
-    <li>Envio de confirmações, lembretes e comunicações relativas aos serviços contratados.</li>
-  </ul>
+    <section>
+      <h2>6. Cookies e Navegação</h2>
+      <p>Podemos utilizar cookies essenciais para manter sessões ativas e melhorar sua experiência de navegação. Não utilizamos cookies de rastreamento para publicidade.</p>
+    </section>
 
-  <h2>3. Fundamento Legal para o Tratamento</h2>
-  <p>O tratamento de seus dados é baseado no <strong>consentimento do titular</strong> (Art. 7º, I da LGPD), o qual é obtido no momento do cadastro por meio do aceite destes termos.</p>
+    <section>
+      <h2>7. Direitos do Titular</h2>
+      <p>Você pode exercer, a qualquer momento, os seguintes direitos previstos na LGPD:</p>
+      <ul>
+        <li>Confirmação da existência de tratamento</li>
+        <li>Acesso aos seus dados</li>
+        <li>Correção de dados incompletos ou desatualizados</li>
+        <li>Eliminação de dados tratados com consentimento</li>
+        <li>Portabilidade dos dados</li>
+        <li>Informações sobre uso compartilhado</li>
+        <li>Revogação do consentimento</li>
+      </ul>
+      
+      <div class="contact-info">
+        <p>Para exercer qualquer direito, entre em contato conosco via e-mail: <a href="mailto:contato@seudominio.com">contato@seudominio.com</a>.</p>
+      </div>
+    </section>
 
-  <h2>4. Armazenamento e Segurança</h2>
-  <p>Os dados coletados são armazenados de forma segura em nossos sistemas, com o uso de práticas adequadas de segurança da informação para prevenir acessos não autorizados, vazamentos ou perdas.</p>
+    <section>
+      <h2>8. Atualizações</h2>
+      <p>Podemos atualizar este documento a qualquer momento. Recomendamos que você consulte esta página regularmente para estar ciente de quaisquer alterações.</p>
+    </section>
 
-  <h2>5. Compartilhamento de Dados</h2>
-  <p>Não compartilhamos seus dados com terceiros, exceto quando necessário para cumprir obrigações legais ou mediante solicitação do próprio titular.</p>
+    <p class="last-update"><strong>Última atualização:</strong> Maio de 2025</p>
 
-  <h2>6. Direitos do Titular</h2>
-  <p>Você pode, a qualquer momento, exercer seus direitos previstos na LGPD, incluindo:</p>
-  <ul>
-    <li>Confirmação da existência de tratamento;</li>
-    <li>Acesso aos dados;</li>
-    <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
-    <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos;</li>
-    <li>Portabilidade dos dados a outro fornecedor;</li>
-    <li>Eliminação dos dados tratados com consentimento;</li>
-    <li>Informações sobre compartilhamento de dados;</li>
-    <li>Revogação do consentimento.</li>
-  </ul>
-  <p>Para exercer qualquer um desses direitos, envie uma solicitação para: <a href="mailto:contato@seudominio.com">contato@seudominio.com</a>.</p>
-
-  <h2>7. Atualizações</h2>
-  <p>Estes termos podem ser atualizados periodicamente para refletir mudanças na legislação ou nos nossos serviços. Recomendamos que você revise este documento regularmente.</p>
-
-  <p><strong>Última atualização:</strong> Maio de 2025</p>
-
-  <p><a href="entrar.php">← Voltar para o cadastro</a></p>
-</body>
-</html>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <a href="entrar.php" class="back-link">← Voltar para o cadastro</a>
+  </div>
 </body>
 </html>

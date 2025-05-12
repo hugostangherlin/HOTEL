@@ -40,9 +40,9 @@ $sth->execute();
         <div class="input-field">
           <select name="status" id="status" class="form-control" required>
             <option value="">Selecione</option>
-            <option value="disponivel">Disponível</option>
-            <option value="ocupado">Ocupado</option>
-            <option value="manutencao">Manutenção</option>
+            <option value="Disponivel">Disponível</option>
+            <option value="Ocupado">Ocupado</option>
+            <option value="Manutencao">Manutenção</option>
           </select>
         </div>
       </div>
