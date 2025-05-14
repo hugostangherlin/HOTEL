@@ -24,8 +24,6 @@ require_once '../includes/header.php';
         <section class="content-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <h3 class="mb-0"><?= "$saudacao, $nome!" ?></h3>
-                <form action="/HOTEL/logout.php" method="post">
-                    <button type="submit" class="btn btn-danger">Sair</button>
                 </form>
             </div>
         </section>

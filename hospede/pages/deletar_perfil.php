@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
     exit();
 }
 
-$usuario_id = $_SESSION['usuario']['id'];
+$usuario_id = $_SESSION['usuario']['ID'];
 
 // Verifica se já foi solicitada
 $sql = $pdo->prepare("SELECT solicitou_exclusao FROM usuarios WHERE ID = :id");

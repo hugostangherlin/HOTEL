@@ -6,7 +6,6 @@ require '../Config/config.php';
 
 
 ?>
-
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Botão sidebar Para responsividade. Importante !!! -->
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -18,27 +17,36 @@ require '../Config/config.php';
         </li>
     </ul>
 
-    <!-- icone que fica o usuário que está logado a direita -->
+ <!-- Menu do usuário (lado direito) -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link d-flex align-items-center" href="../gestor/telas/exibir_gestor.php">
-                <i class="fas fa-user-circle mr-1"></i>
-                <span class="d-none d-md-inline">
-                    <?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?>
-                </span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-header text-center">
-                    <strong><?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?></strong>
-                    <div class="text-muted small">
-                        <?= ucfirst($_SESSION['usuario']['perfil'] ?? 'Perfil') ?>
+            <div class="user-menu">
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" class="username nav-link d-flex align-items-center" id="dropdownToggle">
+                        <i class="fas fa-user-circle mr-1"></i>
+                        <span><?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?></span>
+                    </a>
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none; position: absolute; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.15); padding: 10px; border-radius: 5px;">
+                        <a class="dropdown-item" href="../gestor/telas/exibir_gestor.php">Meu Perfil</a>
+                        <a class="dropdown-item" href="/HOTEL/home.php">Sair</a>
                     </div>
                 </div>
-                <div class="dropdown-divider"></div>
-                <a href="/logout.php" class="dropdown-item text-danger">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Sair
-                </a>
             </div>
         </li>
     </ul>
 </nav>
+<script>
+    const toggle = document.getElementById('dropdownToggle');
+    const menu = document.getElementById('dropdownMenu');
+
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('userDropdown').contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+</script>

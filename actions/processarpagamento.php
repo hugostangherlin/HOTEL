@@ -21,7 +21,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario_id = $_SESSION['usuario']['id'];
+    $usuario_id = $_SESSION['usuario']['ID'];
     $quarto_id = $_POST['quarto_id'];
     $checkin = $_POST['checkin'];
     $checkout = $_POST['checkout'];
@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $stmt = $pdo->prepare("UPDATE quarto SET Status = 'Ocupado' WHERE ID_Quarto = :id");
 $stmt->execute([':id' => $quarto_id]);
 
-    echo "<h3>Pagamento confirmado com sucesso!</h3>";
-    echo "<p>Reserva Concluída</p>";
-    echo "<a href='../hospede/pages/minhas_reservas.php'>Voltar à página de Minhas Reservas</a>";
+header("Location: ../hospede/pages/minhas_reservas.php");
+exit();
 }

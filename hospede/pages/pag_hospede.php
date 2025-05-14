@@ -11,7 +11,7 @@ $nomeUsuario = $_SESSION['usuario']['nome'];
 
 require_once '../../config/config.php';
 
-include '../../includes/searchbar.php';
+include '../../includes/nave.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,10 +24,6 @@ include '../../includes/searchbar.php';
   <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <br>
-  <main class="main-content">
-    <div class="container">
-      <h3 class="mb-0">Olá, <?= $nomeUsuario ?></h3>
 
       <!-- Exibe os resultados da busca -->
       <?php include '../../includes/resultado_busca.php'; ?>

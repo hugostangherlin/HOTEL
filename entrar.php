@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($usuario && password_verify($senha, $usuario['Senha'])) {
         // Armazena dados na sessão
         $_SESSION['usuario'] = [
-            'id'     => $usuario['ID'],
+            'ID'     => $usuario['ID'],
             'nome'   => $usuario['Nome'],
             'email'  => $usuario['Email'],
             'perfil' => $usuario['Perfil_ID_Perfil']
