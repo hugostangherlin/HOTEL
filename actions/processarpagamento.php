@@ -14,7 +14,6 @@ try {
     die("Erro de conexão: " . $e->getMessage());
 }
 
-
 if (!isset($_SESSION['usuario'])) {
     header("Location: entrar.php");
     exit();
@@ -25,8 +24,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quarto_id = $_POST['quarto_id'];
     $checkin = $_POST['checkin'];
     $checkout = $_POST['checkout'];
-    $valor_total = $_POST['valor_total'];
     $forma_pagamento = $_POST['forma_pagamento'];
+
+    if (empty($quarto_id) || empty($checkin) || empty($checkout) || empty($forma_pagamento)) {
+        die("Todos os campos são obrigatórios.");
+    }
+
+    // Verificar preço da diária e calcular valor total
+    $stmt = $pdo->prepare("SELECT Preco_diaria FROM quarto WHERE ID_Quarto = :id");
+    $stmt->execute([':id' => $quarto_id]);
+    $quarto = $stmt->fetch();
+
+    if (!$quarto) {
+        die("Quarto não encontrado.");
+    }
+
+    $inicio = new DateTime($checkin);
+    $fim = new DateTime($checkout);
+    $intervalo = $inicio->diff($fim)->days;
+
+    if ($intervalo <= 0) {
+        die("Datas inválidas.");
+    }
+
+    $valor_total = $quarto['Preco_diaria'] * $intervalo;
+
+    // Verificar se o quarto está disponível no período
+    $stmt = $pdo->prepare("SELECT * FROM reserva 
+        WHERE Quarto_ID_Quarto = :quarto_id 
+        AND (Checkin < :checkout AND Checkout > :checkin)");
+
+    $stmt->execute([
+        ':quarto_id' => $quarto_id,
+        ':checkin' => $checkin,
+        ':checkout' => $checkout
+    ]);
+
+    if ($stmt->rowCount() > 0) {
+        die("O quarto já está reservado nesse período.");
+    }
 
     // Inserir reserva
     $stmt = $pdo->prepare("INSERT INTO reserva (Usuarios_ID, Quarto_ID_Quarto, Checkin, Checkout) 
@@ -38,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':checkout' => $checkout
     ]);
 
-    // Obter ID da reserva recém inserida
     $reserva_id = $pdo->lastInsertId();
 
     // Inserir pagamento
@@ -50,10 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':valor_total' => $valor_total,
         ':forma_pagamento' => $forma_pagamento
     ]);
-// Atualizar status do quarto para "Ocupado"
-$stmt = $pdo->prepare("UPDATE quarto SET Status = 'Ocupado' WHERE ID_Quarto = :id");
-$stmt->execute([':id' => $quarto_id]);
 
-header("Location: ../hospede/pages/minhas_reservas.php");
-exit();
+    // Atualizar status do quarto
+    $stmt = $pdo->prepare("UPDATE quarto SET Status = 'Ocupado' WHERE ID_Quarto = :id");
+    $stmt->execute([':id' => $quarto_id]);
+
+    header("Location: ../hospede/pages/minhas_reservas.php");
+    exit();
 }
+?>

@@ -257,9 +257,9 @@ $chave_pix = gerarChavePix();
         
         <form method="POST" action="http://localhost/HOTEL/actions/processarpagamento.php" class="payment-form">
             <input type="hidden" name="quarto_id" value="<?php echo $quarto_id; ?>">
-            <input type="hidden" name="checkin" value="<?php echo $checkin; ?>">
-            <input type="hidden" name="checkout" value="<?php echo $checkout; ?>">
-            <input type="hidden" name="valor_total" value="<?php echo $valor_total; ?>">
+<input type="hidden" name="checkin" value="<?php echo $checkin; ?>">
+<input type="hidden" name="checkout" value="<?php echo $checkout; ?>">
+<input type="hidden" name="valor_total" value="<?php echo $valor_total; ?>">
             
             <div class="form-group">
                 <label for="forma_pagamento">Forma de Pagamento</label>

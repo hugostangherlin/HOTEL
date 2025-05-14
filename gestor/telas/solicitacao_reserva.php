@@ -44,7 +44,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 1) {
                     echo "<td>{$reserva['categoria']} (ID {$reserva['ID_Quarto']})</td>";
                     echo "<td>{$reserva['Data_Solicitacao_Exclusao']}</td>";
                     echo "<td>
-                        <a href='excluir_reserva.php?id={$reserva['ID_Reserva']}' class='btn btn-danger btn-sm'>Aprovar</a>
+                        <a href='/HOTEL/actions/excluir_reserva.php?id={$reserva['ID_Reserva']}' class='btn btn-danger btn-sm'>Aprovar</a>
                         <a href='negar_exclusao.php?id={$reserva['ID_Reserva']}' class='btn btn-secondary btn-sm'>Negar</a>
                     </td>";
                     echo "</tr>";
