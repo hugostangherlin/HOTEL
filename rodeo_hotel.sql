@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Maio-2025 às 21:54
+-- Tempo de geração: 20-Maio-2025 às 20:54
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -72,16 +72,6 @@ CREATE TABLE `pagamentos` (
   `Data_Pagamento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `pagamentos`
---
-
-INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
-(36, 37, 9, 350.00, 'Pix', 'Pago', '2025-05-14 19:53:31'),
-(39, 40, 9, 150.00, 'Pix', 'Pago', '2025-05-15 20:58:51'),
-(40, 41, 9, 350.00, 'Cartão', 'Pago', '2025-05-18 20:11:15'),
-(41, 42, 9, 150.00, 'Pix', 'Pago', '2025-05-18 20:12:24');
-
 -- --------------------------------------------------------
 
 --
@@ -123,7 +113,7 @@ CREATE TABLE `quarto` (
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
 (1, 'Ocupado', 1, 1, 'quarto_6824b7747eb00.jpg', 350.00),
 (2, 'Ocupado', 1, 1, 'quarto_68240342b4a5b.jpeg', 150.00),
-(3, 'Ocupado', 4, 1, 'quarto_68240660aaa19.jpg', 150.00),
+(3, 'Disponivel', 4, 1, 'quarto_68240660aaa19.jpg', 150.00),
 (13, 'Disponivel', 1, 4, '', 400.00),
 (22, 'Disponivel', 1, 2, 'quarto_68240dd57e085.jpg', 200.00),
 (23, 'Disponivel', 2, 2, 'quarto_68240df308ef1.jpeg', 200.00);
@@ -156,16 +146,6 @@ CREATE TABLE `reserva` (
   `solicitou_exclusao` tinyint(1) DEFAULT 0,
   `Data_Solicitacao_Exclusao` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `reserva`
---
-
-INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`, `solicitou_exclusao`, `Data_Solicitacao_Exclusao`) VALUES
-(37, '2025-05-15', '2025-05-16', 1, 9, 0, NULL),
-(40, '2025-05-16', '2025-05-17', 3, 9, 0, NULL),
-(41, '2025-05-19', '2025-05-20', 1, 9, 0, NULL),
-(42, '2025-05-19', '2025-05-20', 2, 9, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -278,7 +258,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -302,7 +282,7 @@ ALTER TABLE `relatorio`
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
