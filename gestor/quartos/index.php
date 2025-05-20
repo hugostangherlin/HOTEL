@@ -10,7 +10,7 @@ $sql = $pdo->query("
     (
         SELECT COUNT(*) FROM reserva r
         WHERE r.Quarto_ID_Quarto = q.ID_QUARTO
-        AND CURDATE() BETWEEN r.Checkin AND r.Checkout
+        AND CURRENT_TIMESTAMP BETWEEN r.Checkin AND r.Checkout
     ) as Ocupado
     FROM Quarto q
     INNER JOIN Categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
@@ -354,7 +354,12 @@ if ($sql->rowCount() > 0) {
                 ?>
                     <tr>
                         <td data-label="Foto">
-                            <img src="../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>" alt="Foto do Quarto" class="room-image">
+                            <?php if (!empty($quarto['Foto'])): ?>
+    <img src="../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>" alt="Foto do Quarto" class="room-image">
+<?php else: ?>
+    <img src="../../assets/img/sem-imagem.jpg" alt="Sem imagem" class="room-image">
+<?php endif; ?>
+
                         </td>
                         <td data-label="Número"><?= $quarto['ID_Quarto'] ?></td>
                         <td data-label="Categoria"><?= $quarto['CategoriaNome'] ?></td>

@@ -7,6 +7,8 @@ if (!$id) {
     echo "ID do quarto inválido.";
     exit;
 }
+$checkin = isset($_GET['checkin']) ? $_GET['checkin'] : null;
+$checkout = isset($_GET['checkout']) ? $_GET['checkout'] : null;
 
 $sql = $pdo->prepare("
     SELECT q.*, c.Nome AS nome_categoria
@@ -322,7 +324,9 @@ document.getElementById("form-reserva").addEventListener("submit", function(e) {
     const confirmado = confirm("Você deseja fazer uma reserva para este quarto?");
     if (confirmado) {
         const quartoId = <?= $quarto['ID_Quarto'] ?>;
-        window.location.href = "/HOTEL/actions/reservar_quarto.php?id=" + quartoId;
+        const checkin = "<?= $checkin ?>";
+        const checkout = "<?= $checkout ?>";
+        window.location.href = "/HOTEL/actions/reservar_quarto.php?id=" + quartoId + "&checkin=" + checkin + "&checkout=" + checkout;
     }
 });
 </script>

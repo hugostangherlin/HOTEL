@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Maio-2025 às 21:01
+-- Tempo de geração: 19-Maio-2025 às 21:54
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.0.30
+-- versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,6 +72,16 @@ CREATE TABLE `pagamentos` (
   `Data_Pagamento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Extraindo dados da tabela `pagamentos`
+--
+
+INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
+(36, 37, 9, 350.00, 'Pix', 'Pago', '2025-05-14 19:53:31'),
+(39, 40, 9, 150.00, 'Pix', 'Pago', '2025-05-15 20:58:51'),
+(40, 41, 9, 350.00, 'Cartão', 'Pago', '2025-05-18 20:11:15'),
+(41, 42, 9, 150.00, 'Pix', 'Pago', '2025-05-18 20:12:24');
+
 -- --------------------------------------------------------
 
 --
@@ -111,21 +121,12 @@ CREATE TABLE `quarto` (
 --
 
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
-(1, 'Ocupado', 1, 1, 'quarto_681b72b8ae70f.jpeg', 150.00),
-(2, 'Disponivel', 2, 1, 'quarto_681b849dafee7.jpg', 150.00),
-(3, 'Disponivel', 4, 1, '', 150.00),
-(4, 'Disponível', 6, 1, '', 150.00),
-(6, 'Disponível', 2, 2, '', 200.00),
-(7, 'Disponivel', 4, 2, 'quarto_681b80f95ea8f.jpg', 200.00),
-(8, 'Disponível', 6, 2, '', 200.00),
-(9, 'Disponível', 1, 3, '', 300.00),
-(10, 'Disponível', 2, 3, '', 300.00),
-(11, 'Disponível', 4, 3, '', 300.00),
-(12, 'Disponível', 6, 3, '', 300.00),
+(1, 'Ocupado', 1, 1, 'quarto_6824b7747eb00.jpg', 350.00),
+(2, 'Ocupado', 1, 1, 'quarto_68240342b4a5b.jpeg', 150.00),
+(3, 'Ocupado', 4, 1, 'quarto_68240660aaa19.jpg', 150.00),
 (13, 'Disponivel', 1, 4, '', 400.00),
-(14, 'Disponivel', 2, 4, 'quarto_681b82ee6681c.jpg', 400.00),
-(15, 'Disponível', 4, 4, '', 400.00),
-(16, 'Ocupado', 6, 4, '', 400.00);
+(22, 'Disponivel', 1, 2, 'quarto_68240dd57e085.jpg', 200.00),
+(23, 'Disponivel', 2, 2, 'quarto_68240df308ef1.jpeg', 200.00);
 
 -- --------------------------------------------------------
 
@@ -151,8 +152,20 @@ CREATE TABLE `reserva` (
   `Checkin` date NOT NULL,
   `Checkout` date NOT NULL,
   `Quarto_ID_Quarto` int(11) NOT NULL,
-  `usuarios_ID` int(11) NOT NULL
+  `usuarios_ID` int(11) NOT NULL,
+  `solicitou_exclusao` tinyint(1) DEFAULT 0,
+  `Data_Solicitacao_Exclusao` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `reserva`
+--
+
+INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`, `solicitou_exclusao`, `Data_Solicitacao_Exclusao`) VALUES
+(37, '2025-05-15', '2025-05-16', 1, 9, 0, NULL),
+(40, '2025-05-16', '2025-05-17', 3, 9, 0, NULL),
+(41, '2025-05-19', '2025-05-20', 1, 9, 0, NULL),
+(42, '2025-05-19', '2025-05-20', 2, 9, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +193,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `Endereco`, `CPF`, `Perfil_ID_Perfil`, `solicitou_exclusao`, `Senha`, `Data_Solicitacao_Exclusao`) VALUES
 (3, 'gestor', 'gestor@gmail.com', '1980-10-09', '+5561983113397', 'QNR 1 Conjunto B Casa 34', '704.012.331-20', 1, NULL, '$2y$10$HhKxenprFERP3hEKXO9l/eixvksWomx91Xm1xiBEziGuEyPZMYPCu', '2025-05-04 14:57:17'),
-(4, 'hospede', 'hospede@gmail.com', '2004-05-01', '+5561983179384', 'QNR 1', '064.875.921-02', 2, '1', '$2y$10$3waVDycvuWEEne8skwNASO/Wqj2.EFAY3kuW6NTpi21nFBorOxIMe', '2025-05-04 15:01:10');
+(9, 'hospede', 'hospede@gmail.com', '2004-05-01', '(55) 61983-1793', 'QNR 1', '064.875.921-02', 2, '1', '$2y$10$tZsz8wFs/mG0nsyUya8ROOdpM8iIDtQlDurclj.wv8Nrurdcrus3.', '2025-05-14 19:38:44'),
+(11, 'joao', 'joao@gmail.com', '2004-08-05', '(61) 99789-1545', 'qnn 1', '555.555.555-55', 1, NULL, '$2y$10$wNswlU1UTyECdw6u3tXQm./MfSoIrZuVOXQzc0cAGhmYTH2APYMFC', '2025-05-14 20:07:44'),
+(13, 'joao', 'joaogestor@gmail.com', '2004-08-05', '(61) 99238-2332', 'qnn 23', '057.382.918-33', 1, NULL, '$2y$10$bhZRvrsTYsggjhRmGCuMZeeGNjBcjnQhNRN6ax62g4/mrNwjfmgU6', '2025-05-14 21:36:56'),
+(14, 'arthur', 'arthurgestor@gmail.com', '2004-08-05', '(61) 99238-2332', 'qnn 23', '057.382.918-33', 1, NULL, '$2y$10$D8r07tqCI3bFkNaubFD2x.ck6myVp30WGloT8zhahq8P5rC3u56dS', '2025-05-14 21:37:14');
 
 --
 -- Índices para tabelas despejadas
@@ -262,7 +278,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -274,7 +290,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_Quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `relatorio`
@@ -286,13 +302,13 @@ ALTER TABLE `relatorio`
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restrições para despejos de tabelas
@@ -323,7 +339,7 @@ ALTER TABLE `quarto`
 --
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_Reserva_Quarto1` FOREIGN KEY (`Quarto_ID_Quarto`) REFERENCES `quarto` (`ID_Quarto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Reserva_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Reserva_usuarios1` FOREIGN KEY (`usuarios_ID`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `usuarios`
