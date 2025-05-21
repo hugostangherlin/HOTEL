@@ -219,6 +219,8 @@ if ($id) {
                 </label>
                 <select name="status" id="status" class="form-control" >
                     <option value="">Selecione o status</option>
+                    <option value="Disponivel" <?php echo ($info['Status'] == 'Disponivel') ? 'selected' : ''; ?>>Disponível</option>
+                    <option value="Ocupado" <?php echo ($info['Status'] == 'Ocupado') ? 'selected' : ''; ?>>Ocupado</option>
                     <option value="Manutencao" <?php echo ($info['Status'] == 'Manutencao') ? 'selected' : ''; ?>>Manutenção</option>
                 </select>
             </div>

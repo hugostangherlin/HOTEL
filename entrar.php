@@ -33,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: gestor/dashboard.php");
                 break;
             case 2:
+                if($_SESSION['checkin']!='' && $_SESSION['checkout']!=''){
+                  header("Location: /HOTEL/hospede/pages/detalhes_quarto.php?id=".$_SESSION['id']."&checkin=".$_SESSION['checkin']."&checkout=".$_SESSION['checkout']);
+                  break;
+                }
                 header("Location: hospede/pages/pag_hospede.php");
                 break;
             default:

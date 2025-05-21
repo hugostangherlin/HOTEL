@@ -235,7 +235,7 @@ try {
         <div class="dropdown-menu" id="dropdownMenu">
             <a href="exibir_hospede.php">Meu Perfil</a>
             <a href="minhas_reservas.php">Minhas Reservas</a>
-            <a href="/HOTEL/home.php">Sair</a>
+            <a href="/HOTEL/logout.php">Sair</a>
         </div>
     </div>
 </div>

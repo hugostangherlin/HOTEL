@@ -4,7 +4,14 @@ session_start();
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
-    header("Location: entrar.php");
+
+    // Salva os dados da pesquisa na sessão
+    if($_GET['checkin']!='' && $_GET['checkout']!=''){
+        $_SESSION['id']=$_GET['id'];
+        $_SESSION['checkin']=$_GET['checkin'];
+        $_SESSION['checkout']=$_GET['checkout'];
+    }
+    header("Location: /HOTEL/entrar.php");
     exit();
 }
 

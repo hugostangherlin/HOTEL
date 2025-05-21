@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: /HOTEL/entrar.php");
+header("Location: /HOTEL/home.php");
 exit();

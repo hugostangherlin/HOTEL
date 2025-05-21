@@ -95,7 +95,7 @@
                 <?php endif; ?>
 
                 <li class="nav-item d-md-none">
-                    <a href="../home.php" class="nav-link text-danger">
+                    <a href="../logout.php" class="nav-link text-danger">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Sair</p>
                     </a>

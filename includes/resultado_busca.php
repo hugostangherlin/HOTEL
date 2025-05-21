@@ -272,7 +272,7 @@ $checkout_formatado = DateTime::createFromFormat('Y-m-d', $checkout)->format('d/
                                 </div>
                             </div>
                             
-                            <a href="detalhes_quarto.php?id=<?= $quarto['ID_Quarto'] ?>&checkin=<?= $_GET['checkin'] ?>&checkout=<?= $_GET['checkout'] ?>" class="view-details-btn">
+                            <a href="/HOTEL/hospede/pages/detalhes_quarto.php?id=<?= $quarto['ID_Quarto'] ?>&checkin=<?= $_GET['checkin'] ?>&checkout=<?= $_GET['checkout'] ?>" class="view-details-btn">
                                 Ver Detalhes
                             </a>
                         </div>

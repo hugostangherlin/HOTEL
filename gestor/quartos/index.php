@@ -340,11 +340,10 @@ if ($sql->rowCount() > 0) {
                 <?php foreach ($lista as $quarto): 
                     $statusClass = '';
                     $statusText = '';
-                    
                     if ($quarto['Status'] === 'Manutencao') {
                         $statusClass = 'status-manutencao';
                         $statusText = 'Manutenção';
-                    } elseif ($quarto['Ocupado'] > 0) {
+                    } elseif ($quarto['Status'] ==='Ocupado') {
                         $statusClass = 'status-ocupado';
                         $statusText = 'Ocupado';
                     } else {
