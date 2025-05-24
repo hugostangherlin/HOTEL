@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 $nomeUsuario = $_SESSION['usuario']['nome'];
 $usuarioId = $_SESSION['usuario']['ID'];
 
-// Consulta para buscar as reservas do hóspede logado
+// Consulta para buscar as reservas do hóspede logado (sem status de pagamento)
 $sql = "SELECT 
             r.ID_Reserva,
             r.Checkin,
@@ -20,11 +20,11 @@ $sql = "SELECT
             q.Capacidade,
             q.Preco_diaria,
             c.Nome AS Categoria,
-            p.Status AS Status_Pagamento
+            a.ID_Avaliacao
         FROM reserva r
         INNER JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
         INNER JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-        LEFT JOIN pagamentos p ON r.ID_Reserva = p.ID_Reserva
+        LEFT JOIN avaliacao a ON r.ID_Reserva = a.ID_Reserva
         WHERE r.usuarios_ID = :usuario_id";
 
 $stmt = $pdo->prepare($sql);
@@ -136,29 +136,6 @@ $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border-right: 1px solid #eee;
             border-top-right-radius: var(--border-radius);
             border-bottom-right-radius: var(--border-radius);
-        }
-        
-        .status {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .status-pago {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .status-pendente {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-nao-registrado {
-            background-color: #f8d7da;
-            color: #721c24;
         }
         
         .btn-action {
@@ -302,37 +279,28 @@ $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Check-in</th>
                     <th>Check-out</th>
                     <th>Preço Diária</th>
-                    <th>Status Pagamento</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($reservas as $reserva): 
-                    $statusClass = '';
-                    $statusText = $reserva['Status_Pagamento'] ?? 'Não registrado';
-                    
-                    if (strtolower($statusText) === 'pago') {
-                        $statusClass = 'status-pago';
-                    } elseif (strtolower($statusText) === 'pendente') {
-                        $statusClass = 'status-pendente';
-                    } else {
-                        $statusClass = 'status-nao-registrado';
-                    }
-                ?>
+                <?php foreach ($reservas as $reserva): ?>
                     <tr>
                         <td data-label="Quarto"><?= htmlspecialchars($reserva['Categoria']) ?></td>
                         <td data-label="Capacidade"><?= htmlspecialchars($reserva['Capacidade']) ?> pessoas</td>
                         <td data-label="Check-in"><?= date('d/m/Y', strtotime($reserva['Checkin'])) ?></td>
                         <td data-label="Check-out"><?= date('d/m/Y', strtotime($reserva['Checkout'])) ?></td>
                         <td data-label="Preço Diária">R$ <?= number_format($reserva['Preco_diaria'], 2, ',', '.') ?></td>
-                        <td data-label="Status Pagamento">
-                            <span class="status <?= $statusClass ?>"><?= htmlspecialchars($statusText) ?></span>
-                        </td>
                         <td data-label="Ações">
                             <div class="action-buttons">
-                                <a href="avaliar_reserva.php?id=<?= $reserva['ID_Quarto'] ?>" class="btn-action btn-edit">
-                                    <i class="fas fa-star"></i> Avaliar
-                                </a>
+                                <?php if (!$reserva['ID_Avaliacao']): ?>
+                                    <a href="avaliar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn-action btn-edit">
+                                        <i class="fas fa-star"></i> Avaliar
+                                    </a>
+                                <?php else: ?>
+                                    <a href="ver_avaliacao.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn-action btn-edit">
+                                        <i class="fas fa-pen"></i> Minha Avaliação
+                                    </a>
+                                <?php endif; ?>
                                 <a href="deletar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn-action btn-delete" onclick="return confirm('Tem certeza que deseja cancelar esta reserva?')">
                                     <i class="fas fa-trash-alt"></i> Cancelar
                                 </a>
