@@ -20,7 +20,6 @@ include '../../includes/nave.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rodeo Hotel</title>
-  <link rel="stylesheet" href="pag_hospede.css">
   <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
 </head>
 <body>

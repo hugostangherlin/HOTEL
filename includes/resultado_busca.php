@@ -80,7 +80,10 @@ $checkout_formatado = DateTime::createFromFormat('Y-m-d', $checkout)->format('d/
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quartos Disponíveis - Rodeo Hotel</title>
-      <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>

@@ -20,8 +20,9 @@ try {
     <meta charset="UTF-8">
     <title>Rodeo Hotel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -195,9 +196,11 @@ try {
 
     <!-- Navbar -->
     <nav class="navbar">
- <div class="logo">
-    <span>Rodeo Hotel</span>
- </div>
+        <div class="logo">
+            <img src="/HOTEL/assets/img/logo_preta.png" alt="Logo Rodeo Hotel"style="height: 40px; vertical-align: middle; margin-right: 10px;">
+            
+        </div>
+
         <!-- Improved Search Form -->
         <form action="" method="GET" class="search-form">
             <label for="checkin">Check-in</label>
@@ -209,7 +212,6 @@ try {
             <select name="categoria" aria-label="Categoria">
                 <option value="" disabled selected>Categoria</option> 
                 <?php
-                // Conectando ao banco e buscando categorias
                 $stmt = $pdo->query("SELECT * FROM categoria");
                 while ($cat = $stmt->fetch()) {
                     echo "<option value='{$cat['ID_Categoria']}'>{$cat['Nome']}</option>";
@@ -236,7 +238,6 @@ try {
 
     <!-- Script do Dropdown -->
     <script>
-        // This can be used if you add dropdown functionality later
         const toggle = document.getElementById('dropdownToggle');
         const menu = document.getElementById('dropdownMenu');
 

@@ -22,7 +22,10 @@ try {
     <meta charset="UTF-8">
     <title>Rodeo Hotel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+    <!-- Font Awesome CDN -->
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -197,9 +200,10 @@ try {
 
     <!-- Navbar -->
     <nav class="navbar">
- <div class="logo">
-    <span>Rodeo Hotel</span>
- </div>
+        <div class="logo">
+            <img src="/HOTEL/assets/img/logo_preta.png" alt="Logo Rodeo Hotel"style="height: 40px; vertical-align: middle; margin-right: 10px;">
+            
+        </div>
         <!-- Improved Search Form -->
         <form action="" method="GET" class="search-form">
             <label for="checkin">Check-in</label>
