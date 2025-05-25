@@ -1,0 +1,16 @@
+{
+    "name": "rodeo/reservas",
+    "description": "Sistema de reservas de hotel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hugostangherlin",
+            "email": "hugostangherlin@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "mpdf/mpdf": "8.2"
+    }
+}

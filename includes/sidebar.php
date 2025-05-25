@@ -55,7 +55,7 @@
                         </a>
                         <ul class="nav nav-treeview pl-3">
                             <li class="nav-item">
-                                <a href="../gestor/gerar_relatorio.php?tipo=funcionarios" class="nav-link" target="_blank">
+                                <a href="../gestor/relatorio/relatorio_hospedes.php" class="nav-link" target="_blank">
                                     <i class="fas fa-user text-warning nav-icon"></i>
                                     <p>Usuários</p>
                                 </a>
