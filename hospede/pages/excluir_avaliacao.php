@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once '../../config/config.php';
 session_start();
 
@@ -18,4 +18,5 @@ if ($stmt->execute()) {
     exit;
 } else {
     echo "Erro ao excluir avaliação.";
-}
+} 
+?>-->

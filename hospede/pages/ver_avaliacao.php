@@ -217,12 +217,12 @@ if (!$avaliacao) {
                 <i class="fas fa-edit"></i> Editar Avaliação
             </a>
             
-            <form action="excluir_avaliacao.php" method="POST" style="display: inline;">
+            <!-- <form action="excluir_avaliacao.php" method="POST" style="display: inline;">
                 <input type="hidden" name="id" value="<?= $avaliacao['ID_Avaliacao'] ?>">
                 <button type="submit" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir a avaliação?')">
                     <i class="fas fa-trash-alt"></i> Excluir Avaliação
                 </button>
-            </form>
+            </form> -->
             
             <a href="minhas_reservas.php" class="btn btn-back">
                 <i class="fas fa-arrow-left"></i> Voltar
