@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 }
 
 $nomeUsuario = $_SESSION['usuario']['nome'];
-$usuarioId = $_SESSION['usuario']['ID'];
+$usuarioId = $_SESSION['usuario']['id'];
 
 // Consulta para buscar as reservas do hóspede logado (sem status de pagamento)
 $sql = "SELECT 
@@ -24,7 +24,7 @@ $sql = "SELECT
         FROM reserva r
         INNER JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
         INNER JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-        LEFT JOIN avaliacao a ON r.ID_Reserva = a.ID_Reserva
+        LEFT JOIN avaliacao a ON q.ID_Quarto = a.ID_Quarto
         WHERE r.usuarios_ID = :usuario_id";
 
 $stmt = $pdo->prepare($sql);

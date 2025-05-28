@@ -21,7 +21,7 @@ if (empty($_GET['id'])) {
     exit();
 }
 
-$usuario_id = $_SESSION['usuario']['ID'];
+$usuario_id = $_SESSION['usuario']['id'];
 $quarto_id = $_GET['id'];
 
 // Gera datas padrão: hoje e amanhã
