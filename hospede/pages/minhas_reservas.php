@@ -24,7 +24,7 @@ $sql = "SELECT
         FROM reserva r
         INNER JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
         INNER JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-        LEFT JOIN avaliacao a ON r.ID_Reserva = a.ID_Reserva
+        LEFT JOIN avaliacao a ON q.ID_Quarto = a.ID_Quarto
         WHERE r.usuarios_ID = :usuario_id";
 
 $stmt = $pdo->prepare($sql);

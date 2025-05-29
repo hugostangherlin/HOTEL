@@ -39,7 +39,10 @@ if (isset($_POST['submit'])) {
                     'nome' => $nome,
                     'perfil' => $perfil
                 ];
-
+                if($_SESSION['checkin']!='' && $_SESSION['checkout']!=''){
+                    header("Location: /HOTEL/hospede/pages/detalhes_quarto.php?id=".$_SESSION['id']."&checkin=".$_SESSION['checkin']."&checkout=".$_SESSION['checkout']);
+                    exit;
+                }
                 // Redireciona para a página de hóspede
                 header("Location: /HOTEL/hospede/pages/pag_hospede.php");
                 exit;

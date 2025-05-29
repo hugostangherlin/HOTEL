@@ -230,19 +230,25 @@ try {
         </form>
 
         <div class="user-menu">
-    <div class="user-dropdown" id="userDropdown">
-        <a href="#" class="username d-flex align-items-center" id="dropdownToggle">
-        <i class="fas fa-user-circle mr-1"></i>
-            <span><?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?></span>
-            
-        </a>
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="exibir_hospede.php">Meu Perfil</a>
-            <a href="minhas_reservas.php">Minhas Reservas</a>
-            <a href="/HOTEL/logout.php">Sair</a>
+            <div class="user-dropdown" id="userDropdown">
+                <?php if(!array_key_exists('usuario', $_SESSION)):?>
+                <a href="entrar.php" class="username">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <span>Entrar</span>
+                </a>
+                <?php else: ?>
+                <a href="#" class="username d-flex align-items-center" id="dropdownToggle">
+                <i class="fas fa-user-circle mr-1"></i>
+                    <span><?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?></span>
+                </a>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="exibir_hospede.php">Meu Perfil</a>
+                    <a href="minhas_reservas.php">Minhas Reservas</a>
+                    <a href="/HOTEL/logout.php">Sair</a>
+                </div>
+                <?php endif; ?>
+            </div>
         </div>
-    </div>
-</div>
 
     </nav>
 

@@ -19,10 +19,12 @@
                             <i class="nav-icon fas fa-user-plus text-white"></i>
                             <p>Cadastro de Funcionários</p>
                         </a>
-                        <!-- Solicitação de Exclusão   -->
-                        <li class="nav-item menu-close">
+                    </li>
+
+                    <!-- Solicitação de Exclusão -->
+                    <li class="nav-item menu-close">
                         <a href="#" class="nav-link">
-                        <i class="fa-solid fa-trash"></i>
+                            <i class="fa-solid fa-trash"></i>
                             <p>
                                 Solicitação de Exclusões
                                 <i class="right fas fa-angle-left"></i>
@@ -43,7 +45,6 @@
                             </li>
                         </ul>
                     </li>
-
 
                     <li class="nav-item menu-close">
                         <a href="#" class="nav-link">
@@ -74,24 +75,6 @@
                             </li>
                         </ul>
                     </li>
-
-                <?php elseif ($_SESSION['usuario']['perfil'] == 2): ?>
-                    <!-- Se o perfil for de Preparador -->
-                    <li class="nav-item">
-                        <a href="../preparador/pedidos_recebidos.php" class="nav-link">
-                            <i class="nav-icon fas fa-blender text-white"></i>
-                            <p>Pedidos Recebidos</p>
-                        </a>
-                    </li>
-
-                <?php elseif ($_SESSION['usuario']['perfil'] == 3): ?>
-                    <!-- Se o perfil for de Caixa -->
-                    <li class="nav-item">
-                        <a href="../caixa/registrar_pedido.php" class="nav-link">
-                            <i class="nav-icon fas fa-cash-register text-white"></i>
-                            <p>Registrar Pedido</p>
-                        </a>
-                    </li>
                 <?php endif; ?>
 
                 <li class="nav-item d-md-none">
@@ -100,6 +83,7 @@
                         <p>Sair</p>
                     </a>
                 </li>
+
             </ul>
         </nav>
     </div>

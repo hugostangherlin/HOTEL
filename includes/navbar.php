@@ -28,7 +28,7 @@ require '../Config/config.php';
                     </a>
                     <div class="dropdown-menu" id="dropdownMenu" style="display: none; position: absolute; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.15); padding: 10px; border-radius: 5px;">
                         <a class="dropdown-item" href="../gestor/telas/exibir_gestor.php">Meu Perfil</a>
-                        <a class="dropdown-item" href="/HOTEL/home.php">Sair</a>
+                        <a class="dropdown-item" href="/HOTEL/logout.php">Sair</a>
                     </div>
                 </div>
             </div>
