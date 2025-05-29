@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 }
 
 $nomeUsuario = $_SESSION['usuario']['nome'];
-$usuarioId = $_SESSION['usuario']['ID'];
+$usuarioId = $_SESSION['usuario']['id'];
 
 // Consulta para buscar as reservas do hóspede logado (sem status de pagamento)
 $sql = "SELECT 
