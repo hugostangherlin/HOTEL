@@ -24,11 +24,14 @@ $stmt2 = $pdo->query($sql2);
 $ocupacao = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 // --- Últimas 10 reservas ---
-$sql3 = "SELECT r.ID_Reserva, u.Nome, r.Checkin, r.Checkout, q.Status
+$sql3 = "SELECT r.ID_Reserva, u.Nome AS Hospede, r.Checkin, r.Checkout, c.Nome AS Nome_Quarto
          FROM reserva r
          JOIN usuarios u ON r.usuarios_ID = u.ID
          JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
+         JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
          ORDER BY r.ID_Reserva DESC LIMIT 10";
+$stmt3 = $pdo->query($sql3);
+
 $stmt3 = $pdo->query($sql3);
 ?>
 
@@ -41,9 +44,14 @@ $stmt3 = $pdo->query($sql3);
         /* Seu estilo atual, mantém o que você já tinha */
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+
         * {
-            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
+
         :root {
             --primary: #FB4D46;
             --primary-light: #FFE9E9;
@@ -53,18 +61,23 @@ $stmt3 = $pdo->query($sql3);
             --text: #333333;
             --text-light: #6C757D;
         }
-        body, .content-wrapper {
+
+        body,
+        .content-wrapper {
             background-color: var(--light) !important;
             color: var(--text);
         }
+
         .main-header {
             background-color: var(--dark) !important;
             border-bottom: none;
         }
+
         .main-sidebar {
             background-color: var(--dark) !important;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .navbar a,
         .nav-icon,
         .nav-link,
@@ -72,14 +85,17 @@ $stmt3 = $pdo->query($sql3);
         .main-footer a {
             color: rgba(255, 255, 255, 0.9) !important;
         }
+
         .nav-link.active {
             background-color: var(--primary) !important;
             color: white !important;
             border-left: 3px solid white;
         }
+
         .nav-link:hover {
             background-color: rgba(251, 77, 70, 0.2) !important;
         }
+
         .btn-primary,
         .btn-block {
             background-color: var(--primary) !important;
@@ -91,20 +107,24 @@ $stmt3 = $pdo->query($sql3);
             transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .btn-primary:hover {
             background-color: #E04141 !important;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
+
         .btn-outline-primary {
             border-color: var(--primary) !important;
             color: var(--primary) !important;
             background: transparent !important;
         }
+
         .btn-outline-primary:hover {
             background-color: var(--primary) !important;
             color: white !important;
         }
+
         .content-header {
             background-color: white;
             border-radius: 8px;
@@ -112,12 +132,14 @@ $stmt3 = $pdo->query($sql3);
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
+
         .content-header h3 {
             font-weight: 600;
             color: var(--dark);
             font-size: 1.5rem;
             margin: 0;
         }
+
         .card {
             border: none;
             border-radius: 8px;
@@ -125,9 +147,11 @@ $stmt3 = $pdo->query($sql3);
             margin-bottom: 20px;
             transition: transform 0.3s ease;
         }
+
         .card:hover {
             transform: translateY(-3px);
         }
+
         .card-header {
             background-color: white;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -135,46 +159,64 @@ $stmt3 = $pdo->query($sql3);
             color: var(--dark);
             border-radius: 8px 8px 0 0 !important;
         }
+
         .table {
             border-collapse: separate;
             border-spacing: 0;
         }
+
         .table th {
             background-color: var(--dark);
             color: white;
             font-weight: 500;
             border: none;
         }
+
         .table td {
             background-color: white;
             border-top: 1px solid rgba(0, 0, 0, 0.03);
         }
+
         .table-striped tbody tr:nth-of-type(odd) td {
             background-color: var(--primary-light);
         }
-        .form-control, .custom-select {
+
+        .form-control,
+        .custom-select {
             border: 1px solid #e0e0e0;
             border-radius: 6px;
             padding: 8px 12px;
             transition: all 0.3s ease;
         }
-        .form-control:focus, .custom-select:focus {
+
+        .form-control:focus,
+        .custom-select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(251, 77, 70, 0.15);
         }
+
         .main-footer {
             background-color: var(--dark) !important;
             padding: 15px;
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
+#ocupacaoChart {
+    max-width: 300px;  /* ou qualquer largura que quiser */
+    max-height: 300px; /* altura proporcional */
+    margin: 0 auto;    /* centralizar horizontalmente */
+    display: block;
+}
+
         @media (max-width: 768px) {
             .content-wrapper {
                 padding: 15px !important;
             }
+
             .card {
                 margin-bottom: 15px;
             }
+
             .table-responsive {
                 border-radius: 8px;
                 overflow: hidden;
@@ -235,7 +277,7 @@ $stmt3 = $pdo->query($sql3);
                             <div class="card">
                                 <div class="card-header">Ocupação atual dos quartos</div>
                                 <div class="card-body">
-                                    <canvas id="ocupacaoChart"></canvas>
+                                    <canvas id="ocupacaoChart" width="300" height="300"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -250,23 +292,24 @@ $stmt3 = $pdo->query($sql3);
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Nome do Quarto</th>
                                         <th>Hóspede</th>
                                         <th>Check-in</th>
                                         <th>Check-out</th>
-                                        <th>Status do Quarto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php while ($row = $stmt3->fetch(PDO::FETCH_ASSOC)) : ?>
                                         <tr>
                                             <td><?= htmlspecialchars($row['ID_Reserva']) ?></td>
-                                            <td><?= htmlspecialchars($row['Nome']) ?></td>
+                                            <td><?= htmlspecialchars($row['Nome_Quarto']) ?></td>
+                                            <td><?= htmlspecialchars($row['Hospede']) ?></td>
                                             <td><?= htmlspecialchars($row['Checkin']) ?></td>
                                             <td><?= htmlspecialchars($row['Checkout']) ?></td>
-                                            <td><?= htmlspecialchars($row['Status']) ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
