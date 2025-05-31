@@ -20,7 +20,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario_id = $_SESSION['usuario']['id'];
+    $usuario_id = $_SESSION['usuario']['ID'];
     $quarto_id = $_POST['quarto_id'];
     $checkin = $_POST['checkin'];
     $checkout = $_POST['checkout'];

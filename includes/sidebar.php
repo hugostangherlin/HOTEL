@@ -56,19 +56,19 @@
                         </a>
                         <ul class="nav nav-treeview pl-3">
                             <li class="nav-item">
-                                <a href="../gestor/relatorio/relatorio_hospedes.php" class="nav-link" target="_blank">
+                                <a href="../gestor/relatorio/usuario/filtro_usuarios.php" class="nav-link" target="_blank">
                                     <i class="fas fa-user text-warning nav-icon"></i>
                                     <p>Usuários</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../gestor/gerar_relatorio.php?tipo=produtos" class="nav-link" target="_blank">
+                                <a href="../gestor/relatorio/reserva/filtro_reservas.php" class="nav-link" target="_blank">
                                     <i class="fa-solid fa-bed"></i>
                                     <p>Reservas</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../gestor/gerar_relatorio.php?tipo=vendas" class="nav-link" target="_blank">
+                                <a href="../gestor/relatorio/faturamento/filtro_faturamento.php" class="nav-link" target="_blank">
                                     <i class="fa-solid fa-money-check-dollar"></i>
                                     <p>Faturamento</p>
                                 </a>

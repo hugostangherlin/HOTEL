@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Maio-2025 às 21:14
+-- Tempo de geração: 31-Maio-2025 às 18:29
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `avaliacao` (
   `ID_Avaliacao` int(11) NOT NULL,
-  `ID_Quarto` int(11) NOT NULL,
+  `ID_Reserva` int(11) DEFAULT NULL,
   `ID_Usuario` int(11) NOT NULL,
   `Nota` int(11) NOT NULL,
   `Comentario` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `avaliacao`
+--
+
+INSERT INTO `avaliacao` (`ID_Avaliacao`, `ID_Reserva`, `ID_Usuario`, `Nota`, `Comentario`) VALUES
+(2, 53, 15, 2, 'Muito bom');
 
 -- --------------------------------------------------------
 
@@ -77,7 +84,7 @@ CREATE TABLE `pagamentos` (
 --
 
 INSERT INTO `pagamentos` (`ID_Pagamento`, `ID_Reserva`, `ID_Usuarios`, `Valor`, `Forma_Pagamento`, `Status`, `Data_Pagamento`) VALUES
-(51, 52, 15, 350.00, 'Pix', 'Pago', '2025-05-29 15:41:15');
+(52, 53, 15, 700.00, 'Pix', 'Pago', '2025-05-31 12:52:26');
 
 -- --------------------------------------------------------
 
@@ -135,8 +142,18 @@ CREATE TABLE `relatorio` (
   `ID_Relatorio` int(11) NOT NULL,
   `Data_Relatorio` datetime NOT NULL,
   `Tipo_Relatorio` varchar(45) NOT NULL,
-  `Descricao` text NOT NULL
+  `Descricao` text NOT NULL,
+  `Arquivo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `relatorio`
+--
+
+INSERT INTO `relatorio` (`ID_Relatorio`, `Data_Relatorio`, `Tipo_Relatorio`, `Descricao`, `Arquivo`) VALUES
+(8, '2025-05-31 17:02:52', 'Usuários', 'Relatório de usuários', 'relatorio_usuarios_20250531_170251.pdf'),
+(20, '2025-05-31 18:23:45', 'Reservas', 'Relatório de reservas a partir de 2025-05-31 até 2025-06-02', 'relatorio_reservas_20250531_182345.pdf'),
+(21, '2025-05-31 18:27:24', 'Faturamento', 'Relatório de faturamento - Filtro forma pagamento: Pix.', 'relatorio_faturamento_20250531_182724.pdf');
 
 -- --------------------------------------------------------
 
@@ -159,7 +176,7 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`ID_Reserva`, `Checkin`, `Checkout`, `Quarto_ID_Quarto`, `usuarios_ID`, `solicitou_exclusao`, `Data_Solicitacao_Exclusao`) VALUES
-(52, '2025-05-29', '2025-05-30', 1, 15, 0, NULL);
+(53, '2025-05-31', '2025-06-02', 1, 15, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -198,7 +215,7 @@ INSERT INTO `usuarios` (`ID`, `Nome`, `Email`, `Data_Nascimento`, `Telefone`, `E
 --
 ALTER TABLE `avaliacao`
   ADD PRIMARY KEY (`ID_Avaliacao`),
-  ADD KEY `fk_Avaliacao_Quarto` (`ID_Quarto`),
+  ADD KEY `fk_Avaliacao_Quarto` (`ID_Reserva`),
   ADD KEY `fk_Avaliacao_Usuario` (`ID_Usuario`);
 
 --
@@ -257,7 +274,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `categoria`
@@ -269,7 +286,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -287,13 +304,13 @@ ALTER TABLE `quarto`
 -- AUTO_INCREMENT de tabela `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
@@ -309,7 +326,7 @@ ALTER TABLE `usuarios`
 -- Limitadores para a tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  ADD CONSTRAINT `fk_Avaliacao_Quarto` FOREIGN KEY (`ID_Quarto`) REFERENCES `quarto` (`ID_Quarto`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Avaliacao_Reserva` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Avaliacao_Usuario` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
