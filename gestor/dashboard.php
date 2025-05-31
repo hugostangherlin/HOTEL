@@ -266,16 +266,17 @@ $stmt3 = $pdo->query($sql3);
 
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-header">Reservas nos últimos 6 meses</div>
+                                <!-- Gerar relatório de últimas Reservas dos ultimos 6 meses -->
+                                <a href="#"div class="card-header">Reservas nos últimos 6 meses</a>
                                 <div class="card-body">
                                     <canvas id="reservasChart"></canvas>
                                 </div>
                             </div>
                         </div>
-
+<!-- Gerar relatório de Ocupação atual do Hotel-->
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-header">Ocupação atual dos quartos</div>
+                                <a href="#" div class="card-header">Ocupação atual dos quartos</a>
                                 <div class="card-body">
                                     <canvas id="ocupacaoChart" width="300" height="300"></canvas>
                                 </div>
@@ -291,11 +292,11 @@ $stmt3 = $pdo->query($sql3);
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Número da Reserva</th>
                                         <th>Nome do Quarto</th>
                                         <th>Hóspede</th>
-                                        <th>Check-in</th>
-                                        <th>Check-out</th>
+                                        <th>Checkin</th>
+                                        <th>Checkout</th>
                                     </tr>
                                 </thead>
                                 <tbody>
