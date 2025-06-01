@@ -25,40 +25,173 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Inicia mPDF
 $mpdf = new \Mpdf\Mpdf();
 
-$html = "<h2 style='text-align: center;'>Relatório de Usuários</h2>";
-$html .= "<table border='1' width='100%' style='border-collapse: collapse; font-size: 12px;'>";
-$html .= "<thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Data de Nascimento</th>
-                <th>Telefone</th>
-                <th>Endereço</th>
-                <th>Perfil</th>
-            </tr>
-          </thead><tbody>";
+$html = '<style>
+    body {
+        font-family: "Helvetica", Arial, sans-serif;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #FB4D46;
+    }
+    
+    .header h1 {
+        color: #1A1A2E;
+        font-size: 26px;
+        margin-bottom: 8px;
+        font-weight: 700;
+    }
+    
+    .header .filters {
+        color: #555;
+        font-size: 14px;
+        margin-top: 10px;
+        background-color: #FFE9E9;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    
+    .header .date {
+        color: #666;
+        font-size: 13px;
+        margin-top: 10px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 25px;
+        font-size: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    table thead th {
+        background-color: #1A1A2E;
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+    }
+    
+    table tbody td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+    }
+    
+    table tbody tr:nth-child(even) {
+        background-color: #FFF5F5;
+    }
+    
+    table tbody tr:hover {
+        background-color: #FFE9E9;
+    }
+    
+    .profile {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .profile.gestor {
+        background-color: #E6F7E6;
+        color: #28A745;
+    }
+    
+    .profile.hospede {
+        background-color: #E6F0F7;
+        color: #1A73E8;
+    }
+    
+    .footer {
+        margin-top: 30px;
+        padding-top: 15px;
+        border-top: 1px solid #ddd;
+        font-size: 11px;
+        color: #777;
+        text-align: center;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .nowrap {
+        white-space: nowrap;
+    }
+</style>
+
+<div class="header">
+    <h1>RELATÓRIO DE USUÁRIOS</h1>';
+    
+// Adiciona filtros aplicados
+if (!empty($nome) || !empty($perfil)) {
+    $html .= '<div class="filters">Filtros aplicados: ';
+    $filters = [];
+    if (!empty($nome)) {
+        $filters[] = 'Nome: ' . htmlspecialchars($nome);
+    }
+    if (!empty($perfil)) {
+        $filters[] = 'Perfil: ' . ($perfil == 1 ? 'Gestor' : 'Hóspede');
+    }
+    $html .= implode(' | ', $filters) . '</div>';
+}
+
+$html .= '<div class="date">Emitido em: ' . date('d/m/Y H:i') . '</div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data Nascimento</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>Perfil</th>
+        </tr>
+    </thead>
+    <tbody>';
 
 foreach ($usuarios as $usuario) {
-    $nomeUsuario = $usuario['Nome'] ?? '';
-    $email = $usuario['Email'] ?? '';
-    $dataNascimento = $usuario['Data_Nascimento'] ?? '';
-    $telefone = $usuario['Telefone'] ?? '';
-    $endereco = $usuario['Endereco'] ?? '';
+    $nomeUsuario = htmlspecialchars($usuario['Nome'] ?? '');
+    $email = htmlspecialchars($usuario['Email'] ?? '');
+    $dataNascimento = !empty($usuario['Data_Nascimento']) ? date('d/m/Y', strtotime($usuario['Data_Nascimento'])) : '';
+    $telefone = htmlspecialchars($usuario['Telefone'] ?? '');
+    $endereco = htmlspecialchars($usuario['Endereco'] ?? '');
     $perfilId = $usuario['Perfil_ID_Perfil'] ?? '';
-
     $perfilNome = ($perfilId == 1) ? 'Gestor' : 'Hóspede';
+    $perfilClass = strtolower($perfilNome);
 
     $html .= "<tr>
                 <td>{$nomeUsuario}</td>
                 <td>{$email}</td>
-                <td>{$dataNascimento}</td>
+                <td class='nowrap'>{$dataNascimento}</td>
                 <td>{$telefone}</td>
                 <td>{$endereco}</td>
-                <td>{$perfilNome}</td>
+                <td><span class='profile {$perfilClass}'>{$perfilNome}</span></td>
               </tr>";
 }
 
-$html .= "</tbody></table>";
+$html .= '</tbody>
+</table>
+
+<div class="footer">
+    Sistema de Gestão Hoteleira | Relatório gerado automaticamente
+</div>';
 
 // Caminho correto para salvar o arquivo PDF
 $caminho_pasta = __DIR__ . '/../../../relatorios/usuario';

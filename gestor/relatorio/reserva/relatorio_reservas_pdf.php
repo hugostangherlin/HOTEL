@@ -31,30 +31,154 @@ $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $mpdf = new \Mpdf\Mpdf();
 
-$html = "<h2 style='text-align: center;'>Relatório de Reservas</h2>";
-$html .= "<table border='1' width='100%' style='border-collapse: collapse; font-size: 12px;'>
-            <thead>
-                <tr>
-                    <th>ID Reserva</th>
-                    <th>Hóspede</th>
-                    <th>Quarto</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                </tr>
-            </thead>
-            <tbody>";
+$html = '
+<style>
+    body {
+        font-family: "Helvetica", Arial, sans-serif;
+        color: #333;
+        line-height: 1.5;
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #FB4D46;
+    }
+    
+    .header h1 {
+        color: #1A1A2E;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+    
+    .header .periodo {
+        color: #666;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    
+    .header .data-emissao {
+        color: #666;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+    
+    table thead th {
+        background-color: #1A1A2E;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+    }
+    
+    table tbody td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    table tbody tr:nth-child(even) {
+        background-color: #FFE9E9;
+    }
+    
+    .footer {
+        margin-top: 30px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        font-size: 10px;
+        color: #666;
+        text-align: center;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-right {
+        text-align: right;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 3px 6px;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: bold;
+    }
+    
+    .badge-primary {
+        background-color: #FB4D46;
+        color: white;
+    }
+</style>
+
+<div class="header">
+    <h1>Relatório de Reservas</h1>
+    <div class="periodo">';
+    
+// Adiciona período do relatório se filtrado por data
+if (!empty($dataInicio) || !empty($dataFim)) {
+    $html .= 'Período: ';
+    if (!empty($dataInicio)) {
+        $html .= 'De ' . date('d/m/Y', strtotime($dataInicio)) . ' ';
+    }
+    if (!empty($dataFim)) {
+        $html .= 'Até ' . date('d/m/Y', strtotime($dataFim));
+    }
+}
+
+$html .= '</div>
+    <div class="data-emissao">Emitido em: ' . date('d/m/Y H:i') . '</div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID Reserva</th>
+            <th>Hóspede</th>
+            <th>Quarto</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>';
 
 foreach ($reservas as $reserva) {
+    // Formata datas para padrão brasileiro
+    $checkin = date('d/m/Y H:i', strtotime($reserva['Checkin']));
+    $checkout = date('d/m/Y H:i', strtotime($reserva['Checkout']));
+    
+    // Determina status (exemplo básico)
+    $status = 'Ativa';
+    $statusClass = 'badge-primary';
+    
     $html .= "<tr>
                 <td>{$reserva['ID_Reserva']}</td>
                 <td>{$reserva['NomeHospede']}</td>
-                <td>{$reserva['Quarto_ID_Quarto']}</td>
-                <td>{$reserva['Checkin']}</td>
-                <td>{$reserva['Checkout']}</td>
+                <td>{$reserva['ID_Quarto']}</td>
+                <td>{$checkin}</td>
+                <td>{$checkout}</td>
+                <td><span class='badge {$statusClass}'>{$status}</span></td>
               </tr>";
 }
 
-$html .= "</tbody></table>";
+$html .= '</tbody>
+</table>
+
+<div class="footer">
+    Sistema de Gestão Hoteleira | Relatório gerado automaticamente
+</div>';
 
 $mpdf->WriteHTML($html);
 

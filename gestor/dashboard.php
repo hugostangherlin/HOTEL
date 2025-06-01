@@ -41,7 +41,6 @@ $stmt3 = $pdo->query($sql3);
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 
     <style>
-        /* Seu estilo atual, mantém o que você já tinha */
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
 

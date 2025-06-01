@@ -4,9 +4,6 @@
         <a href="/entrar.php" class="brand-text font-weight-light" style="color: white !important; margin-left: 15px;">
             Rodeo Hotel
         </a>
-        <a href="../entrar.php" class="btn btn-danger btn-sm mr-2 d-none d-md-inline" title="Sair">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
     </div>
 
     <div class="sidebar">
