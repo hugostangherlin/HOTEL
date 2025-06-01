@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Maio-2025 às 18:29
+-- Tempo de geração: 01-Jun-2025 às 05:12
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -151,9 +151,9 @@ CREATE TABLE `relatorio` (
 --
 
 INSERT INTO `relatorio` (`ID_Relatorio`, `Data_Relatorio`, `Tipo_Relatorio`, `Descricao`, `Arquivo`) VALUES
-(8, '2025-05-31 17:02:52', 'Usuários', 'Relatório de usuários', 'relatorio_usuarios_20250531_170251.pdf'),
-(20, '2025-05-31 18:23:45', 'Reservas', 'Relatório de reservas a partir de 2025-05-31 até 2025-06-02', 'relatorio_reservas_20250531_182345.pdf'),
-(21, '2025-05-31 18:27:24', 'Faturamento', 'Relatório de faturamento - Filtro forma pagamento: Pix.', 'relatorio_faturamento_20250531_182724.pdf');
+(26, '2025-06-01 04:47:26', 'Usuários', 'Relatório de usuários Filtro por perfil: Gestor.', 'relatorio_usuarios_20250601_044726.pdf'),
+(27, '2025-06-01 04:47:55', 'Reservas', 'Relatório de reservas a partir de 2025-05-31 até 2025-06-02', 'relatorio_reservas_20250601_044755.pdf'),
+(28, '2025-06-01 05:03:27', 'Faturamento', 'Relatório de faturamento - Filtro forma pagamento: Pix.', 'relatorio_faturamento_20250601_050327.pdf');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ ALTER TABLE `quarto`
 -- AUTO_INCREMENT de tabela `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `reserva`
