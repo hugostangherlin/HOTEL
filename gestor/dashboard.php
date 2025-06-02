@@ -36,12 +36,9 @@ $stmt3 = $pdo->query($sql3);
 ?>
 
 <head>
-    <link rel="icon" href="/HOTEL/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/HOTEL/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+<link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
 
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
 
         * {
@@ -200,12 +197,16 @@ $stmt3 = $pdo->query($sql3);
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
-#ocupacaoChart {
-    max-width: 300px;  /* ou qualquer largura que quiser */
-    max-height: 300px; /* altura proporcional */
-    margin: 0 auto;    /* centralizar horizontalmente */
-    display: block;
-}
+
+        #ocupacaoChart {
+            max-width: 300px;
+            /* ou qualquer largura que quiser */
+            max-height: 300px;
+            /* altura proporcional */
+            margin: 0 auto;
+            /* centralizar horizontalmente */
+            display: block;
+        }
 
         @media (max-width: 768px) {
             .content-wrapper {
@@ -266,13 +267,13 @@ $stmt3 = $pdo->query($sql3);
                         <div class="col-md-6">
                             <div class="card">
                                 <!-- Gerar relatório de últimas Reservas dos ultimos 6 meses -->
-                                <a href="#"div class="card-header">Reservas nos últimos 6 meses</a>
+                                <a href="#" div class="card-header">Reservas nos últimos 6 meses</a>
                                 <div class="card-body">
                                     <canvas id="reservasChart"></canvas>
                                 </div>
                             </div>
                         </div>
-<!-- Gerar relatório de Ocupação atual do Hotel-->
+                        <!-- Gerar relatório de Ocupação atual do Hotel-->
                         <div class="col-md-6">
                             <div class="card">
                                 <a href="#" div class="card-header">Ocupação atual dos quartos</a>
@@ -304,8 +305,9 @@ $stmt3 = $pdo->query($sql3);
                                             <td><?= htmlspecialchars($row['ID_Reserva']) ?></td>
                                             <td><?= htmlspecialchars($row['Nome_Quarto']) ?></td>
                                             <td><?= htmlspecialchars($row['Hospede']) ?></td>
-                                            <td><?= htmlspecialchars($row['Checkin']) ?></td>
-                                            <td><?= htmlspecialchars($row['Checkout']) ?></td>
+                                            <td><?= date('d/m/Y', strtotime($row['Checkin'])) ?></td>
+                                            <td><?= date('d/m/Y', strtotime($row['Checkout'])) ?></td>
+
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>

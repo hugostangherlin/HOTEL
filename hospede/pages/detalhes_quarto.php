@@ -1,7 +1,6 @@
 <?php
-require_once '../../config/config.php';
-
 session_start();
+require_once '../../config/config.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$id) {
@@ -43,59 +42,62 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($quarto['nome_categoria']) ?> - Detalhes | Rodeo Hotel</title>
+    <title><?= htmlspecialchars($quarto['nome_categoria']) ?> - Detalhes do Quarto</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
+    <!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #FB4D46;
             --secondary-color: #2c3e50;
-            --light-gray: #f8f9fa;
-            --dark-gray: #6c757d;
-            --white: #ffffff;
-            --border-radius: 12px;
-            --box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
         }
         
         body {
-            background-color: #f3f4f6;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
         }
         
-        .container {
+        .main-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 15px;
         }
         
-        /* Room Header Section */
         .room-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
             gap: 30px;
-            margin-bottom: 40px;
-            background-color: var(--white);
-            border-radius: var(--border-radius);
+            margin-bottom: 50px;
+            background-color: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .room-image {
-            height: 400px;
+            flex: 1 1 400px;
+            min-height: 400px;
             background-size: cover;
             background-position: center;
         }
         
         .room-content {
+            flex: 1 1 400px;
             padding: 30px;
             display: flex;
             flex-direction: column;
@@ -103,62 +105,64 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
         }
         
         .room-title {
+            font-size: 2.2rem;
+            font-weight: 700;
             color: var(--secondary-color);
-            font-size: 28px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .room-price {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 600;
             color: var(--primary-color);
-            margin: 15px 0;
+            margin-bottom: 25px;
+        }
+        
+        .room-price small {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            opacity: 0.8;
         }
         
         .room-features {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .feature {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.95rem;
         }
         
         .feature i {
             color: var(--primary-color);
-            font-size: 18px;
-            width: 24px;
+            width: 20px;
             text-align: center;
         }
         
         .room-description {
-            margin: 20px 0;
-            line-height: 1.7;
+            margin: 25px 0;
+            line-height: 1.6;
         }
         
-        /* Booking Form */
         .booking-form {
             margin-top: 30px;
         }
         
         .btn {
-            display: inline-block;
             background-color: var(--primary-color);
             color: white;
-            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 12px 25px;
+            border-radius: 5px;
             font-weight: 600;
             cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.3s;
             width: 100%;
-            text-align: center;
         }
         
         .btn:hover {
@@ -166,41 +170,51 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
             transform: translateY(-2px);
         }
         
-        /* Similar Rooms Section */
-        .similar-rooms {
-            margin-top: 50px;
+        .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
         }
         
-        .section-title {
-            font-size: 24px;
-            color: var(--secondary-color);
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .similar-rooms {
+            margin-top: 60px;
         }
         
         .rooms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
+            margin-top: 30px;
         }
         
         .room-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
+            background-color: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
         }
         
         .room-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
         
         .room-card-img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
         }
         
@@ -209,14 +223,14 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
         }
         
         .room-card-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
         
         .room-card-price {
-            font-weight: 600;
             color: var(--primary-color);
+            font-weight: 600;
             margin-bottom: 15px;
         }
         
@@ -228,111 +242,112 @@ $outros_quartos = $outros->fetchAll(PDO::FETCH_ASSOC);
             background-color: #1a252f;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .room-header {
-                grid-template-columns: 1fr;
+                flex-direction: column;
             }
             
             .room-image {
-                height: 300px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .room-features {
-                grid-template-columns: 1fr;
+                min-height: 250px;
             }
             
-            .room-content {
-                padding: 20px;
+            .room-title {
+                font-size: 1.8rem;
+            }
+            
+            .room-price {
+                font-size: 1.5rem;
+            }
+            
+            .rooms-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="room-header">
-        <div class="room-image" style="background-image: url('../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>');"></div>
-        
-        <div class="room-content">
-            <div>
-                <h1 class="room-title"><?= htmlspecialchars($quarto['nome_categoria']) ?></h1>
-                <div class="room-price">R$ <?= number_format($quarto['Preco_diaria'], 2, ',', '.') ?> <small>/noite</small></div>
-                
-                <div class="room-features">
-                    <div class="feature">
-                        <i class="fas fa-user-friends"></i>
-                        <span><?= htmlspecialchars($quarto['Capacidade']) ?> pessoa(s)</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-ruler-combined"></i>
-                        <span><?= $quarto['Metragem'] ?? 'N/A' ?> m²</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-bed"></i>
-                        <span>2 camas</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-bath"></i>
-                        <span>1 banheiro</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-wifi"></i>
-                        <span>Wi-Fi gratuito</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-tv"></i>
-                        <span>TV a cabo</span>
-                    </div>
-                </div>
-                
-                <div class="room-description">
-                    <p>Este quarto <?= htmlspecialchars($quarto['nome_categoria']) ?> é ideal para quem busca conforto e praticidade. Acomoda até <?= htmlspecialchars($quarto['Capacidade']) ?> pessoas e oferece todas as comodidades necessárias para uma estadia agradável no Rodeo Hotel.</p>
-                </div>
-            </div>
+    <div class="main-container">
+        <div class="room-header">
+            <div class="room-image" style="background-image: url('../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>');"></div>
             
-            <form id="form-reserva" class="booking-form">
-                <button class="btn" type="submit">Reservar este quarto</button>
-            </form>
-        </div>
-    </div>
-
-    <?php if (count($outros_quartos) > 0): ?>
-        <div class="similar-rooms">
-            <h2 class="section-title">Outros quartos da mesma categoria</h2>
-            <div class="rooms-grid">
-                <?php foreach ($outros_quartos as $q): ?>
-                    <div class="room-card">
-                        <img src="../../uploads/<?= htmlspecialchars($q['Foto']) ?>" alt="<?= htmlspecialchars($q['nome_categoria']) ?>" class="room-card-img">
-                        <div class="room-card-content">
-                            <h3 class="room-card-title"><?= htmlspecialchars($q['nome_categoria']) ?></h3>
-                            <div class="room-card-price">R$ <?= number_format($q['Preco_diaria'], 2, ',', '.') ?>/noite</div>
-                            <a href="detalhes_quarto.php?id=<?= $q['ID_Quarto'] ?>" class="btn btn-secondary">Ver detalhes</a>
+            <div class="room-content">
+                <div>
+                    <h1 class="room-title"><?= htmlspecialchars($quarto['nome_categoria']) ?></h1>
+                    <div class="room-price">R$ <?= number_format($quarto['Preco_diaria'], 2, ',', '.') ?> <small>/noite</small></div>
+                    
+                    <div class="room-features">
+                        <div class="feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span><?= htmlspecialchars($quarto['Capacidade']) ?> pessoa(s)</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>2 camas</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>1 banheiro</span>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                    
+                    <div class="room-description">
+                        <p>Este quarto <?= htmlspecialchars($quarto['nome_categoria']) ?> é ideal para quem busca conforto e praticidade. Acomoda até <?= htmlspecialchars($quarto['Capacidade']) ?> pessoas e oferece todas as comodidades necessárias para uma estadia agradável no Rodeo Hotel.</p>
+                    </div>
+                </div>
+                
+                <form id="form-reserva" class="booking-form">
+                    <button class="btn" type="submit">Reservar este quarto</button>
+                </form>
             </div>
         </div>
-    <?php endif; ?>
-</div>
 
-<script>
+        <?php if (count($outros_quartos) > 0): ?>
+            <div class="similar-rooms">
+                <h2 class="section-title">Outros Quartos</h2>
+                <div class="rooms-grid">
+                    <?php foreach ($outros_quartos as $q): ?>
+                        <div class="room-card">
+                            <img src="../../uploads/<?= htmlspecialchars($q['Foto']) ?>" alt="<?= htmlspecialchars($q['nome_categoria']) ?>" class="room-card-img">
+                            <div class="room-card-content">
+                                <h3 class="room-card-title"><?= htmlspecialchars($q['nome_categoria']) ?></h3>
+                                <div class="room-card-price">R$ <?= number_format($q['Preco_diaria'], 2, ',', '.') ?>/noite</div>
+                                <a href="detalhes_quarto.php?id=<?= $q['ID_Quarto'] ?><?= $checkin ? '&checkin='.$checkin : '' ?><?= $checkout ? '&checkout='.$checkout : '' ?>" class="btn btn-secondary">Ver detalhes</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <script>
 document.getElementById("form-reserva").addEventListener("submit", function(e) {
     e.preventDefault();
-
-    const confirmado = confirm("Você deseja fazer uma reserva para este quarto?");
-    if (confirmado) {
-        const quartoId = <?= $quarto['ID_Quarto'] ?>;
-        const checkin = "<?= $checkin ?>";
-        const checkout = "<?= $checkout ?>";
-        window.location.href = "/HOTEL/actions/reservar_quarto.php?id=" + quartoId + "&checkin=" + checkin + "&checkout=" + checkout;
-    }
+    
+    Swal.fire({
+        title: 'Confirmar Reserva',
+        html: `Você deseja reservar o quarto <b>${<?= json_encode($quarto['nome_categoria']) ?>}</b>?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#FB4D46',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sim, reservar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const quartoId = <?= $quarto['ID_Quarto'] ?>;
+            const checkin = "<?= $checkin ?>";
+            const checkout = "<?= $checkout ?>";
+            window.location.href = "/HOTEL/actions/reservar_quarto.php?id=" + quartoId + "&checkin=" + checkin + "&checkout=" + checkout;
+        }
+    });
 });
-</script>
+    </script>
 
-<?php include '../../includes/rodape.php'; ?>
+    <?php include '../../includes/rodape.php'; ?>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

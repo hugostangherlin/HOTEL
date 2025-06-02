@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("UPDATE quarto SET Status = 'Ocupado' WHERE ID_Quarto = :id");
     $stmt->execute([':id' => $quarto_id]);
 
-    header("Location: ../hospede/pages/minhas_reservas.php");
+    header("Location: ../hospede/pages/pag_hospede.php");
     exit();
 }
 ?>

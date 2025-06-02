@@ -33,7 +33,8 @@ if (!$reserva) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar Reserva | HOTEL</title>
+    <title>Avaliar Reserva</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
     <style>
         :root {
             --primary-color: #FB4D46;

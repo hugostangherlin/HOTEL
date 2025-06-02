@@ -150,7 +150,7 @@ if (!empty($nome) || !empty($perfil)) {
     $html .= implode(' | ', $filters) . '</div>';
 }
 
-$html .= '<div class="date">Emitido em: ' . date('d/m/Y H:i') . '</div>
+$html .= '<div class="date">Emitido em: ' . date('d/m/Y') . '</div>
 </div>
 
 <table>

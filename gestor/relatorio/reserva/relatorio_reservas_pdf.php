@@ -138,7 +138,7 @@ if (!empty($dataInicio) || !empty($dataFim)) {
 }
 
 $html .= '</div>
-    <div class="data-emissao">Emitido em: ' . date('d/m/Y H:i') . '</div>
+    <div class="data-emissao">Emitido em: ' . date('d/m/Y') . '</div>
 </div>
 
 <table>

@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("INSERT INTO avaliacao (ID_Reserva, ID_Usuario, Nota, Comentario) VALUES (?, ?, ?, ?)");
     $stmt->execute([$id_reserva, $id_usuario, $nota, $comentario]);
 
-    echo "Avaliação registrada com sucesso!";
-} else {
-    echo "Requisição inválida.";
+  header("Location: ../hospede/pages/pag_hospede.php");
+    exit();
 }

@@ -126,7 +126,7 @@ $html .= '<div class="header">
 $html .= '<div class="filter-info">
             <strong>Forma de Pagamento:</strong> ' . 
             (!empty($formaPagamento) ? htmlspecialchars($formaPagamento) : 'Todas') . '<br>
-            <strong>Emitido em:</strong> ' . date('d/m/Y H:i') . '
+            <strong>Emitido em:</strong> ' . date('d/m/Y') . '
           </div>';
 
 $html .= '<table>

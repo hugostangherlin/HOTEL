@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Rodeo Hotel</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="rodeo.ico">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #FB4D46;
+            --secondary-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar-custom {
+            background-color: var(--primary-color) !important;
+            min-height: 80px;
+            padding: 5px 0 !important;
+        }
+
+        .navbar-brand img {
+            height: 55px;
+            width: auto;
+            transition: all 0.3s;
+        }
+
+        /* Estilo para o cabeçalho da página Sobre */
+        .about-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/img/hotel_sobre.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 120px 0 80px;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-header p.lead {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Seção de conteúdo */
+        .about-content {
+            padding: 60px 0;
+        }
+
+        .about-content h2 {
+            color: var(--secondary-color);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .about-content h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Seção da equipe */
+        .team-section {
+            background-color: white;
+            padding: 80px 0;
+            margin-top: 50px;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            color: var(--secondary-color);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-section p.subtitle {
+            text-align: center;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        .team-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-card img {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-card .card-body {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .team-card h5 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .team-card p.position {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            color: var(--secondary-color);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 0;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 80px 0 50px;
+            }
+            
+            .about-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                padding: 40px 0;
+            }
+            
+            .team-section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="display: flex; align-items: center;">
+                <img src="/HOTEL/assets/img/Rodeo-removebg-preview.png"
+                    alt="Rodeo Hotel"
+                    style="height: 55px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="entrar.php"><i class="fas fa-sign-in-alt me-1"></i> Entrar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cabeçalho Sobre -->
+    <header class="about-header">
+        <div class="container">
+            <h1>Sobre Nós</h1>
+            <p class="lead">Conheça nossa história, valores e a equipe por trás do Rodeo Hotel</p>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="container about-content">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2>Nossa História</h2>
+                <p>
+                    Bem-vindo ao nosso sistema de reservas de hotel! Criado com o objetivo de facilitar o processo de hospedagem, nosso sistema oferece uma plataforma moderna, segura e intuitiva, tanto para hóspedes quanto para gestores.
+                </p>
+                <p>
+                    Aqui você pode buscar quartos disponíveis, fazer reservas com poucos cliques, acompanhar seu histórico de hospedagens, realizar pagamentos e muito mais.
+                </p>
+                <p>
+                    Nosso compromisso é oferecer praticidade, eficiência e confiança para todos os usuários, tornando sua experiência cada vez mais agradável.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <img src="/HOTEL/assets/img/Rodeo.png" alt="Hotel" class="img-fluid about-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção da Equipe -->
+    <section class="team-section">
+        <div class="container">
+            <h2>Nossa Equipe</h2>
+            <p class="subtitle">Conheça quem está por trás do desenvolvimento e funcionamento do nosso sistema.</p>
+
+            <div class="row justify-content-center">
+                <!-- Membro 1 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <!-- <img src="assets/img/equipe1.jpg" class="card-img-top" alt="Foto Membro 1"> -->
+                        <div class="card-body">
+                            <h5>Hugo Feitosa</h5>
+                            <p class="position">Desenvolvedor</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/hugostangherlin/"><i class="fab fa-instagram"></i></a>
+                                <a href="https://github.com/hugostangherlin"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membro 2 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <!-- <img src="assets/img/equipe2.jpg" class="card-img-top" alt="Foto Membro 2"> -->
+                        <div class="card-body">
+                            <h5>João Paulo</h5>
+                            <p class="position">Designer</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/jjuao.p/"><i class="fab fa-instagram"></i></a>
+                                <a href="https://github.com/jblackx"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membro 3 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <!-- <img src="assets/img/equipe3.jpg" class="card-img-top" alt="Foto Membro 3"> -->
+                        <div class="card-body">
+                            <h5>Thiago Oliveira</h5>
+                            <p class="position">Documentação</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/_thiagoaugusto18"><i class="fab fa-instagram"></i></a>
+                                <a href="https://github.com/thiagoausto"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="/HOTEL/assets/img/Rodeo-removebg-preview.png" alt="Rodeo Hotel" class="mb-3" width="180">
+                    <p class="text-muted">O Rodeo Hotel oferece a melhor experiência em hospedagem de luxo, combinando conforto, elegância e atendimento personalizado.</p>
+                    <div class="mt-4">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="/home.php">Home</a></li>
+                        <li class="mb-2"><a href="sobre.html">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Contato</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> EQNN 14 Área Especial S/ Nº- Ceilândia Sul - DF</li>
+                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> (61) 94002-8922</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> rodeohotel@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2023 Rodeo Hotel. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

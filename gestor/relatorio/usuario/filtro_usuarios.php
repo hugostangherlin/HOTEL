@@ -7,7 +7,14 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Usuários</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
+</head>
 <h2>Relatório de Usuários</h2>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -295,7 +302,7 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($relatorios as $rel): ?>
             <tr>
                 <td><?= htmlspecialchars($rel['ID_Relatorio']) ?></td>
-                <td><?= htmlspecialchars($rel['Data_Relatorio']) ?></td>
+                <td><?= date('d/m/Y H:i', strtotime($rel['Data_Relatorio'])) ?></td>
                 <td><?= htmlspecialchars($rel['Tipo_Relatorio']) ?></td>
                 <td><?= htmlspecialchars($rel['Descricao']) ?></td>
                 <td><a href="/HOTEL/relatorios/usuario/<?= htmlspecialchars($rel['Arquivo']) ?>" target="_blank">Ver PDF</a>

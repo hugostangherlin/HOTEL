@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitação de Exclusão</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
+    <style>
+                :root {
+            --primary-color: #FB4D46;
+            --secondary-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
 <?php
 session_start();
 require_once '../../config/config.php';
@@ -7,12 +30,19 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
     exit();
 }
 
-
 $usuario_id = $_SESSION['usuario']['ID'];
 $reserva_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($reserva_id <= 0) {
-    echo "<script>alert('ID da reserva inválido.'); history.back();</script>";
+    echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'ID da reserva inválido.',
+        }).then(() => {
+            history.back();
+        });
+    </script>";
     exit();
 }
 
@@ -24,12 +54,28 @@ $sql->execute();
 $reserva = $sql->fetch();
 
 if (!$reserva) {
-    echo "<script>alert('Reserva não encontrada ou não pertence a você.'); history.back();</script>";
+    echo "<script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Atenção',
+            text: 'Reserva não encontrada ou não pertence a você.',
+        }).then(() => {
+            history.back();
+        });
+    </script>";
     exit();
 }
 
 if ($reserva['solicitou_exclusao'] == 1) {
-    echo "<script>alert('Você já solicitou a exclusão dessa reserva. Aguarde o gestor.'); history.back();</script>";
+    echo "<script>
+        Swal.fire({
+            icon: 'info',
+            title: 'Solicitação já enviada',
+            text: 'Você já solicitou a exclusão dessa reserva. Aguarde o gestor.',
+        }).then(() => {
+            history.back();
+        });
+    </script>";
     exit();
 }
 
@@ -39,4 +85,16 @@ $sql->bindValue(':id', $reserva_id);
 $sql->bindValue(':usuario_id', $usuario_id);
 $sql->execute();
 
-echo "<script>alert('Solicitação enviada. Aguarde a análise do gestor.'); location.href='minhas_reservas.php';</script>";
+echo "<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Solicitação Enviada',
+        text: 'A solicitação de exclusão foi enviada. Aguarde a análise do gestor.',
+    }).then(() => {
+        window.location.href = 'pag_hospede.php';
+    });
+</script>";
+?>
+
+</body>
+</html>

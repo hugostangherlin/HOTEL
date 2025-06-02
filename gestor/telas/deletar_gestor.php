@@ -1,10 +1,10 @@
 <?php
-include './config/config.php';
+require_once '../../config/config.php';
 
 $id = $_GET['id'];
 
 $pdo->prepare("DELETE FROM usuarios WHERE id = ?")->execute([$id]);
 
-header("Location: entrar.php");
+header("Location: /HOTEL/entrar.php");
 exit();
 ?>
