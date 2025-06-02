@@ -225,7 +225,7 @@ if (!$avaliacao) {
                 </button>
             </form> -->
             
-            <a href="minhas_reservas.php" class="btn btn-back">
+            <a href="pag_hospede.php" class="btn btn-back">
                 <i class="fas fa-arrow-left"></i> Voltar
             </a>
         </div>
