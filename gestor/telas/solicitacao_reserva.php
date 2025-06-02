@@ -256,7 +256,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 1) {
                             <td class="request-date"><?= date('d/m/Y H:i', strtotime($reserva['Data_Solicitacao_Exclusao'])) ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="/HOTEL/actions/excluir_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" 
+                                    <a href="/HOTEL/actions/excluir_solicitacao.php?id=<?= $reserva['ID_Reserva'] ?>" 
                                        class="btn btn-approve"
                                        onclick="return confirm('Tem certeza que deseja aprovar a exclusão desta reserva?')">
                                         <i class="fas fa-check-circle"></i> Aprovar

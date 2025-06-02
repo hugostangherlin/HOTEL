@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Jun-2025 às 04:37
+-- Tempo de geração: 02-Jun-2025 às 20:54
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -112,7 +112,7 @@ CREATE TABLE `quarto` (
 
 INSERT INTO `quarto` (`ID_Quarto`, `Status`, `Capacidade`, `Categoria_ID_Categoria`, `Foto`, `Preco_diaria`) VALUES
 (27, 'Disponível', 1, 1, 'quarto_683cd0fe8afdd.jpg', 200.00),
-(28, 'Disponivel', 2, 1, 'quarto_683cd1edd53e9.jpg', 200.00),
+(28, 'Disponível', 2, 1, 'quarto_683cd1edd53e9.jpg', 200.00),
 (29, 'Disponivel', 4, 1, 'quarto_683cd2509e626.jpg', 200.00),
 (31, 'Disponivel', 1, 2, 'quarto_683cd333ad35b.jpg', 150.00),
 (32, 'Disponivel', 2, 2, 'quarto_683cd3d9658ec.jpg', 150.00),
@@ -143,13 +143,7 @@ CREATE TABLE `relatorio` (
 --
 
 INSERT INTO `relatorio` (`ID_Relatorio`, `Data_Relatorio`, `Tipo_Relatorio`, `Descricao`, `Arquivo`) VALUES
-(26, '2025-06-01 04:47:26', 'Usuários', 'Relatório de usuários Filtro por perfil: Gestor.', 'relatorio_usuarios_20250601_044726.pdf'),
-(27, '2025-06-01 04:47:55', 'Reservas', 'Relatório de reservas a partir de 2025-05-31 até 2025-06-02', 'relatorio_reservas_20250601_044755.pdf'),
-(28, '2025-06-01 05:03:27', 'Faturamento', 'Relatório de faturamento - Filtro forma pagamento: Pix.', 'relatorio_faturamento_20250601_050327.pdf'),
-(29, '2025-06-01 12:49:02', 'Usuários', 'Relatório de usuários', 'relatorio_usuarios_20250601_124902.pdf'),
-(30, '2025-06-02 04:04:38', 'Faturamento', 'Relatório de faturamento', 'relatorio_faturamento_20250602_040437.pdf'),
-(31, '2025-06-02 04:07:19', 'Faturamento', 'Relatório de faturamento', 'relatorio_faturamento_20250602_040719.pdf'),
-(32, '2025-06-02 04:08:08', 'Faturamento', 'Relatório de faturamento', 'relatorio_faturamento_20250602_040808.pdf');
+(35, '2025-06-02 19:46:12', 'Reservas', 'Relatório de reservas', 'relatorio_reservas_20250602_194612.pdf');
 
 -- --------------------------------------------------------
 
@@ -262,7 +256,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `categoria`
@@ -274,7 +268,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -292,19 +286,19 @@ ALTER TABLE `quarto`
 -- AUTO_INCREMENT de tabela `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restrições para despejos de tabelas
