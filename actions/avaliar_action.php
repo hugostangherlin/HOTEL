@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_usuario = $_SESSION['usuario']['ID'];
+    $id_usuario = $_SESSION['usuario']['id'];
     $id_reserva = $_POST['id_reserva'] ?? null;
     $nota = isset($_POST['nota']) ? intval($_POST['nota']) : 0;
     $comentario = trim($_POST['comentario'] ?? '');

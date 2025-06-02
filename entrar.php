@@ -3,65 +3,66 @@ session_start();
 require __DIR__ . '/Config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
 
-    // Consulta usuário no banco
-    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE LOWER(Email) = LOWER(?)");
-    $stmt->execute([$email]);
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+  // Consulta usuário no banco
+  $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE LOWER(Email) = LOWER(?)");
+  $stmt->execute([$email]);
+  $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$usuario) {
-        $_SESSION['erro_login'] = "Usuário não encontrado!";
-        header("Location: entrar.php");
-        exit();
-    }
+  if (!$usuario) {
+    $_SESSION['erro_login'] = "Usuário não encontrado!";
+    header("Location: entrar.php");
+    exit();
+  }
 
-    // Valida senha
-    if ($usuario && password_verify($senha, $usuario['Senha'])) {
-        // Armazena dados na sessão
-        $_SESSION['usuario'] = [
-            'ID'     => $usuario['ID'],
-            'nome'   => $usuario['Nome'],
-            'email'  => $usuario['Email'],
-            'perfil' => $usuario['Perfil_ID_Perfil']
-        ];
+  // Valida senha
+  if ($usuario && password_verify($senha, $usuario['Senha'])) {
+    // Armazena dados na sessão
+    $_SESSION['usuario'] = [
+      'ID'     => $usuario['ID'],
+      'nome'   => $usuario['Nome'],
+      'email'  => $usuario['Email'],
+      'perfil' => $usuario['Perfil_ID_Perfil']
+    ];
 
-        // Redireciona conforme o perfil
-        switch ($usuario['Perfil_ID_Perfil']) {
-            case 1:
-                header("Location: gestor/dashboard.php");
-                break;
-            case 2:
-                if($_SESSION['checkin']!='' && $_SESSION['checkout']!=''){
-                  header("Location: /HOTEL/hospede/pages/detalhes_quarto.php?id=".$_SESSION['id']."&checkin=".$_SESSION['checkin']."&checkout=".$_SESSION['checkout']);
-                  break;
-                }
-                header("Location: hospede/pages/pag_hospede.php");
-                break;
-            default:
-                $_SESSION['erro_login'] = "Perfil não identificado!";
-                header("Location: entrar.php");
-                break;
+    // Redireciona conforme o perfil
+    switch ($usuario['Perfil_ID_Perfil']) {
+      case 1:
+        header("Location: gestor/dashboard.php");
+        break;
+      case 2:
+        if ($_SESSION['checkin'] != '' && $_SESSION['checkout'] != '') {
+          header("Location: /HOTEL/hospede/pages/detalhes_quarto.php?id=" . $_SESSION['id'] . "&checkin=" . $_SESSION['checkin'] . "&checkout=" . $_SESSION['checkout']);
+          break;
         }
-        exit();
-    } else {
-        $_SESSION['erro_login'] = "Credenciais inválidas!";
+        header("Location: hospede/pages/pag_hospede.php");
+        break;
+      default:
+        $_SESSION['erro_login'] = "Perfil não identificado!";
         header("Location: entrar.php");
-        exit();
+        break;
     }
+    exit();
+  } else {
+    $_SESSION['erro_login'] = "Credenciais inválidas!";
+    header("Location: entrar.php");
+    exit();
+  }
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar</title>
 
-<link rel="icon" type="image/png" sizes="32x32" href="rodeo.ico">
-<link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="rodeo.ico">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -353,8 +354,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes fadeInUp {
@@ -362,6 +368,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -373,6 +380,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         transform: translateY(-50px);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -384,7 +392,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       .login-form {
         padding: 1.8rem;
       }
-      
+
       .modal-content {
         margin: 12% auto;
         padding: 1.5rem;
@@ -395,16 +403,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       .login-form {
         padding: 1.5rem;
       }
-      
+
       .links {
         flex-direction: column;
         gap: 0.3rem;
       }
-      
+
       .links span {
         display: none;
       }
-      
+
       .modal-content {
         margin: 15% auto;
         padding: 1.2rem;
@@ -412,6 +420,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   </style>
 </head>
+
 <body>
   <div class="login-container">
     <form action="entrar.php" method="POST" class="login-form">
@@ -420,8 +429,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <?php if (isset($_SESSION['erro_login'])): ?>
         <div class="error-message">
           <?php
-            echo $_SESSION['erro_login'];
-            unset($_SESSION['erro_login']);
+          echo $_SESSION['erro_login'];
+          unset($_SESSION['erro_login']);
           ?>
         </div>
       <?php endif; ?>
@@ -479,9 +488,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
 
           <div class="input-box">
-            <label for="endereco">Endereço</label>
-            <input type="text" name="endereco" id="endereco" placeholder="Digite seu endereço" required>
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" maxlength="9" placeholder="00000-000">
           </div>
+
+          <div class="input-box">
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+          </div>
+
+          <script src="buscaCEP.js"></script>
 
           <div class="input-box">
             <label for="birthdate">Data de Nascimento</label>
@@ -525,7 +541,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // CPF mask
     document.getElementById('cpf').addEventListener('input', function(e) {
       let value = e.target.value.replace(/\D/g, '');
-      
+
       if (value.length > 3) {
         value = value.replace(/^(\d{3})(\d)/g, '$1.$2');
       }
@@ -538,26 +554,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if (value.length > 11) {
         value = value.substring(0, 14);
       }
-      
+
       e.target.value = value;
     });
 
-    // Phone mask
     document.getElementById('telefone').addEventListener('input', function(e) {
       let value = e.target.value.replace(/\D/g, '');
-      
-      if (value.length > 0) {
-        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+
+      // Adiciona o código do país +55 fixo
+      if (!value.startsWith('55')) {
+        value = '55' + value;
       }
-      if (value.length > 10) {
-        value = value.replace(/(\d{5})(\d)/, '$1-$2');
+
+      // Limita ao máximo de 13 dígitos após o + (55 + 2 DDD + 9 número)
+      value = value.substring(0, 13);
+
+      // Aplica a máscara: +55 (DD) 9XXXX-XXXX
+      if (value.length >= 2) {
+        value = value.replace(/^(\d{2})/, '+$1 ');
       }
-      if (value.length > 15) {
-        value = value.substring(0, 15);
+      if (value.length >= 4) {
+        value = value.replace(/^\+(\d{2}) (\d{2})/, '+$1 ($2)');
       }
-      
-      e.target.value = value;
+      if (value.length >= 9) {
+        value = value.replace(/^\+(\d{2}) \((\d{2})\)(\d{5})(\d{0,4}).*/, '+$1 ($2) $3-$4');
+      }
+
+      e.target.value = value.trim();
     });
+
+document.getElementById('cep').addEventListener('blur', function() {
+    var cep = this.value.replace(/\D/g, '');
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.erro) {
+                // Monta o endereço com rua, bairro, cidade e estado
+                let enderecoCompleto = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+                document.getElementById('endereco').value = enderecoCompleto;
+            } else {
+                alert('CEP não encontrado.');
+                document.getElementById('endereco').value = '';
+            }
+        })
+        .catch(() => {
+            alert('Erro ao buscar CEP.');
+            document.getElementById('endereco').value = '';
+        });
+    } else {
+        alert('Formato de CEP inválido.');
+        document.getElementById('endereco').value = '';
+    }
+});
+
   </script>
 </body>
+
 </html>

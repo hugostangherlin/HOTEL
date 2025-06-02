@@ -328,7 +328,7 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($rel['Descricao']) ?></td>
                     <td>
                         <a href="/HOTEL/relatorios/faturamento/<?= htmlspecialchars($rel['Arquivo']) ?>" target="_blank">Ver PDF</a>
-                        <a href="../../actions/excluir_relatorio.php?id=<?= $rel['ID_Relatorio'] ?>"
+                        <a href="/HOTEL/actions/excluir_relatorio_faturamento.php?id=<?= $rel['ID_Relatorio'] ?>"
                            onclick="return confirm('Tem certeza que deseja excluir este relatório?')"
                            style="color: red; text-decoration: none;">
                             🗑️ Excluir

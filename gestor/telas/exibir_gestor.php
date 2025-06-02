@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-$id_usuario = $_SESSION['usuario']['id'];
+$id_usuario = $_SESSION['usuario']['ID'];
 
 // Busca os dados do usuário
 $sql = "SELECT * FROM usuarios WHERE ID = :id";
@@ -211,7 +211,7 @@ if (!$usuario) {
                 <i class="fas fa-trash-alt"></i> Excluir Conta
             </a>
             
-            <a href="pag_gestor.php" class="btn-secondary">
+            <a href="/HOTEL/gestor/dashboard.php" class="btn-secondary">
                 <i class="fas fa-arrow-left"></i> Voltar
             </a>
         </div>

@@ -282,7 +282,7 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                     <?php 
                     $dataRelatorio = new DateTime($rel['Data_Relatorio']);
-                    echo $dataRelatorio->format('d/m/Y \à\s H:i');
+                    echo $dataRelatorio->format('d/m/Y');
                     ?>
                 </td>
                 <td><?= htmlspecialchars($rel['Tipo_Relatorio']) ?></td>
@@ -306,7 +306,7 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </td>
                 <td>
                     <a href="/HOTEL/relatorios/reservas/<?= htmlspecialchars($rel['Arquivo']) ?>" target="_blank">Ver PDF</a>
-                    <a href="../../actions/excluir_relatorio.php?id=<?= $rel['ID_Relatorio'] ?>"
+                    <a href="/HOTEL/actions/excluir_relatorio_reserva.php?id=<?= $rel['ID_Relatorio'] ?>"
                        onclick="return confirm('Tem certeza que deseja excluir este relatório?')">
                         🗑️ Excluir
                     </a>

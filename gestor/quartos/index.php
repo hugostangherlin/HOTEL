@@ -24,6 +24,7 @@ if ($sql->rowCount() > 0) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,24 +41,24 @@ if ($sql->rowCount() > 0) {
             --dark-gray: #6c757d;
             --white: #ffffff;
             --border-radius: 8px;
-            --box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
-        
+
         body {
             background-color: #f3f4f6;
             color: #333;
             line-height: 1.6;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 30px auto;
@@ -66,7 +67,7 @@ if ($sql->rowCount() > 0) {
             box-shadow: var(--box-shadow);
             padding: 30px;
         }
-        
+
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -75,13 +76,13 @@ if ($sql->rowCount() > 0) {
             flex-wrap: wrap;
             gap: 15px;
         }
-        
+
         .page-title {
             color: var(--secondary-color);
             font-size: 28px;
             margin: 0;
         }
-        
+
         .btn-add {
             display: inline-flex;
             align-items: center;
@@ -94,13 +95,13 @@ if ($sql->rowCount() > 0) {
             font-weight: 600;
             transition: var(--transition);
         }
-        
+
         .btn-add:hover {
             background-color: #e0413a;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         /* DataTables Custom Styling */
         #myTable {
             width: 100% !important;
@@ -108,7 +109,7 @@ if ($sql->rowCount() > 0) {
             border-spacing: 0 10px;
             margin-top: 20px;
         }
-        
+
         #myTable thead th {
             background-color: var(--primary-color);
             color: white;
@@ -117,45 +118,45 @@ if ($sql->rowCount() > 0) {
             font-weight: 600;
             border: none;
         }
-        
+
         #myTable tbody tr {
             background-color: var(--white);
             transition: var(--transition);
             border-radius: var(--border-radius);
         }
-        
+
         #myTable tbody tr:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         #myTable tbody td {
             padding: 15px;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
             vertical-align: middle;
         }
-        
+
         #myTable tbody td:first-child {
             border-left: 1px solid #eee;
             border-top-left-radius: var(--border-radius);
             border-bottom-left-radius: var(--border-radius);
         }
-        
+
         #myTable tbody td:last-child {
             border-right: 1px solid #eee;
             border-top-right-radius: var(--border-radius);
             border-bottom-right-radius: var(--border-radius);
         }
-        
+
         .room-image {
             width: 100px;
             height: 70px;
             object-fit: cover;
             border-radius: var(--border-radius);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .status {
             display: inline-block;
             padding: 6px 12px;
@@ -163,28 +164,28 @@ if ($sql->rowCount() > 0) {
             font-size: 14px;
             font-weight: 500;
         }
-        
+
         .status-disponivel {
             background-color: #d4edda;
             color: #155724;
         }
-        
+
         .status-ocupado {
             background-color: #f8d7da;
             color: #721c24;
         }
-        
+
         .status-manutencao {
             background-color: #fff3cd;
             color: #856404;
         }
-        
+
         .action-buttons {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-        
+
         .btn-action {
             display: inline-flex;
             align-items: center;
@@ -198,74 +199,74 @@ if ($sql->rowCount() > 0) {
             transition: var(--transition);
             text-align: center;
         }
-        
+
         .btn-edit {
             background-color: #007bff;
             color: white;
         }
-        
+
         .btn-edit:hover {
             background-color: #0069d9;
         }
-        
+
         .btn-delete {
             background-color: #dc3545;
             color: white;
         }
-        
+
         .btn-delete:hover {
             background-color: #c82333;
         }
-        
+
         .btn-more {
             background-color: var(--secondary-color);
             color: white;
         }
-        
+
         .btn-more:hover {
             background-color: #1a252f;
         }
-        
+
         .price {
             font-weight: 600;
             color: var(--primary-color);
         }
-        
+
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 8px 12px;
             border-radius: var(--border-radius);
             margin: 0 3px;
             transition: var(--transition);
         }
-        
+
         .dataTables_wrapper .dataTables_paginate .paginate_button.current,
         .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
             background: var(--primary-color) !important;
             color: white !important;
             border: none;
         }
-        
+
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             background: var(--light-gray) !important;
             border: none !important;
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
             }
-            
+
             #myTable thead {
                 display: none;
             }
-            
+
             #myTable tbody tr {
                 display: block;
                 margin-bottom: 15px;
                 border-radius: var(--border-radius);
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
-            
+
             #myTable tbody td {
                 display: flex;
                 justify-content: space-between;
@@ -274,7 +275,7 @@ if ($sql->rowCount() > 0) {
                 border: none;
                 border-bottom: 1px solid #eee;
             }
-            
+
             #myTable tbody td::before {
                 content: attr(data-label);
                 font-weight: 600;
@@ -282,30 +283,30 @@ if ($sql->rowCount() > 0) {
                 margin-right: 15px;
                 flex: 1;
             }
-            
-            #myTable tbody td > span, 
-            #myTable tbody td > div {
+
+            #myTable tbody td>span,
+            #myTable tbody td>div {
                 flex: 2;
                 text-align: right;
             }
-            
+
             #myTable tbody td:first-child {
                 border-top-left-radius: var(--border-radius);
                 border-top-right-radius: var(--border-radius);
             }
-            
+
             #myTable tbody td:last-child {
                 border-bottom-left-radius: var(--border-radius);
                 border-bottom-right-radius: var(--border-radius);
                 border-bottom: none;
             }
-            
+
             .action-buttons {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: flex-end;
             }
-            
+
             .btn-action {
                 padding: 6px 10px;
                 font-size: 13px;
@@ -313,6 +314,7 @@ if ($sql->rowCount() > 0) {
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="page-header">
@@ -321,10 +323,10 @@ if ($sql->rowCount() > 0) {
                 <i class="fas fa-plus"></i> Adicionar Quarto
             </a>
         </div>
-        
+
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        
+
         <table id="myTable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -338,27 +340,28 @@ if ($sql->rowCount() > 0) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($lista as $quarto): 
+                <?php foreach ($lista as $quarto):
                     $statusClass = '';
                     $statusText = '';
                     if ($quarto['Status'] === 'Manutencao') {
                         $statusClass = 'status-manutencao';
                         $statusText = 'Manutenção';
-                    } elseif ($quarto['Status'] ==='Ocupado') {
+                    } elseif ($quarto['Ocupado'] > 0) {
                         $statusClass = 'status-ocupado';
                         $statusText = 'Ocupado';
                     } else {
                         $statusClass = 'status-disponivel';
                         $statusText = 'Disponível';
                     }
+
                 ?>
                     <tr>
                         <td data-label="Foto">
                             <?php if (!empty($quarto['Foto'])): ?>
-    <img src="../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>" alt="Foto do Quarto" class="room-image">
-<?php else: ?>
-    <img src="../../assets/img/sem-imagem.jpg" alt="Sem imagem" class="room-image">
-<?php endif; ?>
+                                <img src="../../uploads/<?= htmlspecialchars($quarto['Foto']) ?>" alt="Foto do Quarto" class="room-image">
+                            <?php else: ?>
+                                <img src="../../assets/img/sem-imagem.jpg" alt="Sem imagem" class="room-image">
+                            <?php endif; ?>
 
                         </td>
                         <td data-label="Número"><?= $quarto['ID_Quarto'] ?></td>
@@ -406,4 +409,5 @@ if ($sql->rowCount() > 0) {
         </script>
     </div>
 </body>
+
 </html>

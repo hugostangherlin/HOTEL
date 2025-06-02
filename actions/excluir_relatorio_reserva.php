@@ -12,7 +12,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     if ($relatorio) {
         // Caminho completo do arquivo PDF para exclusão
-        $arquivoPath = __DIR__ . "/../../relatorios/usuario/" . $relatorio['Arquivo'];
+        $arquivoPath = __DIR__ . "/../../relatorios/reserva/" . $relatorio['Arquivo'];
 
         // Excluir registro do banco
         $deleteSql = "DELETE FROM relatorio WHERE ID_Relatorio = :id";
@@ -25,7 +25,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 unlink($arquivoPath);
             }
             // Redireciona de volta para a página do filtro com sucesso
-            header("Location: /HOTEL/gestor/relatorio/usuario/filtro_usuarios.php");
+            header("Location: /HOTEL/gestor/relatorio/reserva/filtro_reservas.php");
             exit;
         } else {
             echo "Erro ao excluir o relatório do banco.";
