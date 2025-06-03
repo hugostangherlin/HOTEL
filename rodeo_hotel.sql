@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Jun-2025 às 20:54
+-- Tempo de geração: 03-Jun-2025 às 21:00
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -138,13 +138,6 @@ CREATE TABLE `relatorio` (
   `Arquivo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `relatorio`
---
-
-INSERT INTO `relatorio` (`ID_Relatorio`, `Data_Relatorio`, `Tipo_Relatorio`, `Descricao`, `Arquivo`) VALUES
-(35, '2025-06-02 19:46:12', 'Reservas', 'Relatório de reservas', 'relatorio_reservas_20250602_194612.pdf');
-
 -- --------------------------------------------------------
 
 --
@@ -256,7 +249,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `categoria`
@@ -268,7 +261,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `ID_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de tabela `perfil`
@@ -286,19 +279,19 @@ ALTER TABLE `quarto`
 -- AUTO_INCREMENT de tabela `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID_Relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `ID_Reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restrições para despejos de tabelas
@@ -315,8 +308,10 @@ ALTER TABLE `avaliacao`
 -- Limitadores para a tabela `pagamentos`
 --
 ALTER TABLE `pagamentos`
-  ADD CONSTRAINT `fk_Pagamentos_Reserva` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Pagamentos_Usuarios` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pagamentos_reserva` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_pagamentos_reserva_unique` FOREIGN KEY (`ID_Reserva`) REFERENCES `reserva` (`ID_Reserva`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_pagamentos_usuarios` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_pagamentos_usuarios_unique` FOREIGN KEY (`ID_Usuarios`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `quarto`
