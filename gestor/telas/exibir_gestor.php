@@ -8,10 +8,10 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-$id_usuario = $_SESSION['usuario']['id'];
+$id_usuario = $_SESSION['usuario']['ID'];
 
 // Busca os dados do usuário
-$sql = "SELECT * FROM usuarios WHERE ID = :id";
+$sql = "SELECT * FROM usuarios WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $id_usuario);
 $stmt->execute();

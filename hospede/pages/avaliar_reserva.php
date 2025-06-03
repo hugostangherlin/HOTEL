@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 2) {
 }
 
 // Pega ID do usuário da sessão
-$id_usuario = $_SESSION['usuario']['id'];
+$id_usuario = $_SESSION['usuario']['ID'];
 
 // Verifica se recebeu ID da reserva
 $id_reserva = $_GET['id_reserva'] ?? $_GET['id'] ?? null;
