@@ -462,7 +462,7 @@ document.getElementById('form-busca').addEventListener('submit', async function 
             WHERE r.usuarios_ID = ?
             ORDER BY r.Checkin DESC
         ");
-        $stmt->execute([$_SESSION['usuario']['id']]);
+        $stmt->execute([$_SESSION['usuario']['ID']]);
         $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
