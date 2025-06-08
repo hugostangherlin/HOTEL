@@ -361,185 +361,176 @@ $nomeUsuario = $_SESSION['usuario']['nome'];
             <p class="lead">Sua experiência conosco é nossa maior prioridade</p>
         </div>
     </header>
-            
-            <!-- Conteúdo Principal -->
-            <div class="col-lg-9">
+<main> <div class="container"> <div class="row justify-content-center"> <div class="col-lg-9">
                 <div class="card-dashboard">
                     <div class="card-body">
                         <h3 class="section-title">Buscar Quartos</h3>
-                        
-    <div class="container">
-        <div class="search-box">
-            <form id="form-busca"class="row g-3">
-                <div class="col-md-3">
-                    <label for="checkin" class="form-label">Check-in</label>
-                    <input type="date" class="form-control" id="checkin" name="checkin" required>
+
+                        <div class="search-box">
+                            <form id="form-busca" class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="checkin" class="form-label">Check-in</label>
+                                    <input type="date" class="form-control" id="checkin" name="checkin" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="checkout" class="form-label">Check-out</label>
+                                    <input type="date" class="form-control" id="checkout" name="checkout" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="categoria" class="form-label">Categoria</label>
+                                    <select class="form-select" id="categoria" name="categoria" required>
+                                        <option value="" selected disabled>Selecione</option>
+                                        <?php
+                                        $stmt = $pdo->query("SELECT * FROM categoria");
+                                        while ($cat = $stmt->fetch()) {
+                                            echo "<option value='{$cat['ID_Categoria']}'>{$cat['Nome']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary-custom w-100">
+                                        <i class="fas fa-search me-2"></i> Buscar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <label for="checkout" class="form-label">Check-out</label>
-                    <input type="date" class="form-control" id="checkout" name="checkout" required>
-                </div>
-                <div class="col-md-3">
-                    <label for="categoria" class="form-label">Categoria</label>
-                    <select class="form-select" id="categoria" name="categoria" required>
-                        <option value="" selected disabled>Selecione</option>
-                        <?php
-                        $stmt = $pdo->query("SELECT * FROM categoria");
-                        while ($cat = $stmt->fetch()) {
-                            echo "<option value='{$cat['ID_Categoria']}'>{$cat['Nome']}</option>";
+
+                <section class="py-5">
+                    <h2 class="text-center section-title"></h2>
+                    <div class="row" id="resultado-quartos">
+                        </div>
+                </section>
+
+                <script>
+                    document.getElementById('form-busca').addEventListener('submit', async function (e) {
+                        e.preventDefault();
+
+                        const form = e.target;
+                        const formData = new FormData(form);
+
+                        try {
+                            const response = await fetch('/HOTEL/includes/resultado_busca.php', {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Erro na requisição');
+                            }
+
+                            const html = await response.text();
+                            document.getElementById('resultado-quartos').innerHTML = html;
+                        } catch (error) {
+                            console.error('Erro:', error);
+                            document.getElementById('resultado-quartos').innerHTML = `
+                                <div class="col-12">
+                                    <div class="alert alert-danger">Ocorreu um erro ao buscar os quartos. Por favor, tente novamente.</div>
+                                </div>
+                            `;
                         }
+                    });
+
+                </script>
+                <div class="card-dashboard mt-4">
+                    <div class="card-body">
+                        <h3 class="section-title">Minhas Reservas</h3>
+
+                        <?php
+                        $stmt = $pdo->prepare("
+                            SELECT
+                                r.ID_Reserva,
+                                r.Checkin,
+                                r.Checkout,
+                                q.ID_Quarto,
+                                q.Capacidade,
+                                q.Preco_diaria,
+                                c.Nome AS Categoria,
+                                a.ID_Avaliacao
+                            FROM reserva r
+                            INNER JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
+                            INNER JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
+                            LEFT JOIN avaliacao a ON r.ID_Reserva = a.ID_Reserva
+                            WHERE r.usuarios_ID = ?
+                            ORDER BY r.Checkin DESC
+                        ");
+                        $stmt->execute([$_SESSION['usuario']['ID']]);
+                        $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         ?>
-                    </select>
+
+                        <?php if ($reservas): ?>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Quarto</th>
+                                            <th>Capacidade</th>
+                                            <th>Check-in</th>
+                                            <th>Check-out</th>
+                                            <th>Preço Diária</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($reservas as $reserva): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($reserva['Categoria']) ?></td>
+                                                <td><?= htmlspecialchars($reserva['Capacidade']) ?> pessoas</td>
+                                                <td><?= date('d/m/Y', strtotime($reserva['Checkin'])) ?></td>
+                                                <td><?= date('d/m/Y', strtotime($reserva['Checkout'])) ?></td>
+                                                <td>R$ <?= number_format($reserva['Preco_diaria'], 2, ',', '.') ?></td>
+                                                <td>
+                                                    <div class="d-flex gap-2 flex-wrap">
+                                                        <?php if (!$reserva['ID_Avaliacao']): ?>
+                                                            <a href="avaliar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-warning">
+                                                                <i class="fas fa-star"></i> Avaliar
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <a href="ver_avaliacao.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-info">
+                                                                <i class="fas fa-pen"></i> Minha Avaliação
+                                                            </a>
+                                                        <?php endif; ?>
+                                                        <a href="deletar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-danger" onclick="return confirmarExclusao(event)">
+                                                            <i class="fas fa-trash-alt"></i> Cancelar
+                                                        </a>
+
+                                                        <script>
+                                                            function confirmarExclusao(event) {
+                                                                event.preventDefault(); // Evita que o link seja seguido imediatamente
+                                                                const linkExclusao = event.currentTarget.getAttribute('href');
+
+                                                                Swal.fire({
+                                                                    title: 'Tem certeza?',
+                                                                    text: "Esta ação cancelará a reserva permanentemente!",
+                                                                    icon: 'warning',
+                                                                    showCancelButton: true,
+                                                                    confirmButtonColor: '#d33',
+                                                                    cancelButtonColor: '#3085d6',
+                                                                    confirmButtonText: 'Sim, cancelar!',
+                                                                    cancelButtonText: 'Não, voltar'
+                                                                }).then((result) => {
+                                                                    if (result.isConfirmed) {
+                                                                        window.location.href = linkExclusao; // Redireciona para deletar_reserva.php
+                                                                    }
+                                                                });
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-info">Você ainda não possui reservas.</div>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary-custom w-100">
-                        <i class="fas fa-search me-2"></i> Buscar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
- <!-- Resultados da Busca -->
-<section class="py-5">
-    <div class="container">
-        <h2 class="text-center section-title"></h2>
-        <div class="row" id="resultado-quartos">
-            <!-- Os resultados serão carregados aqui via AJAX -->
-        </div>
-    </div>
-</section>
-<!-- Script AJAX para buscar quartos -->
-<script>
-document.getElementById('form-busca').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch('/HOTEL/includes/resultado_busca.php', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            throw new Error('Erro na requisição');
-        }
-
-        const html = await response.text();
-        document.getElementById('resultado-quartos').innerHTML = html;
-    } catch (error) {
-        console.error('Erro:', error);
-        document.getElementById('resultado-quartos').innerHTML = `
-            <div class="col-12">
-                <div class="alert alert-danger">Ocorreu um erro ao buscar os quartos. Por favor, tente novamente.</div>
             </div>
-        `;
-    }
-});
-
-</script>
-<!-- Reservas Recentes (modificado para exibir todas) -->
-<div class="card-dashboard mt-4">
-    <div class="card-body">
-        <h3 class="section-title">Minhas Reservas</h3>
-
-        <?php
-        $stmt = $pdo->prepare("
-            SELECT 
-                r.ID_Reserva,
-                r.Checkin,
-                r.Checkout,
-                q.ID_Quarto,
-                q.Capacidade,
-                q.Preco_diaria,
-                c.Nome AS Categoria,
-                a.ID_Avaliacao
-            FROM reserva r
-            INNER JOIN quarto q ON r.Quarto_ID_Quarto = q.ID_Quarto
-            INNER JOIN categoria c ON q.Categoria_ID_Categoria = c.ID_Categoria
-            LEFT JOIN avaliacao a ON r.ID_Reserva = a.ID_Reserva
-            WHERE r.usuarios_ID = ?
-            ORDER BY r.Checkin DESC
-        ");
-        $stmt->execute([$_SESSION['usuario']['ID']]);
-        $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-
-        <?php if ($reservas): ?>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Quarto</th>
-                            <th>Capacidade</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Preço Diária</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($reservas as $reserva): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($reserva['Categoria']) ?></td>
-                                <td><?= htmlspecialchars($reserva['Capacidade']) ?> pessoas</td>
-                                <td><?= date('d/m/Y', strtotime($reserva['Checkin'])) ?></td>
-                                <td><?= date('d/m/Y', strtotime($reserva['Checkout'])) ?></td>
-                                <td>R$ <?= number_format($reserva['Preco_diaria'], 2, ',', '.') ?></td>
-                                <td>
-                                    <div class="d-flex gap-2 flex-wrap">
-                                        <?php if (!$reserva['ID_Avaliacao']): ?>
-                                            <a href="avaliar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-warning">
-                                                <i class="fas fa-star"></i> Avaliar
-                                            </a>
-                                        <?php else: ?>
-                                            <a href="ver_avaliacao.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-info">
-                                                <i class="fas fa-pen"></i> Minha Avaliação
-                                            </a>
-                                        <?php endif; ?>
-<a href="deletar_reserva.php?id=<?= $reserva['ID_Reserva'] ?>" class="btn btn-sm btn-danger" onclick="return confirmarExclusao(event)">
-    <i class="fas fa-trash-alt"></i> Cancelar
-</a>
-
-<script>
-function confirmarExclusao(event) {
-    event.preventDefault(); // Evita que o link seja seguido imediatamente
-    const linkExclusao = event.currentTarget.getAttribute('href');
-
-    Swal.fire({
-        title: 'Tem certeza?',
-        text: "Esta ação cancelará a reserva permanentemente!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sim, cancelar!',
-        cancelButtonText: 'Não, voltar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = linkExclusao; // Redireciona para deletar_reserva.php
-        }
-    });
-}
-</script>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php else: ?>
-            <div class="alert alert-info">Você ainda não possui reservas.</div>
-        <?php endif; ?>
-    </div>
-</div>
-
-            </div>
-        </div>
-    </main>
-
+        </div> </div> </main>
     <!-- Footer -->
     <footer class="pt-5">
         <div class="container">
@@ -574,7 +565,7 @@ function confirmarExclusao(event) {
 
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="text-muted mb-0">&copy; 2023 Rodeo Hotel. Todos os direitos reservados.</p>
+                    <p class="text-muted mb-0">&copy; <?= date('Y') ?> Rodeo Hotel.</p>
                 </div>
             </div>
         </div>

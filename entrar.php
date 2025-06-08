@@ -507,7 +507,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="lgpd" name="aceite_lgpd" required>
             <label class="form-check-label" for="lgpd">
-              Aceito os <a href="termos_e_condicoes.php" target="_blank">termos de uso e a política de privacidade (LGPD)</a>.
+              Aceito os <a href="termos_e_condicoes.php" target="_blank">termos de uso e a política de privacidade.</a>
             </label>
           </div>
 

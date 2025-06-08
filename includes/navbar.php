@@ -25,7 +25,7 @@ require '../Config/config.php';
                     <a href="#" class="username nav-link d-flex align-items-center" id="dropdownToggle">
                         <span>Olá, <?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Usuário') ?></span>
                     </a>
-                    <div class="dropdown-menu" id="dropdownMenu" style="display: none; position: absolute; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.15); padding: 10px; border-radius: 5px;">
+                    <div class="dropdown-menu" id="dropdownMenu">
                         <a class="dropdown-item" href="../gestor/telas/exibir_gestor.php">Meu Perfil</a>
                         <a class="dropdown-item" href="/HOTEL/logout.php">Sair</a>
                     </div>

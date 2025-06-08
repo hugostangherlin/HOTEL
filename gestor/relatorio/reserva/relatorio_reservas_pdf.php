@@ -36,45 +36,53 @@ $html = '
     body {
         font-family: "Helvetica", Arial, sans-serif;
         color: #333;
-        line-height: 1.5;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
     }
     
     .header {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
         padding-bottom: 15px;
-        border-bottom: 2px solid #FB4D46;
+        border-bottom: 3px solid #FB4D46;
     }
     
     .header h1 {
         color: #1A1A2E;
-        font-size: 24px;
-        margin-bottom: 5px;
+        font-size: 26px;
+        margin-bottom: 8px;
+        font-weight: 700;
     }
     
-    .header .periodo {
-        color: #666;
+    .header .filters {
+        color: #555;
         font-size: 14px;
         margin-top: 10px;
+        background-color: #FFE9E9;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: inline-block;
     }
     
-    .header .data-emissao {
+    .header .date {
         color: #666;
-        font-size: 12px;
-        margin-top: 5px;
+        font-size: 13px;
+        margin-top: 10px;
     }
     
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        margin-top: 25px;
         font-size: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     
     table thead th {
         background-color: #1A1A2E;
         color: white;
-        padding: 10px;
+        padding: 12px 15px;
         text-align: left;
         font-weight: 600;
         text-transform: uppercase;
@@ -83,20 +91,44 @@ $html = '
     }
     
     table tbody td {
-        padding: 10px;
+        padding: 12px 15px;
         border-bottom: 1px solid #eee;
+        vertical-align: top;
     }
     
     table tbody tr:nth-child(even) {
+        background-color: #FFF5F5;
+    }
+    
+    table tbody tr:hover {
         background-color: #FFE9E9;
+    }
+    
+    .profile {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .profile.gestor {
+        background-color: #E6F7E6;
+        color: #28A745;
+    }
+    
+    .profile.hospede {
+        background-color: #E6F0F7;
+        color: #1A73E8;
     }
     
     .footer {
         margin-top: 30px;
-        padding-top: 10px;
+        padding-top: 15px;
         border-top: 1px solid #ddd;
-        font-size: 10px;
-        color: #666;
+        font-size: 11px;
+        color: #777;
         text-align: center;
     }
     
@@ -104,26 +136,14 @@ $html = '
         text-align: center;
     }
     
-    .text-right {
-        text-align: right;
-    }
-    
-    .badge {
-        display: inline-block;
-        padding: 3px 6px;
-        border-radius: 3px;
-        font-size: 10px;
-        font-weight: bold;
-    }
-    
-    .badge-primary {
-        background-color: #FB4D46;
-        color: white;
+    .nowrap {
+        white-space: nowrap;
     }
 </style>
 
+
 <div class="header">
-    <h1>Relatório de Reservas</h1>
+    <h1>RELATÓRIO DE RESERVAS</h1>
     <div class="periodo">';
     
 // Adiciona período do relatório se filtrado por data
@@ -177,7 +197,7 @@ $html .= '</tbody>
 </table>
 
 <div class="footer">
-    Sistema de Gestão Hoteleira | Relatório gerado automaticamente
+    Rodeo Hotel
 </div>';
 
 $mpdf->WriteHTML($html);

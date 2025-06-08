@@ -31,6 +31,7 @@ $usuarios = $pdo->query("SELECT ID, Nome, Email, Data_Solicitacao_Exclusao FROM 
     <title>Solicitações de Exclusão - Painel Administrativo</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -204,14 +205,45 @@ $usuarios = $pdo->query("SELECT ID, Nome, Email, Data_Solicitacao_Exclusao FROM 
                             <td><?= $u['ID'] ?></td>
                             <td><?= htmlspecialchars($u['Nome']) ?></td>
                             <td><?= htmlspecialchars($u['Email']) ?></td>
-                            <td class="timestamp"><?= date('d/m/Y H:i:s', strtotime($u['Data_Solicitacao_Exclusao'])) ?></td>
+                            <td class="timestamp"><?= date('d/m/Y', strtotime($u['Data_Solicitacao_Exclusao'])) ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="/HOTEL/actions/excluir_usuario.php?id=<?= $u['ID'] ?>&action=confirmar" 
-                                       class="btn btn-confirm" 
-                                       onclick="return confirm('Tem certeza que deseja excluir permanentemente este usuário?')">
-                                        Confirmar Exclusão
-                                    </a>
+<a href="#"
+   class="btn btn-confirm btn-excluir-usuario"
+   data-id="<?= $u['ID'] ?>">
+    Confirmar Exclusão
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const botoesExcluir = document.querySelectorAll('.btn-excluir-usuario');
+
+    botoesExcluir.forEach(botao => {
+        botao.addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a navegação padrão do link
+
+            const usuarioId = this.dataset.id;
+            const urlExclusao = `/HOTEL/actions/excluir_usuario.php?id=${usuarioId}&action=confirmar`;
+
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Se o usuário confirmar, redireciona para a URL de exclusão
+                    window.location.href = urlExclusao;
+                }
+            });
+        });
+    });
+});
+</script>
                                 </div>
                             </td>
                         </tr>

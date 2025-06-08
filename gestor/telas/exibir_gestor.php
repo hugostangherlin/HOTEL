@@ -199,8 +199,10 @@ if (!$usuario) {
             <p><strong><i class="fas fa-phone"></i> Telefone:</strong> <?= htmlspecialchars($usuario['Telefone']) ?></p>
             <p><strong><i class="fas fa-id-card"></i> CPF:</strong> <?= htmlspecialchars($usuario['CPF']) ?></p>
             <p><strong><i class="fas fa-map-marker-alt"></i> Endereço:</strong> <?= htmlspecialchars($usuario['Endereco']) ?></p>
-            <p><strong><i class="fas fa-birthday-cake"></i> Data de Nascimento:</strong> <?= htmlspecialchars($usuario['Data_Nascimento']) ?></p>
-        </div>
+           <p>
+    <strong><i class="fas fa-birthday-cake"></i> Data de Nascimento:</strong>
+    <?= htmlspecialchars(date('d/m/Y', strtotime($usuario['Data_Nascimento']))) ?>
+</p>
 
         <div class="btn-group">
             <a href="editar_gestor.php" class="btn-primary">

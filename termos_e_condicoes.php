@@ -246,7 +246,7 @@
       </ul>
       
       <div class="contact-info">
-        <p>Para exercer qualquer direito, entre em contato conosco via e-mail: <a href="mailto:contato@seudominio.com">contato@seudominio.com</a>.</p>
+        <p>Para exercer qualquer direito, entre em contato conosco via e-mail: <a href="#">rodeohotel@gmail.com</a>.</p>
       </div>
     </section>
 
@@ -255,7 +255,7 @@
       <p>Podemos atualizar este documento a qualquer momento. Recomendamos que você consulte esta página regularmente para estar ciente de quaisquer alterações.</p>
     </section>
 
-    <p class="last-update"><strong>Última atualização:</strong> Maio de 2025</p>
+    
 
     <a href="entrar.php" class="back-link">← Voltar para o cadastro</a>
   </div>

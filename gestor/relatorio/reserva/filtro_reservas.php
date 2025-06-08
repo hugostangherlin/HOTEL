@@ -14,6 +14,7 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Reservas</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -305,11 +306,35 @@ $relatorios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 </td>
                 <td>
-                    <a href="/HOTEL/relatorios/reservas/<?= htmlspecialchars($rel['Arquivo']) ?>" target="_blank">Ver PDF</a>
-                    <a href="/HOTEL/actions/excluir_relatorio_reserva.php?id=<?= $rel['ID_Relatorio'] ?>"
-                       onclick="return confirm('Tem certeza que deseja excluir este relatório?')">
-                        🗑️ Excluir
-                    </a>
+                    <a href="/HOTEL/relatorios/reservas/<?= htmlspecialchars($rel['Arquivo']) ?>" target="_blank" style="text-decoration: none;">Ver PDF</a>
+                   <a href="/HOTEL/actions/excluir_relatorio_reserva.php?id=<?= $rel['ID_Relatorio'] ?>"
+   id="excluirRelatorio_<?= $rel['ID_Relatorio'] ?>"
+   style="color: red; text-decoration: none;">
+   🗑️ Excluir
+</a>
+
+<script>
+document.getElementById('excluirRelatorio_<?= $rel['ID_Relatorio'] ?>').addEventListener('click', function(e) {
+    e.preventDefault(); // Impede o link de ser clicado imediatamente
+    const idRelatorio = this.href.split('id=')[1]; // Pega o ID do link
+
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Se o usuário confirmar, redireciona para a URL de exclusão
+            window.location.href = this.href;
+        }
+    });
+});
+</script>
                 </td>
             </tr>
         <?php endforeach; ?>

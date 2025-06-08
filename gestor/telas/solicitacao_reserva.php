@@ -16,6 +16,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 1) {
     <link rel="icon" type="image/png" sizes="32x32" href="/HOTEL/rodeo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -243,24 +244,54 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 1) {
                 <tbody>
                     <?php while ($reserva = $sql->fetch()): ?>
                         <tr>
-                            <td class="reservation-id">#<?= $reserva['ID_Reserva'] ?></td>
+                            <td class="reservation-id"><?= $reserva['ID_Reserva'] ?></td>
                             <td class="guest-name"><?= htmlspecialchars($reserva['hospede']) ?></td>
                             <td class="dates"><?= date('d/m/Y', strtotime($reserva['Checkin'])) ?></td>
                             <td class="dates"><?= date('d/m/Y', strtotime($reserva['Checkout'])) ?></td>
                             <td>
                                 <div class="room-info">
                                     <span class="room-category"><?= htmlspecialchars($reserva['categoria']) ?></span>
-                                    <span class="room-id">ID <?= $reserva['ID_Quarto'] ?></span>
                                 </div>
                             </td>
-                            <td class="request-date"><?= date('d/m/Y H:i', strtotime($reserva['Data_Solicitacao_Exclusao'])) ?></td>
+                            <td class="request-date"><?= date('d/m/Y', strtotime($reserva['Data_Solicitacao_Exclusao'])) ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="/HOTEL/actions/excluir_solicitacao.php?id=<?= $reserva['ID_Reserva'] ?>" 
-                                       class="btn btn-approve"
-                                       onclick="return confirm('Tem certeza que deseja aprovar a exclusão desta reserva?')">
-                                        <i class="fas fa-check-circle"></i> Aprovar
-                                    </a>
+<a href="#"
+   class="btn btn-confirm btn-excluir-usuario"
+   data-id="<?= $u['ID'] ?>">
+    Confirmar Exclusão
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const botoesExcluir = document.querySelectorAll('.btn-excluir-usuario');
+
+    botoesExcluir.forEach(botao => {
+        botao.addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a navegação padrão do link
+
+            const usuarioId = this.dataset.id;
+            const urlExclusao = `/HOTEL/actions/excluir_solicitacao.php?id=${usuarioId}&action=confirmar`;
+
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Se o usuário confirmar, redireciona para a URL de exclusão
+                    window.location.href = urlExclusao;
+                }
+            });
+        });
+    });
+});
+</script>
                                 </div>
                             </td>
                         </tr>

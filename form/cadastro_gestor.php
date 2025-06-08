@@ -45,6 +45,7 @@ require '../Config/config.php';
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             overflow: hidden;
+            padding: 30px; /* Adicionado padding aqui para o conteúdo */
         }
         
         .form-header {
@@ -53,11 +54,12 @@ require '../Config/config.php';
             padding: 25px;
             text-align: center;
             position: relative;
+            margin: -30px -30px 30px -30px; /* Ajusta para preencher a largura do container */
         }
         
         .form-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
             margin: 0;
         }
         
@@ -69,7 +71,7 @@ require '../Config/config.php';
             color: white;
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 24px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -78,98 +80,133 @@ require '../Config/config.php';
             transform: translateY(-50%) scale(1.1);
         }
         
-        .form-body {
-            padding: 30px;
-        }
-        
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         
-        .input-group {
-            margin-bottom: 20px;
+        .input-box {
+            margin-bottom: 15px; /* Ajuste para espaçamento entre os inputs */
         }
         
-        .input-label {
+        .input-box label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
-        .input-field {
-            position: relative;
-        }
-        
-        .input-field i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--dark-gray);
-        }
-        
-        .form-control {
+        .input-box input[type="text"],
+        .input-box input[type="email"],
+        .input-box input[type="password"],
+        .input-box input[type="date"] {
             width: 100%;
-            padding: 12px 15px 12px 40px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             font-size: 16px;
-            transition: var(--transition);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .form-control:focus {
+        .input-box input[type="text"]:focus,
+        .input-box input[type="email"]:focus,
+        .input-box input[type="password"]:focus,
+        .input-box input[type="date"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(251, 77, 70, 0.2);
         }
-        
-        .form-control.date {
-            padding-left: 15px;
+
+        .input-box input::placeholder {
+            color: #999;
+        }
+
+        .form-group.form-check {
+            grid-column: 1 / -1; /* Ocupa todas as colunas */
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .form-check-label {
+            font-size: 15px;
+            color: var(--dark-gray);
+        }
+
+        .form-check-label a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-check-label a:hover {
+            text-decoration: underline;
         }
         
-        .submit-btn {
+        .btn-default {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: var(--border-radius);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
-        .submit-btn:hover {
+        .btn-default:hover {
             background-color: #e0413a;
             transform: translateY(-2px);
         }
         
         @media (max-width: 768px) {
-            .form-body {
+            .form-container {
                 padding: 20px;
             }
-            
+            .form-header {
+                margin: -20px -20px 20px -20px;
+            }
             .form-grid {
                 grid-template-columns: 1fr;
+            }
+            .form-title {
+                font-size: 24px;
+            }
+            .back-btn {
+                font-size: 20px;
             }
         }
         
         @media (max-width: 480px) {
+            .form-container {
+                padding: 15px;
+            }
             .form-header {
                 padding: 20px 15px;
+                margin: -15px -15px 15px -15px;
             }
-            
             .form-title {
-                font-size: 20px;
+                font-size: 22px;
+            }
+            .back-btn {
+                font-size: 18px;
+                left: 15px;
+            }
+            .btn-default {
+                padding: 12px;
+                font-size: 16px;
             }
         }
     </style>
@@ -183,123 +220,136 @@ require '../Config/config.php';
             <h1 class="form-title">Cadastro de Gestor</h1>
         </div>
         
-        <form method="POST" action="/HOTEL/actions/adicionar_gestor.php" class="form-body">
+        <form action="/HOTEL/actions/adicionar_gestor.php" method="post" id="manager-form">
             <div class="form-grid">
-                <!-- Nome -->
-                <div class="input-group">
-                    <label for="name" class="input-label">
-                        <i class="fas fa-user"></i>
-                        Nome Completo
-                    </label>
-                    <div class="input-field">
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Digite seu nome" required>
-                        <i class="fas fa-user"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-name">Nome Completo</label>
+                    <input type="text" name="name" id="manager-name" placeholder="Digite o nome completo" required>
                 </div>
 
-                <!-- Email -->
-                <div class="input-group">
-                    <label for="email" class="input-label">
-                        <i class="fas fa-envelope"></i>
-                        E-mail
-                    </label>
-                    <div class="input-field">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@rodeohotel.com" required>
-                        <i class="fas fa-envelope"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-email">E-mail</label>
+                    <input type="email" name="email" id="manager-email" placeholder="exemplo@rodeohotel.com" required>
                 </div>
 
-                <!-- Senha -->
-                <div class="input-group">
-                    <label for="password" class="input-label">
-                        <i class="fas fa-lock"></i>
-                        Senha
-                    </label>
-                    <div class="input-field">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Crie uma senha segura" required>
-                        <i class="fas fa-lock"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-password">Senha</label>
+                    <input type="password" name="password" id="manager-password" placeholder="Crie uma senha" required>
                 </div>
 
-                <!-- Telefone -->
-                <div class="input-group">
-                    <label for="telefone" class="input-label">
-                        <i class="fas fa-phone"></i>
-                        Telefone
-                    </label>
-                    <div class="input-field">
-                        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(00) 00000-0000">
-                        <i class="fas fa-phone"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-telefone">Telefone</label>
+                    <input type="text" name="telefone" id="manager-telefone" placeholder="+00 (00)00000-0000" required>
                 </div>
 
-                <!-- CPF -->
-                <div class="input-group">
-                    <label for="cpf" class="input-label">
-                        <i class="fas fa-id-card"></i>
-                        CPF
-                    </label>
-                    <div class="input-field">
-                        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" maxlength="14">
-                        <i class="fas fa-id-card"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-cpf">CPF</label>
+                    <input type="text" name="cpf" id="manager-cpf" placeholder="000.000.000-00" maxlength="14" required>
                 </div>
 
-                <!-- Endereço -->
-                <div class="input-group">
-                    <label for="endereco" class="input-label">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Endereço
-                    </label>
-                    <div class="input-field">
-                        <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Rua, número, complemento">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
+                <div class="input-box">
+                    <label for="manager-cep">CEP:</label>
+                    <input type="text" id="manager-cep" name="cep" maxlength="9" placeholder="00000-000">
                 </div>
 
-                <!-- Data de Nascimento -->
-                <div class="input-group">
-                    <label for="birthdate" class="input-label">
-                        <i class="fas fa-calendar-alt"></i>
-                        Data de Nascimento
-                    </label>
-                    <div class="input-field">
-                        <input type="date" name="birthdate" id="birthdate" class="form-control date">
-                    </div>
+                <div class="input-box">
+                    <label for="manager-endereco">Endereço:</label>
+                    <input type="text" id="manager-endereco" name="endereco" placeholder="Rua, número, complemento, bairro, cidade - UF" required>
                 </div>
+
+                <div class="input-box">
+                    <label for="manager-birthdate">Data de Nascimento</label>
+                    <input type="date" name="birthdate" id="manager-birthdate" required>
+                </div>
+
+                <input type="hidden" name="perfil" value="1">
+
+                <button type="submit" name="submit" class="btn-default">Cadastrar Gestor</button>
             </div>
-
-            <!-- Campo oculto para definir o perfil -->
-            <input type="hidden" name="perfil" value="1">
-
-            <button type="submit" name="submit" class="submit-btn">
-                <i class="fas fa-user-plus"></i> Cadastrar Gestor
-            </button>
         </form>
     </main>
 
     <script>
         // Máscara para CPF
-        document.getElementById('cpf').addEventListener('input', function(e) {
+        document.getElementById('manager-cpf').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            if (value.length > 3) {
+                value = value.replace(/^(\d{3})(\d)/g, '$1.$2');
+            }
+            if (value.length > 6) {
+                value = value.replace(/^(\d{3})\.(\d{3})(\d)/g, '$1.$2.$3');
+            }
+            if (value.length > 9) {
+                value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/g, '$1.$2.$3-$4');
+            }
+            if (value.length > 11) {
+                value = value.substring(0, 14);
+            }
+
             e.target.value = value;
         });
 
-        // Máscara para telefone
-        document.getElementById('telefone').addEventListener('input', function(e) {
+        // Máscara para telefone (com +55 e DDD)
+        document.getElementById('manager-telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 2) {
-                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-                if (value.length > 10) {
-                    value = value.replace(/(\d{5})(\d)/, '$1-$2');
-                } else {
-                    value = value.replace(/(\d{4})(\d)/, '$1-$2');
-                }
+
+            // Adiciona o código do país +55 fixo se ainda não estiver presente e for um número brasileiro
+            if (!value.startsWith('55')) {
+                value = '55' + value;
+            }
+
+            // Limita ao máximo de 13 dígitos após o + (55 + 2 DDD + 9 número)
+            value = value.substring(0, 13);
+
+            // Aplica a máscara: +55 (DD) 9XXXX-XXXX ou +55 (DD) XXXX-XXXX
+            if (value.length >= 2) {
+                value = value.replace(/^(\d{2})/, '+$1 ');
+            }
+            if (value.length >= 4) {
+                value = value.replace(/^\+(\d{2}) (\d{2})/, '+$1 ($2)');
+            }
+            if (value.length >= 9) {
+                value = value.replace(/^\+(\d{2}) \((\d{2})\)(\d{5})(\d{0,4}).*/, '+$1 ($2) $3-$4');
+            } else if (value.length >= 8) { // Para números de 8 dígitos (sem o 9 na frente)
+                value = value.replace(/^\+(\d{2}) \((\d{2})\)(\d{4})(\d{0,4}).*/, '+$1 ($2) $3-$4');
+            }
+            
+            e.target.value = value.trim();
+        });
+
+        // Máscara e busca de CEP
+        document.getElementById('manager-cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.replace(/^(\d{5})(\d)/, '$1-$2');
             }
             e.target.value = value;
+        });
+
+        document.getElementById('manager-cep').addEventListener('blur', function() {
+            var cep = this.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.erro) {
+                        // Monta o endereço com rua, bairro, cidade e estado
+                        let enderecoCompleto = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+                        document.getElementById('manager-endereco').value = enderecoCompleto;
+                    } else {
+                        alert('CEP não encontrado.');
+                        document.getElementById('manager-endereco').value = '';
+                    }
+                })
+                .catch(() => {
+                    alert('Erro ao buscar CEP.');
+                    document.getElementById('manager-endereco').value = '';
+                });
+            } else if (cep.length > 0) {
+                alert('Formato de CEP inválido. Digite 8 dígitos.');
+                document.getElementById('manager-endereco').value = '';
+            }
         });
     </script>
 </body>

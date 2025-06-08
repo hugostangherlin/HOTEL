@@ -27,7 +27,7 @@ if ($id) {
         }
 
         // 3. Deletar avaliações do usuário
-        $stmtDelAval = $pdo->prepare("DELETE FROM avaliacao WHERE usuarios_ID = :id_usuario");
+        $stmtDelAval = $pdo->prepare("DELETE FROM avaliacao WHERE ID_Usuario = :id_usuario");
         $stmtDelAval->bindValue(':id_usuario', $id, PDO::PARAM_INT);
         $stmtDelAval->execute();
 

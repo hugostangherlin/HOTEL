@@ -487,7 +487,7 @@ require __DIR__ . '/config/config.php';
 
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="text-muted mb-0">&copy; <?= date('Y') ?> Rodeo Hotel. Todos os direitos reservados.</p>
+                    <p class="text-muted mb-0">&copy; <?= date('Y') ?> Rodeo Hotel.</p>
                 </div>
             </div>
         </div>

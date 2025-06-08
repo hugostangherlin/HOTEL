@@ -31,91 +31,156 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 
 $html = '<style>
-    body {
-        font-family: "Helvetica", Arial, sans-serif;
-        color: #333;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-    }
-    
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 3px solid #FB4D46;
-    }
-    
-    .header h1 {
-        color: #1A1A2E;
-        font-size: 24px;
-        margin-bottom: 5px;
-        font-weight: 700;
-    }
-    
-    .filter-info {
-        background-color: #FFE9E9;
-        padding: 10px 15px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        font-size: 14px;
-    }
-    
-    .filter-info strong {
-        color: #1A1A2E;
-    }
-    
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-size: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    
-    table thead th {
-        background-color: #1A1A2E;
-        color: white;
-        padding: 12px;
-        text-align: left;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 11px;
-        letter-spacing: 0.5px;
-    }
-    
-    table tbody td {
-        padding: 12px;
-        border-bottom: 1px solid #eee;
-    }
-    
-    table tbody tr:nth-child(even) {
-        background-color: #FFF5F5;
-    }
-    
-    .total-geral {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1A1A2E;
-        margin: 25px 0;
-        padding: 10px;
-        background-color: #FFE9E9;
-        border-left: 4px solid #FB4D46;
-    }
-    
-    .footer {
-        text-align: center;
-        font-size: 10px;
-        color: #666;
-        margin-top: 30px;
-        padding-top: 10px;
-        border-top: 1px solid #ddd;
-    }
-    
-    .money {
-        font-family: "Courier New", monospace;
-        font-weight: bold;
-    }
+/* public/css/report_styles.css */
+
+body {
+    font-family: "Helvetica", Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #FB4D46;
+}
+
+.header h1 {
+    color: #1A1A2E;
+    font-size: 26px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.header .filters,
+.header .periodo { /* Adicionado .periodo para o relatório de reservas */
+    color: #555;
+    font-size: 14px;
+    margin-top: 10px;
+    background-color: #FFE9E9;
+    padding: 8px 15px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.header .date,
+.header .data-emissao { /* Adicionado .data-emissao para o relatório de reservas */
+    color: #666;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+table thead th {
+    background-color: #1A1A2E;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #FFF5F5;
+}
+
+table tbody tr:hover {
+    background-color: #FFE9E9;
+}
+
+.profile {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.profile.gestor {
+    background-color: #E6F7E6;
+    color: #28A745;
+}
+
+.profile.hospede {
+    background-color: #E6F0F7;
+    color: #1A73E8;
+}
+
+.footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    font-size: 11px;
+    color: #777;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+/* Estilos específicos para o relatório de Faturamento, se necessário */
+.filter-info {
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #444;
+}
+
+.total-geral {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #F8F8F8;
+    border: 1px solid #eee;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1A1A2E;
+}
+
+.money {
+    text-align: right;
+    font-weight: 600;
+}
+
+.badge { /* Para o status no relatório de Reservas */
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    background-color: #6c757d; /* Cinza padrão para status desconhecido */
+}
+
+.badge-primary {
+    background-color: #007bff; /* Cor de exemplo para status primário */
+}
+/* Adicione outras cores de badge conforme necessário, por exemplo, para sucesso, perigo */
 </style>';
 
 $html .= '<div class="header">
@@ -161,7 +226,7 @@ $html .= '</tbody></table>';
 $html .= '<div class="total-geral">Total Geral: R$ ' . number_format($totalGeral, 2, ',', '.') . '</div>';
 
 $html .= '<div class="footer">
-            Sistema de Gestão Hoteleira | Relatório gerado automaticamente
+           Rodeo Hotel
           </div>';
 
 

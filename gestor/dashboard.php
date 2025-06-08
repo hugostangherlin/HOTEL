@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once '../Config/config.php';
 require_once '../includes/header.php';
 
@@ -91,6 +93,43 @@ $stmt3 = $pdo->query($sql3);
         .nav-link:hover {
             background-color: rgba(251, 77, 70, 0.2) !important;
         }
+        /* Garante que o item de navegação principal tem posicionamento relativo para o dropdown absoluto */
+.navbar-nav .nav-item.dropdown {
+    position: relative;
+}
+
+/* Estilo para o menu dropdown em si */
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Posições abaixo do elemento pai */
+    right: 0; /* Alinha à direita do pai */
+    left: auto; /* Garante que não está fixado à esquerda */
+    min-width: 160px; /* Largura padrão de dropdown, ajuste se necessário */
+    padding: 0.5rem 0;
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text); /* Ou sua cor de texto padrão */
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    z-index: 1050; /* Z-index comum para dropdowns no Bootstrap/AdminLTE, maior que 1000 */
+    display: none; /* Inicia escondido, seu JS o tornará 'block' */
+}
+
+/* Regra para quando o dropdown estiver visível (ativado pelo seu JS) */
+.navbar-nav .dropdown-menu.show {
+    display: block !important; /* Seu JS já faz isso, mas é bom ter */
+}/* Garante que os links dentro do dropdown-menu tenham uma cor visível */
+.dropdown-menu .dropdown-item {
+    color: #333333 !important; /* Um tom de cinza escuro, quase preto */
+    /* Você pode ajustar essa cor para o que ficar melhor com seu design */
+    background-color: transparent !important; /* Garante que o background do item seja transparente para o menu */
+}
+
 
         .btn-primary,
         .btn-block {
