@@ -258,9 +258,10 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['perfil'] != 1) {
                                 <div class="action-buttons">
 <a href="#"
    class="btn btn-confirm btn-excluir-usuario"
-   data-id="<?= $u['ID'] ?>">
+   data-id="<?= $reserva['ID_Reserva'] ?>">
     Confirmar Exclusão
 </a>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
